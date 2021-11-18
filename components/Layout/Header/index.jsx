@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import styled from '@emotion/styled';
 
 const { Header } = Layout;
 const MainHeader = () => {
@@ -7,12 +8,17 @@ const MainHeader = () => {
     <>
       <Header>
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          <Menu.Item key={1}>test</Menu.Item>
-        </Menu>
+        <HeaderMenu mode="horizontal" defaultSelectedKeys={['1']}>
+          <Menu.Item key={1}>Introduce</Menu.Item>
+          <Menu.Item key={2}>Post</Menu.Item>
+        </HeaderMenu>
       </Header>
     </>
   )
 };
+
+const HeaderMenu = styled(Menu)`
+  justify-content: flex-end;
+`;
 
 export default MainHeader;
