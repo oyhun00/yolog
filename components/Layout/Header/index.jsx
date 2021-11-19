@@ -6,19 +6,28 @@ const { Header } = Layout;
 const MainHeader = () => {
   return (
     <>
-      <Header>
-        <div className="logo" />
-        <HeaderMenu mode="horizontal" defaultSelectedKeys={['1']}>
-          <Menu.Item key={1}>Introduce</Menu.Item>
-          <Menu.Item key={2}>Post</Menu.Item>
-        </HeaderMenu>
-      </Header>
+      <CustomHeader>
+        <div className="logo">yolog</div>
+        <CustomMenu mode="horizontal" defaultSelectedKeys={['1']}>
+          <CustomMenuItem key={1}>Introduce</CustomMenuItem>
+          <CustomMenuItem key={2}>Post</CustomMenuItem>
+        </CustomMenu>
+      </CustomHeader>
     </>
   )
 };
 
-const HeaderMenu = styled(Menu)`
+const CustomHeader = styled(Header)`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CustomMenu = styled(Menu)`
   justify-content: flex-end;
 `;
+
+const CustomMenuItem = styled(Menu.Item)`
+
+`
 
 export default MainHeader;
