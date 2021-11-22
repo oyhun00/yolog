@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Layout, Menu } from 'antd';
 import styled from '@emotion/styled';
 
@@ -9,8 +10,16 @@ const MainHeader = () => {
       <CustomHeader>
         <div className="logo">yolog</div>
         <CustomMenu mode="horizontal" defaultSelectedKeys={['1']}>
-          <CustomMenuItem key={1}>Introduce</CustomMenuItem>
-          <CustomMenuItem key={2}>Post</CustomMenuItem>
+          <CustomMenuItem key={1}>
+            <Link href="/introduce">
+              <a>Introduce</a>
+            </Link>
+          </CustomMenuItem>
+          <CustomMenuItem key={2}>
+            <Link href="/post">
+              <a>Post</a>
+            </Link>
+          </CustomMenuItem>
         </CustomMenu>
       </CustomHeader>
     </>

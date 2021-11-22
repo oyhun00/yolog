@@ -1,12 +1,13 @@
 import React from 'react';
-import Main from '../components/index';
+import Main from '../components';
+import MainLayout from '../components/Layout';
 import "../public/style/yolog.css";
 
 const App = () => {
   return (
-    <>
+    <MainLayout>
       <Main />
-    </>
+    </MainLayout>
   )
 };
 
