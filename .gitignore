@@ -1,0 +1,7 @@
+node_modules
+
+.next
+
+public/style/yolog.css
+
+package-lock.json
