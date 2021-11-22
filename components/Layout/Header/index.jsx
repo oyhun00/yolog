@@ -24,6 +24,7 @@ const CustomHeader = styled(Header)`
 
 const CustomMenu = styled(Menu)`
   justify-content: flex-end;
+  border-bottom: 0;
 `;
 
 const CustomMenuItem = styled(Menu.Item)`

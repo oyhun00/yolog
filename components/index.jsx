@@ -1,14 +1,16 @@
 import React from 'react';
+import { Layout } from 'antd';
 import MainHeader from './Layout/Header';
 
+const { Content } = Layout;
 const index = () => {
   return (
-    <>
+    <Layout className="layout">
       <MainHeader />
-      <div>
+      <Content style={{ padding: '0 50px' }}>
         Index Component
-      </div>
-    </>
+      </Content>
+    </Layout>
   )
 };
 
