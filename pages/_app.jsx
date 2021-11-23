@@ -1,14 +1,12 @@
 import React from 'react';
-import Main from '../components';
-import MainLayout from '../components/Layout';
+import App from 'next/app';
 import "../public/style/yolog.css";
 
-const App = () => {
-  return (
-    <MainLayout>
-      <Main />
-    </MainLayout>
-  )
-};
+class MainApp extends App {
+  render() {
+    const { Component, pageProps } = this.props;
+    return <Component {...pageProps} />
+  }
+}
 
-export default App;
+export default MainApp;

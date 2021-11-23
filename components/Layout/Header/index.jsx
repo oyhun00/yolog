@@ -8,7 +8,11 @@ const MainHeader = () => {
   return (
     <>
       <CustomHeader>
-        <div className="logo">yolog</div>
+        <div className="logo">
+          <Link href="/">
+            <a>yolog</a>
+          </Link>
+        </div>
         <CustomMenu mode="horizontal" defaultSelectedKeys={['1']}>
           <CustomMenuItem key={1}>
             <Link href="/introduce">
