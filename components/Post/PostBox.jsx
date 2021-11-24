@@ -15,9 +15,23 @@ const PostBox = () => {
 };
 
 const CustomCard = styled(Card)`
-  & .ant-card-cover {
-    height: 170px;
+  &.ant-card-bordered {
+    border: 1px solid black;
+  }
+
+  .ant-card-cover {
+    height: 130px;
     overflow: hidden;
+  }
+
+  .ant-card-body {
+    padding: 20px;
+  }
+
+  .ant-card-meta-description {
+    height: 90px;
+    overflow: hidden;
+    font-size: 12px;
   }
 `;
 

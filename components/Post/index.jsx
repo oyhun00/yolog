@@ -5,20 +5,20 @@ import PostBox from './PostBox';
 const PostComponent = () => {
   return (
     <>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={6}>
+      <Row gutter={[24, 24]}>
+        <Col className="gutter-row" xs={12} sm={8} md={6} lg={6} xl={6}>
           <PostBox />
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={12} sm={8} md={6} lg={6} xl={6}>
           <PostBox />
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={12} sm={8} md={6} lg={6} xl={6}>
           <PostBox />
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={12} sm={8} md={6} lg={6} xl={6}>
           <PostBox />
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={12} sm={8} md={6} lg={6} xl={6}>
           <PostBox />
         </Col>
       </Row>
