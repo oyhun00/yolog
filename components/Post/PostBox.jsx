@@ -1,16 +1,24 @@
 import React from 'react';
 import { Card } from 'antd';
+import styled from '@emotion/styled';
 
 const { Meta } = Card;
 const PostBox = () => {
   return (
-    <Card
+    <CustomCard
       hoverable
       cover={<img alt="example" src="https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg" />}
     >
-      <Meta title="포스트 박스 테스트!!!!!!" description="김아무개아무말대잔치가나다라감사과"></Meta>
-    </Card>
+      <Meta title="포스트 박스 테스트!!!!!!" description="s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It "></Meta>
+    </CustomCard>
   )
 };
+
+const CustomCard = styled(Card)`
+  & .ant-card-cover {
+    height: 170px;
+    overflow: hidden;
+  }
+`;
 
 export default PostBox;

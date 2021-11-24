@@ -18,6 +18,9 @@ const PostComponent = () => {
         <Col className="gutter-row" span={6}>
           <PostBox />
         </Col>
+        <Col className="gutter-row" span={6}>
+          <PostBox />
+        </Col>
       </Row>
     </>
   )
