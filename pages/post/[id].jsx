@@ -1,13 +1,13 @@
 import React from 'react';
 import MainLayout from '../../components/Layout';
-import PostComponent from '../../components/Post'
+import Post from '../../components/Post/Post';
 
-const PostPage = () => {
+const PostDetail = () => {
   return (
     <MainLayout>
-      <PostComponent />
+      <Post />
     </MainLayout>
   )
 };
 
-export default PostPage;
+export default PostDetail;

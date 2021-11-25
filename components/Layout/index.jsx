@@ -7,7 +7,7 @@ const MainLayout = ({ children }) => {
   return (
     <Layout className="layout">
       <MainHeader />
-      <Content style={{ padding: '50px' }}>
+      <Content style={{ padding: '50px 50px' }}>
         {children}
       </Content>
     </Layout>
