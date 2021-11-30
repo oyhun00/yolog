@@ -1,4 +1,4 @@
-import { apllyMiddleWare, compose, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -8,14 +8,14 @@ const configure = () => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
   const enhancer = process.env.NODE_ENV === 'production'
-    ? compose(apllyMiddleWare(...middlewares))
-    : composeWithDevTools(apllyMiddleWare(...middlewares));
-  const store = createStore(modules. enhancer);
+    ? compose(applyMiddleware(...middlewares))
+    : composeWithDevTools(applyMiddleware(...middlewares));
+  const store = createStore(modules, enhancer);
 
   return store;
 }
 
-const wrapper = createWrapper(configureStore, {
+const wrapper = createWrapper(configure, {
   debug: process.env.NODE_ENV === 'development'
 });
 

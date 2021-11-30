@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 const { Title, Paragraph, Text } = Typography;
 const Post = () => {
   const dispatch = useDispatch();
-  const num = useSelector(state => state.num);
+  const num = useSelector(state => state);
 
   const onClickPlus = useCallback(() => {
     dispatch(testEvent());
