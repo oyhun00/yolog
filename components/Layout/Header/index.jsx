@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectedKeys } from '../../../store/modules/util';
 import Link from 'next/link';
 import { Layout, Menu } from 'antd';
 import styled from '@emotion/styled';
 
 const { Header } = Layout;
 const MainHeader = () => {
+  const dispatch = useDispatch();
+  const { key } = useSelector(state => state.util);
+  const setKeys = useCallback(() => {
+    dispatch(selectedKeys());
+  }, [ dispatch, key ]);
+
+
   return (
     <>
       <CustomHeader>
@@ -13,13 +22,13 @@ const MainHeader = () => {
             <a>yolog</a>
           </Link>
         </div>
-        <CustomMenu mode="horizontal" defaultSelectedKeys={['1']}>
-          <CustomMenuItem key={1}>
+        <CustomMenu mode="horizontal" defaultSelectedKeys={key}>
+          <CustomMenuItem key={1} onClick={setKeys}>
             <Link href="/introduce">
               <a>Introduce</a>
             </Link>
           </CustomMenuItem>
-          <CustomMenuItem key={2}>
+          <CustomMenuItem key={2} onClick={setKeys}>
             <Link href="/post">
               <a>Post</a>
             </Link>
