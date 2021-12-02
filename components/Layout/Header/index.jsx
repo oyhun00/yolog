@@ -8,11 +8,10 @@ import styled from '@emotion/styled';
 const { Header } = Layout;
 const MainHeader = () => {
   const dispatch = useDispatch();
-  const { key } = useSelector(state => state.util);
-  const setKeys = useCallback(() => {
-    dispatch(selectedKeys());
+  const setKeys = useCallback((id) => {
+    dispatch(selectedKeys(id));
   }, [ dispatch, key ]);
-
+  const { key } = useSelector(state => state.util);
 
   return (
     <>
@@ -22,13 +21,13 @@ const MainHeader = () => {
             <a>yolog</a>
           </Link>
         </div>
-        <CustomMenu mode="horizontal" defaultSelectedKeys={key}>
-          <CustomMenuItem key={1} onClick={setKeys}>
+        <CustomMenu mode="horizontal" defaultSelectedKeys={[key]}>
+          <CustomMenuItem key={1} onClick={() => setKeys('1')}>
             <Link href="/introduce">
               <a>Introduce</a>
             </Link>
           </CustomMenuItem>
-          <CustomMenuItem key={2} onClick={setKeys}>
+          <CustomMenuItem key={2} onClick={() => setKeys('2')}>
             <Link href="/post">
               <a>Post</a>
             </Link>
