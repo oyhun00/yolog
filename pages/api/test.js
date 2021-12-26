@@ -1,15 +1,13 @@
 import { Client } from 'pg';
 import { NextApiRequest, NextApiResponse } from 'next';
-import Database from '../../server/dataBase';
+import db from '../../server/dataBase';
 
 export default async (req, res) => {
-  await Database.execute(
-    Client.query('SELECT TEST')
-      .then(() => {
-        console.log("hi");
-        res.status(200).json({
-          text: "hello"
-        })
-      })
-  );
+  try {
+    const user = await db.one('SELECT test FROM test');
+    console.log(user);
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(500).end();
+  }
 }

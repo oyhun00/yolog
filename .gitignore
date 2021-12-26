@@ -5,3 +5,5 @@ node_modules
 public/style/yolog.css
 
 package-lock.json
+
+config/
