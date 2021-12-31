@@ -19,6 +19,6 @@ const util = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default util;
