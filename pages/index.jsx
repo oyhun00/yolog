@@ -1,10 +1,11 @@
 import React from 'react';
 import MainLayout from '../components/Layout';
+import Main from '../components/index';
 
 const Page = () => {
   return (
     <MainLayout>
-      <div>index</div>
+      <Main />
     </MainLayout>
   )
 };

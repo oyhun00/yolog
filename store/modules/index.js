@@ -1,8 +1,17 @@
 import { combineReducers } from 'redux';
+import test, { counterSaga } from './test';
 import post from './post';
 import util from './util';
+import { all } from 'redux-saga/effects';
 
-export default combineReducers({
+const rootReducer = combineReducers({
+  test,
   post,
-  util,
-})
+  util
+});
+
+export function* rootSaga() {
+  yield all([counterSaga()]);
+}
+
+export default rootReducer;
