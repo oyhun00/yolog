@@ -1,40 +1,23 @@
-import React, { Component } from 'react';
-import dynamic from 'next/dynamic'
-import Quill from 'quill';
+import React from 'react';
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css"; 
+import styled from '@emotion/styled';
 
-const PostEditor = dynamic(import('react-quilljs'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+const PostEditor = () => {
+  const { quill, quillRef } = useQuill();
 
-const modules = {
-  toolbar: [
-    [{ 'header': [1, 2, false] }],
-    ['bold', 'italic', 'underline','strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-    ['link', 'image'],
-    [{ 'align': [] }, { 'color': [] }, { 'background': [] }],
-    ['clean']
-  ],
+  return (
+    <CustomEditor>
+      <div ref={quillRef} />
+    </CustomEditor>
+  );
 };
 
-const formats = [
-  'header',
-  'font',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'video',
-];
+const CustomEditor = styled.div`
+  .ql-toolbar, .ql-container {
+    border: 1px solid #222222;
+    border-top: 0;
+  }
+`;
 
-export default function Home() {
-  return <PostEditor modules={modules} formats={formats} theme="snow" />
-};
+export default PostEditor;
