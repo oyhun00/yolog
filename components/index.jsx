@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import { increase, decrease } from '../store/modules/test';
+import { increaseAsync, decreaseAsync } from '../store/modules/test';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Main = () => {
   const dispatch = useDispatch();
-  const _increase = useCallback(() => dispatch(increase()));
-  const _decrease = useCallback(() => dispatch(decrease()));
+  const _increase = useCallback(() => dispatch(increaseAsync()));
+  const _decrease = useCallback(() => dispatch(decreaseAsync()));
   const { test } = useSelector(state => state);
 
   return (

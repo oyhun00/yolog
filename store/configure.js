@@ -3,7 +3,8 @@ import looger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer, { rootSaga } from './modules';
+import rootReducer from './modules';
+import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const configure = () => {

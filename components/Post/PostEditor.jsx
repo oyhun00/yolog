@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css"; 
-import styled from '@emotion/styled';
 
 const PostEditor = () => {
   const { quill, quillRef } = useQuill();
