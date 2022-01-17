@@ -1,16 +1,15 @@
 import {
   GET_POST_LIST_REQUEST,
   GET_POST_LIST_SUCCESS,
-  GET_POST_LIST_FAILURE
+  GET_POST_LIST_FAILURE,
+  ADD_POST
 } from '../../constants/actionTypes';
-
-const ADD_POST = 'post/ADD_POST';
 
 export const getPostList = () => ({
   type: GET_POST_LIST_REQUEST
 });
 
-export const addPost = (data) => ({
+export const addPost = data => ({
   type: ADD_POST,
   payload: data
 });
@@ -22,16 +21,21 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POST_LIST_REQUEST:
-      console.log('loading');
-      break;
+      return {
+        ...state
+      }
     case GET_POST_LIST_SUCCESS:
-      console.log('SUCCESS');
-      break;
-    case GET_POST_LIST_REQUEST:
-      console.log('REQUEST');
-      break;
+      return {
+        ...state,
+        postTitle: action.result.data.title
+      }
+    case GET_POST_LIST_FAILURE:
+      console.log('FAILURE');
+
+      return {
+        ...state
+      }
     case ADD_POST:
-      console.log('aaa', action)
       return {
         ...state,
         title: action.payload.title

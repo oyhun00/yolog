@@ -10,18 +10,18 @@ function getPostListApi() {
   return axios.get('https://jsonplaceholder.typicode.com/todos/1')
 }
 
-function* getPostList(action) {
+function* getPostList() {
   try {
     const result = yield call(getPostListApi);
 
-    yield put({ type: GET_POST_LIST_SUCCESS, data: result });
+    yield put({ type: GET_POST_LIST_SUCCESS, result });
   } catch (err) {
-    yield put({ type: GET_POST_LIST_FAILURE, data: err.response });
+    yield put({ type: GET_POST_LIST_FAILURE, result: err.response });
   }
 }
 
 function* watchGetPostList() {
-  yield takeLatest(GET_USER_TICKET_REQUEST, getPostList);
+  yield takeLatest(GET_POST_LIST_REQUEST, getPostList);
 }
 
 export default function* postSaga() {

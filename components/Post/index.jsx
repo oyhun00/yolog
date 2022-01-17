@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { Row, Col, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import PostBox from './PostBox';
+import { getPostList } from '../../store/modules/post';
 
 const PostComponent = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPostList());
+  }, [])
+
   return (
     <>
       <Row gutter={[24, 24]}>

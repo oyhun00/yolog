@@ -2,7 +2,7 @@ import React from 'react';
 import wrapper from '../store/configure';
 import App from 'next/app';
 import "../public/style/yolog.css";
-import '../static/font/font.css';
+import '../public/font/font.css';
 
 class MainApp extends App {
   render() {

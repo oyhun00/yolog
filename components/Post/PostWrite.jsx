@@ -14,12 +14,12 @@ const PostWrite = () => {
   const submitPost = useCallback((title) => {
     dispatch(addPost(title));
   }, [ dispatch ]);
-  const { postTitle } = useSelector(state => state.post); 
 
   return (
     <MainLayout>
       <Row gutter={[24, 24]}>
         <Col span={24}>
+          <div style={{ color: '#fff' }}>{title}</div>
           <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChange} value={title} />
         </Col>
       </Row>
