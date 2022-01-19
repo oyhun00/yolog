@@ -7,10 +7,12 @@ import {
 } from '../../constants/actionTypes';
 
 function getPostListApi() {
-  return axios.get('https://jsonplaceholder.typicode.com/todos/1')
+  console.log('getPostListApi');
+  return axios.get('http://localhost:3001/api/post');
 }
 
 function* getPostList() {
+  console.log('getPostList');
   try {
     const result = yield call(getPostListApi);
 

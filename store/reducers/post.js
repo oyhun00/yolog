@@ -27,11 +27,9 @@ const reducer = (state = initialState, action) => {
     case GET_POST_LIST_SUCCESS:
       return {
         ...state,
-        postTitle: action.result.data.title
+        postTitle: action.result.data.test
       }
     case GET_POST_LIST_FAILURE:
-      console.log('FAILURE');
-
       return {
         ...state
       }

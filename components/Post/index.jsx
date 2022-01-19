@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import PostBox from './PostBox';
-import { getPostList } from '../../store/modules/post';
 
 const PostComponent = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPostList());
-  }, [])
+  const { postTitle } = useSelector(state => state.post);
 
   return (
     <>
       <Row gutter={[24, 24]}>
         <Col span={24} style={{ textAlign: 'right' }}>
+          <div style={{ color: 'white' }}>{postTitle}</div>
           <CustomButton icon={<PlusOutlined />} size="large">
             <Link href="/write">
               <span>글쓰기</span>

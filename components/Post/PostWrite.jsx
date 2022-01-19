@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost } from '../../store/modules/post';
+import { addPost } from '../../store/reducers/post';
 import MainLayout from '../Layout';
 import PostEditor from './PostEditor';
 import styled from '@emotion/styled';

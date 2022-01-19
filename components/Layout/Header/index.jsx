@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedKeys } from '../../../store/modules/util';
+import { selectedKeys } from '../../../store/reducers/util';
 import Link from 'next/link';
 import { Layout, Menu } from 'antd';
 import styled from '@emotion/styled';
