@@ -4,21 +4,20 @@ import test from './test';
 import post from './post';
 import util from './util';
 
-const rootReducer = combineReducers({
-  index: (state = {}, action) => {
-    switch (action.type) {
-      case HYDRATE:
-        return {
-          ...state,
-          ...action.payload
-        };
-      default:
-        return state;
+const rootReducer = (state, action) => {
+  switch (action.type) {
+    case HYDRATE:
+      console.log(action.payload);
+      return action.payload;
+    default: {
+      const combineReducer = combineReducers({
+        test,
+        post,
+        util
+      })
+      return combineReducer(state, action);
     }
-  },
-  test,
-  post,
-  util
-});
+  }
+};
 
 export default rootReducer;

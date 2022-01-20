@@ -15,7 +15,7 @@ export const addPost = data => ({
 });
 
 const initialState = {
-  postTitle: ''
+  post: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
     case GET_POST_LIST_SUCCESS:
       return {
         ...state,
-        postTitle: action.result.data.test
+        post: action.result.data
       }
     case GET_POST_LIST_FAILURE:
       return {

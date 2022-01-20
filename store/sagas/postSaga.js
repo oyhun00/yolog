@@ -7,17 +7,15 @@ import {
 } from '../../constants/actionTypes';
 
 function getPostListApi() {
-  console.log('getPostListApi');
   return axios.get('http://localhost:3001/api/post');
 }
 
 function* getPostList() {
-  console.log('getPostList');
   try {
     const result = yield call(getPostListApi);
-
     yield put({ type: GET_POST_LIST_SUCCESS, result });
   } catch (err) {
+    console.log(err);
     yield put({ type: GET_POST_LIST_FAILURE, result: err.response });
   }
 }
