@@ -7,13 +7,19 @@ import styled from '@emotion/styled';
 import PostBox from './PostBox';
 
 const PostComponent = () => {
-  const { postTitle } = useSelector(state => state.post);
+  const { posts } = useSelector(state => state.post);
+  const postCards = posts.map((v) => 
+    !v.deleteFl ? (
+      <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
+        <PostBox key={v.id} data={v} />
+      </Col>
+    ) : ''
+  );
 
   return (
     <>
       <Row gutter={[24, 24]}>
         <Col span={24} style={{ textAlign: 'right' }}>
-          <div style={{ color: 'white' }}>{postTitle}</div>
           <CustomButton icon={<PlusOutlined />} size="large">
             <Link href="/write">
               <span>글쓰기</span>
@@ -22,21 +28,7 @@ const PostComponent = () => {
         </Col>
       </Row>
       <Row gutter={[24, 24]}>
-        <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
-          <PostBox />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
-          <PostBox />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
-          <PostBox />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
-          <PostBox />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
-          <PostBox />
-        </Col>
+        {postCards}
       </Row>
     </>
   )
