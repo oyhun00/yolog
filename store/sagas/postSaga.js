@@ -45,5 +45,5 @@ function* watchGetPost() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchGetPostList), fork(watchGetPost)]);
+  yield all([fork(watchGetPostList, watchGetPost)]);
 }

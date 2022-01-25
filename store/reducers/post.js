@@ -8,17 +8,26 @@ import {
   ADD_POST
 } from '../../constants/actionTypes';
 
-export const getPostList = () => ({ type: GET_POST_LIST_REQUEST });
+export const getPostList = () => ({
+  type: GET_POST_LIST_REQUEST
+});
+
 export const getPost = id => ({
   type: GET_POST_REQUEST,
   payload: id
 });
+
 export const addPost = data => ({
   type: ADD_POST,
   payload: data
 });
 
+// export const getAllPostIds = () => {
+//   return 
+// };
+
 const initialState = {
+  selectedPost: '',
   posts: [],
   post: {
     id: '',
@@ -45,7 +54,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state
       }
-
     case GET_POST_REQUEST:
       return {
         ...state
@@ -66,13 +74,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state
       }
-
     case ADD_POST:
       return {
         ...state,
         title: action.payload.title
       }
-      
     default:
       return state;
   }

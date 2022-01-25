@@ -6,4 +6,6 @@ export const GET_POST_REQUEST = "POST/GET_POST_REQUEST";
 export const GET_POST_SUCCESS = "POST/GET_POST_SUCCESS";
 export const GET_POST_FAILURE = "POST/GET_POST_FAILURE";
 
+export const SET_POST = "POST/SET_POST"
+
 export const ADD_POST = "POST/ADD_POST";
