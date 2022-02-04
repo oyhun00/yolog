@@ -1,19 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, Divider, Breadcrumb } from 'antd';
 import styled from '@emotion/styled';
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
+  const { post } = useSelector(state => state.post);
+  const { id, title, content, crtDttm, udtDttm, deleteFl } = post;
+
   return (
     <Typography>
-      <CustomTitle>첫번째 포스트 제목</CustomTitle>
+      <CustomTitle>{title}</CustomTitle>
       <Breadcrumb>
-        <Breadcrumb.Item>21. 03. 22</Breadcrumb.Item>
+        <Breadcrumb.Item>{crtDttm}</Breadcrumb.Item>
         <Breadcrumb.Item>portfolio</Breadcrumb.Item>
       </Breadcrumb>
       <Divider />
       <Paragraph>
-        simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently wit
+        {content}
       </Paragraph>
     </Typography>
   )

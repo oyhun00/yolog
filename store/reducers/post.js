@@ -59,6 +59,8 @@ const reducer = (state = initialState, action) => {
         ...state
       }
     case GET_POST_SUCCESS:
+      const { id, title, content, crtDttm, udtDttm, deleteFl } = action.result.data;
+      
       return {
         ...state,
         post: {

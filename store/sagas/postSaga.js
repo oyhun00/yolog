@@ -10,12 +10,11 @@ import {
 } from '../../constants/actionTypes';
 
 const getPostListApi = () => {
-  return axios.get('http://localhost:3001/api/post');
+  return axios.get('http://localhost:3000/api/post');
 }
 
-const getPostApi = id => {
-  console.log("=========getPostApi=========")
-  return axios.get(`http://localhost:3001/api/post`, { params: id });
+const getPostApi = (id) => {
+  return axios.get(`http://localhost:3000/api/post`, { params: id });
 }
 
 function* getPostList() {
@@ -27,9 +26,9 @@ function* getPostList() {
   }
 }
 
-function* getPost() {
+function* getPost(action) {
   try {
-    const result = yield call(getPostApi);
+    const result = yield call(getPostApi, { id: action.payload });
     yield put({ type: GET_POST_SUCCESS, result });
   } catch (err) {
     yield put({ type: GET_POST_FAILURE, result: err.response });
@@ -45,5 +44,5 @@ function* watchGetPost() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchGetPostList, watchGetPost)]);
+  yield all([fork(watchGetPostList), fork(watchGetPost)]);
 }

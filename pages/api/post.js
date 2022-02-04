@@ -1,7 +1,7 @@
 import db from '../../server/dataBase';
 
 const handler = async (req, res) => {
-  if(req.method === 'GET') { await getPostList(req, res); }
+  if(req.method === 'GET' && !req.query.id) { await getPostList(req, res); }
   else { await getPost(req, res); }
 }
 
@@ -15,9 +15,8 @@ const getPostList = async (req, res) => {
 }
 
 const getPost = async (req, res) => {
-  console.log('=======getPost============', req.query);
   const { id } = req.query;
-  const params = [id];
+  const params = [parseInt(id)];
 
   try {
     const data = await db.one(SELECT_POST, params);
@@ -42,13 +41,13 @@ const SELECT_POST_LIST = `
 
 const SELECT_POST = `
   SELECT
-    p.ID as id
-    , p.title as title
-    , p.title_image as titleImage
-    , p.content as content
-    , p.crt_dttm as crtDttm
-    , p.udt_dttm as udtDttm
-    , p.delete_fl as deleteFl
+    p.ID
+    , p.title
+    , p.title_image as "titleImage"
+    , p.content
+    , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
+    , p.udt_dttm as "udtDttm"
+    , p.delete_fl as "deleteFl"
   FROM YLG_POST p
   WHERE p.delete_fl = false
     AND p.id = $1
