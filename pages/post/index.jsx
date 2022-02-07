@@ -4,6 +4,7 @@ import wrapper from '../../store/configure';
 import MainLayout from '../../components/Layout';
 import PostComponent from '../../components/Post';
 import { GET_POST_LIST_REQUEST } from '../../constants/actionTypes'; 
+import { getPostList } from '../../store/reducers/post';
 
 const PostPage = () => {
   return (
@@ -14,8 +15,7 @@ const PostPage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, res }) => {
-  console.log('!@#!@$!@$!$!$',req);
-  store.dispatch({ type: GET_POST_LIST_REQUEST });
+  store.dispatch(getPostList());
   store.dispatch(END);
 
   await store.sagaTask.toPromise();

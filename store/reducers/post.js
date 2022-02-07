@@ -42,10 +42,12 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POST_LIST_REQUEST:
+      console.log('GET_POST_LIST_REQUEST');
       return {
         ...state
       }
     case GET_POST_LIST_SUCCESS:
+      console.log('GET_POST_LIST_SUCCESS');
       return {
         ...state,
         posts: action.result.data
