@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { all, fork, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
+import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
 import {
   GET_POST_LIST_REQUEST,
   GET_POST_LIST_SUCCESS,
@@ -18,7 +18,6 @@ const getPostApi = (id) => {
 }
 
 function* getPostList() {
-  console.log("qwd12312312 getPostList")
   try {
     const result = yield call(getPostListApi);
     yield put({ type: GET_POST_LIST_SUCCESS, result });
@@ -37,12 +36,11 @@ function* getPost(action) {
 }
 
 function* watchGetPostList() {
-  console.log("qwd12312312 watchGetPostList")
-  yield takeEvery(GET_POST_LIST_REQUEST, getPostList);
+  yield takeLatest(GET_POST_LIST_REQUEST, getPostList);
 }
 
 function* watchGetPost() {
-  yield takeEvery(GET_POST_REQUEST, getPost);
+  yield takeLatest(GET_POST_REQUEST, getPost);
 }
 
 export default function* postSaga() {

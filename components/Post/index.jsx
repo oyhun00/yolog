@@ -10,7 +10,7 @@ const PostComponent = () => {
   const { posts } = useSelector(state => state.post);
   const postCards = posts.map((v) => 
     !v.deleteFl ? (
-      <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
+      <Col key={v.id} className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
         <PostBox key={v.id} data={v} />
       </Col>
     ) : ''
