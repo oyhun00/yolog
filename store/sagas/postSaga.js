@@ -6,8 +6,8 @@ import {
   GET_POST_LIST_FAILURE,
   GET_POST_REQUEST,
   GET_POST_SUCCESS,
-  GET_POST_FAILURE
-} from '../../constants/actionTypes';
+  GET_POST_FAILURE,
+} from 'constants/actionTypes';
 
 const getPostListApi = () => {
   return axios.get('http://localhost:3000/api/post');

@@ -1,4 +1,4 @@
-import db from '../../server/dataBase';
+import db from 'server/dataBase';
 
 const handler = async (req, res) => {
   if(req.method === 'GET' && !req.query.id) { await getPostList(req, res); }

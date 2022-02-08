@@ -20,7 +20,7 @@ const Post = () => {
         {content}
       </Paragraph>
     </Typography>
-  )
+  );
 };
 
 const CustomTitle = styled(Title)`

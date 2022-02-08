@@ -1,9 +1,9 @@
 import React from 'react';
 import { END } from 'redux-saga';
-import wrapper from '../../store/configure';
-import MainLayout from '../../components/Layout';
-import PostComponent from '../../components/Post';
-import { GET_POST_LIST_REQUEST } from '../../constants/actionTypes';
+import wrapper from 'store/configure';
+import MainLayout from 'components/Layout';
+import PostComponent from 'components/Post';
+import { GET_POST_LIST_REQUEST } from 'constants/actionTypes';
 
 const PostPage = () => {
   return (

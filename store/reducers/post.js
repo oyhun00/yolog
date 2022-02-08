@@ -6,7 +6,7 @@ import {
   GET_POST_SUCCESS,
   GET_POST_FAILURE,
   ADD_POST
-} from '../../constants/actionTypes';
+} from 'constants/actionTypes';
 
 export const getPostList = () => ({
   type: GET_POST_LIST_REQUEST

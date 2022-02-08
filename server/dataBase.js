@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')();
-const config = require('../config/db-config.json');
+const config = require('config/db-config.json');
 
 const db = () => {
   const dbKey = Symbol.for(db + '.db');
