@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { HYDRATE } from 'next-redux-wrapper';
-import test from 'store/reducers/test';
-import post from 'store/reducers/post';
-import util from 'store/reducers/util';
+import test from '@Store/reducers/test';
+import post from '@Store/reducers/post';
+import util from '@Store/reducers/util';
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -12,8 +12,8 @@ const rootReducer = (state, action) => {
       const combineReducer = combineReducers({
         test,
         post,
-        util
-      })
+        util,
+      });
       return combineReducer(state, action);
     }
   }

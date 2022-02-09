@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
+import {
+  all, fork, put, call, takeLatest,
+} from 'redux-saga/effects';
 import {
   GET_POST_LIST_REQUEST,
   GET_POST_LIST_SUCCESS,
@@ -7,15 +9,11 @@ import {
   GET_POST_REQUEST,
   GET_POST_SUCCESS,
   GET_POST_FAILURE,
-} from 'constants/actionTypes';
+} from '@Constants/actionTypes';
 
-const getPostListApi = () => {
-  return axios.get('http://localhost:3000/api/post');
-}
+const getPostListApi = () => axios.get('http://localhost:3000/api/post');
 
-const getPostApi = (id) => {
-  return axios.get(`http://localhost:3000/api/post`, { params: id });
-}
+const getPostApi = (id) => axios.get('http://localhost:3000/api/post', { params: id });
 
 function* getPostList() {
   try {

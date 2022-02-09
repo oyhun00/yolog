@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"],
+      "@Constants/*": ["./constants/*"],
+      "@Store/*": ["./store/*"],
+      "@Pages/*": ["./pages/*"],
+      "@Components/*": ["./components/*"],
+      "@Server/*": ["./server/*"],
+      "@Public/*": ["./public/*"]
+    },
+    "experimentalDecorators": true
   }
 }

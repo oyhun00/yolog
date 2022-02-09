@@ -1,9 +1,8 @@
-import db from 'server/dataBase';
+import db from '@Server/dataBase';
 
 const handler = async (req, res) => {
-  if(req.method === 'GET' && !req.query.id) { await getPostList(req, res); }
-  else { await getPost(req, res); }
-}
+  if (req.method === 'GET' && !req.query.id) { await getPostList(req, res); } else { await getPost(req, res); }
+};
 
 const getPostList = async (req, res) => {
   try {
@@ -12,11 +11,11 @@ const getPostList = async (req, res) => {
   } catch (e) {
     res.status(500).end();
   }
-}
+};
 
 const getPost = async (req, res) => {
   const { id } = req.query;
-  const params = [parseInt(id)];
+  const params = [parseInt(id, 10)];
 
   try {
     const data = await db.one(SELECT_POST, params);

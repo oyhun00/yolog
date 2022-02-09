@@ -4,17 +4,15 @@ import { useSelector } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
-import PostBox from './PostBox';
+import PostBox from '@Components/Post/PostBox';
 
 const PostComponent = () => {
-  const { posts } = useSelector(state => state.post);
-  const postCards = posts.map((v) => 
-    !v.deleteFl ? (
-      <Col key={v.id} className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
-        <PostBox key={v.id} data={v} />
-      </Col>
-    ) : ''
-  );
+  const { posts } = useSelector((state) => state.post);
+  const postCards = posts.map((v) => (!v.deleteFl ? (
+    <Col key={v.id} className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
+      <PostBox key={v.id} data={v} />
+    </Col>
+  ) : ''));
 
   return (
     <>
@@ -31,7 +29,7 @@ const PostComponent = () => {
         {postCards}
       </Row>
     </>
-  )
+  );
 };
 
 const CustomButton = styled(Button)`

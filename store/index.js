@@ -1,2 +1,2 @@
-import configure from 'store/configure';
+import configure from '@Store/configure';
 export default configure();

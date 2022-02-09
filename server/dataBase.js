@@ -1,8 +1,8 @@
 const pgp = require('pg-promise')();
-const config = require('config/db-config.json');
+const config = require('../config/db-config.json');
 
 const db = () => {
-  const dbKey = Symbol.for(db + '.db');
+  const dbKey = Symbol.for(`${db}.db`);
   const globalSymbols = Object.getOwnPropertySymbols(global);
 
   if (globalSymbols.indexOf(dbKey) < 0) {
@@ -10,6 +10,6 @@ const db = () => {
   }
 
   return global[dbKey];
-}
+};
 
 export default (db)();

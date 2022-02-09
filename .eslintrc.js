@@ -4,7 +4,25 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ['airbnb', 'airbnb/hooks'],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:import/recommended'],
+  settings: {
+    'import/resolver': [{
+      alias: {
+        map: [
+          ['@Constants', './constants'],
+          ['@Store', './store'],
+          ['@Pages', './pages'],
+          ['@Components', './components'],
+          ['@Server', './server'],
+          ['@Public', './public'],
+        ],
+      },
+      node: {
+        extensions: ['.js', '.jsx', 'ts', 'tsx'],
+      },
+      typescript: {},
+    }, 'webpack'],
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -16,7 +34,9 @@ module.exports = {
     'react',
   ],
   rules: {
+    'import/no-unresolved': 'off',
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
   },
 };

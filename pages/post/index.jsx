@@ -1,19 +1,17 @@
 import React from 'react';
 import { END } from 'redux-saga';
-import wrapper from 'store/configure';
-import MainLayout from 'components/Layout';
-import PostComponent from 'components/Post';
-import { GET_POST_LIST_REQUEST } from 'constants/actionTypes';
+import wrapper from '@Store/configure';
+import MainLayout from '@Components/Layout';
+import PostComponent from '@Components/Post';
+import { GET_POST_LIST_REQUEST } from '@Constants/actionTypes';
 
-const PostPage = () => {
-  return (
-    <MainLayout>
-      <PostComponent />
-    </MainLayout>
-  )
-}
+const PostPage = () => (
+  <MainLayout>
+    <PostComponent />
+  </MainLayout>
+);
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, res }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
   store.dispatch({ type: GET_POST_LIST_REQUEST });
   store.dispatch(END);
 

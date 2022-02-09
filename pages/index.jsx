@@ -1,13 +1,11 @@
 import React from 'react';
-import MainLayout from 'components/Layout';
-import Main from 'components/index';
+import MainLayout from '@Components/Layout';
+import Main from '@Components';
 
-const Page = () => {
-  return (
-    <MainLayout>
-      <Main />
-    </MainLayout>
-  )
-};
+const Page = () => (
+  <MainLayout>
+    <Main />
+  </MainLayout>
+);
 
 export default Page;

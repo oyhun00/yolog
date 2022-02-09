@@ -5,8 +5,10 @@ import styled from '@emotion/styled';
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
-  const { post } = useSelector(state => state.post);
-  const { id, title, content, crtDttm, udtDttm, deleteFl } = post;
+  const { post } = useSelector((state) => state.post);
+  const {
+    id, title, content, crtDttm, udtDttm, deleteFl,
+  } = post;
 
   return (
     <Typography>

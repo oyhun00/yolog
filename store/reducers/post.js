@@ -5,26 +5,22 @@ import {
   GET_POST_REQUEST,
   GET_POST_SUCCESS,
   GET_POST_FAILURE,
-  ADD_POST
-} from 'constants/actionTypes';
+  ADD_POST,
+} from '@Constants/actionTypes';
 
 export const getPostList = () => ({
-  type: GET_POST_LIST_REQUEST
+  type: GET_POST_LIST_REQUEST,
 });
 
-export const getPost = id => ({
+export const getPost = (id) => ({
   type: GET_POST_REQUEST,
-  payload: id
+  payload: id,
 });
 
-export const addPost = data => ({
+export const addPost = (data) => ({
   type: ADD_POST,
-  payload: data
+  payload: data,
 });
-
-// export const getAllPostIds = () => {
-//   return 
-// };
 
 const initialState = {
   selectedPost: '',
@@ -36,31 +32,33 @@ const initialState = {
     crtDttm: '',
     udtDttm: '',
     deleteFl: false,
-  }
+  },
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_POST_LIST_REQUEST:
       return {
-        ...state
-      }
+        ...state,
+      };
     case GET_POST_LIST_SUCCESS:
       return {
         ...state,
-        posts: action.result.data
-      }
+        posts: action.result.data,
+      };
     case GET_POST_LIST_FAILURE:
       return {
-        ...state
-      }
+        ...state,
+      };
     case GET_POST_REQUEST:
       return {
-        ...state
-      }
-    case GET_POST_SUCCESS:
-      const { id, title, content, crtDttm, udtDttm, deleteFl } = action.result.data;
-      
+        ...state,
+      };
+    case GET_POST_SUCCESS: {
+      const {
+        id, title, content, crtDttm, udtDttm, deleteFl,
+      } = action.result.data;
+
       return {
         ...state,
         post: {
@@ -70,17 +68,18 @@ const reducer = (state = initialState, action) => {
           crtDttm,
           udtDttm,
           deleteFl,
-        }
-      }
+        },
+      };
+    }
     case GET_POST_FAILURE:
       return {
-        ...state
-      }
+        ...state,
+      };
     case ADD_POST:
       return {
         ...state,
-        title: action.payload.title
-      }
+        title: action.payload.title,
+      };
     default:
       return state;
   }

@@ -1,10 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addPost } from '../../store/reducers/post';
-import MainLayout from '../Layout';
-import PostEditor from './PostEditor';
+import { useDispatch } from 'react-redux';
+import { addPost } from '@Store/reducers/post';
+import MainLayout from '@Components/Layout';
+import PostEditor from '@Components/Post/PostEditor';
 import styled from '@emotion/styled';
-import { Input, Button, Row, Col } from 'antd';
+import {
+  Input, Button, Row, Col,
+} from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
 const PostWrite = () => {
@@ -13,7 +15,7 @@ const PostWrite = () => {
   const dispatch = useDispatch();
   const submitPost = useCallback((title) => {
     dispatch(addPost(title));
-  }, [ dispatch ]);
+  }, [dispatch]);
 
   return (
     <MainLayout>
@@ -25,7 +27,7 @@ const PostWrite = () => {
       </Row>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <PostEditor/>
+          <PostEditor />
         </Col>
       </Row>
       <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>
@@ -34,7 +36,7 @@ const PostWrite = () => {
         </Col>
       </Row>
     </MainLayout>
-  )
+  );
 };
 
 const CustomInput = styled(Input)`

@@ -1,10 +1,8 @@
 import React from 'react';
-import PostWrite from 'components/Post/PostWrite';
+import PostWrite from '@Components/Post/PostWrite';
 
-const Write = () => {
-  return (
-    <PostWrite />
-  )
-};
+const Write = () => (
+  <PostWrite />
+);
 
 export default Write;

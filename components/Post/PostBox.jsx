@@ -5,18 +5,20 @@ import styled from '@emotion/styled';
 
 const { Meta } = Card;
 const PostBox = ({ data }) => {
-  const { id, title, titleImage, content } = data;
+  const {
+    id, title, titleImage, content,
+  } = data;
 
   return (
     <div onClick={() => Router.push(`/post/${id}`)}>
       <CustomCard
         hoverable
-        cover={<img alt="example" src={titleImage ? titleImage : "https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg"} />}
+        cover={<img alt="example" src={titleImage || 'https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg'} />}
       >
-        <Meta title={title} description={content}></Meta>
+        <Meta title={title} description={content} />
       </CustomCard>
     </div>
-  )
+  );
 };
 
 const CustomCard = styled(Card)`

@@ -3,8 +3,8 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from 'store/reducers';
-import rootSaga from 'store/sagas';
+import rootReducer from '@Store/reducers';
+import rootSaga from '@Store/sagas';
 
 const configure = () => {
   const sagaMiddleware = createSagaMiddleware();
@@ -17,10 +17,10 @@ const configure = () => {
   store.sagaTask = sagaMiddleware.run(rootSaga);
 
   return store;
-}
+};
 
 const wrapper = createWrapper(configure, {
-  debug: process.env.NODE_ENV === 'development'
+  debug: process.env.NODE_ENV === 'development',
 });
 
 export default wrapper;

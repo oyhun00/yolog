@@ -1,12 +1,10 @@
 import React from 'react';
-import MainLayout from 'components/Layout';
+import MainLayout from '@Components/Layout';
 
-const Introduce = () => {
-  return (
-    <MainLayout>
-      <div>안녕하세요!</div>
-    </MainLayout>
-  )
-};
+const Introduce = () => (
+  <MainLayout>
+    <div>안녕하세요!</div>
+  </MainLayout>
+);
 
 export default Introduce;
