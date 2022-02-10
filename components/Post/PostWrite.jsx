@@ -19,25 +19,30 @@ const PostWrite = () => {
 
   return (
     <MainLayout>
-      <Row gutter={[24, 24]}>
-        <Col span={24}>
-          <div style={{ color: '#fff' }}>{title}</div>
-          <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChange} value={title} />
-        </Col>
-      </Row>
-      <Row gutter={[24, 24]}>
-        <Col span={24}>
-          <PostEditor />
-        </Col>
-      </Row>
-      <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>
-        <Col span={24} style={{ textAlign: 'right' }}>
-          <CustomButton icon={<CheckOutlined />} size="large" onClick={() => submitPost(title)}>작성완료</CustomButton>
-        </Col>
-      </Row>
+      <SizeSet>
+        <Row gutter={[24, 24]}>
+          <Col span={24}>
+            <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChange} value={title} />
+          </Col>
+        </Row>
+        <Row gutter={[24, 24]}>
+          <Col span={24}>
+            <PostEditor />
+          </Col>
+        </Row>
+        <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>
+          <Col span={24} style={{ textAlign: 'right' }}>
+            <CustomButton icon={<CheckOutlined />} size="large" onClick={() => submitPost(title)}>작성완료</CustomButton>
+          </Col>
+        </Row>
+      </SizeSet>
     </MainLayout>
   );
 };
+
+const SizeSet = styled.div`
+  width: 80%;
+`;
 
 const CustomInput = styled(Input)`
   font-size: 40px;

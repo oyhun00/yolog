@@ -11,9 +11,9 @@ import {
   GET_POST_FAILURE,
 } from '@Constants/actionTypes';
 
-const getPostListApi = () => axios.get('http://localhost:3000/api/post');
+const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`);
 
-const getPostApi = (id) => axios.get('http://localhost:3000/api/post', { params: id });
+const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
 
 function* getPostList() {
   try {
