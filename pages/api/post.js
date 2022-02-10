@@ -23,7 +23,7 @@ const getPost = async (req, res) => {
   } catch (e) {
     res.status(500).end();
   }
-}
+};
 
 const SELECT_POST_LIST = `
   SELECT

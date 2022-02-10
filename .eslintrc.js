@@ -35,6 +35,7 @@ module.exports = {
   ],
   rules: {
     'import/no-unresolved': 'off',
+    'no-use-before-define': 'off',
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
