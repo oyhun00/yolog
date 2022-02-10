@@ -9,11 +9,12 @@ import {
   GET_POST_REQUEST,
   GET_POST_SUCCESS,
   GET_POST_FAILURE,
+  ADD_POST,
 } from '@Constants/actionTypes';
 
 const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`);
-
 const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
+const addPostApi = (data) => axios.post(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: data });
 
 function* getPostList() {
   try {
@@ -33,6 +34,15 @@ function* getPost(action) {
   }
 }
 
+function* addPost(action) {
+  try {
+    const result = yield call(addPostApi, { data: action.payload });
+    yield put({ type: GET_POST_SUCCESS, result });
+  } catch (err) {
+    yield put({ type: GET_POST_FAILURE, result: err.response });
+  }
+}
+
 function* watchGetPostList() {
   yield takeLatest(GET_POST_LIST_REQUEST, getPostList);
 }
@@ -41,6 +51,14 @@ function* watchGetPost() {
   yield takeLatest(GET_POST_REQUEST, getPost);
 }
 
+function* watchAddPost() {
+  yield takeLatest(ADD_POST, addPost);
+}
+
 export default function* postSaga() {
-  yield all([fork(watchGetPostList), fork(watchGetPost)]);
+  yield all([
+    fork(watchGetPostList),
+    fork(watchGetPost),
+    fork(watchAddPost),
+  ]);
 }

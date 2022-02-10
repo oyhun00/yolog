@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 
 const { Content } = Layout;
 const MainLayout = ({ children }) => (
-  <Layout className="layout">
+  <Layout className="layout" style={{ height: '100%' }}>
     <MainHeader />
     <Content style={{ padding: '50px 50px' }}>
       {children}

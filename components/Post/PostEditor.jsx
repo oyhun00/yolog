@@ -1,21 +1,25 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 
-const PostEditor = () => {
-  const { quill, quillRef } = useQuill();
-
-  return (
-    <CustomEditor>
-      <div ref={quillRef} />
-    </CustomEditor>
-  );
-};
+const PostEditor = ({ quillRef }) => (
+  <CustomEditor>
+    <div ref={quillRef} />
+  </CustomEditor>
+);
 
 const CustomEditor = styled.div`
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  .ql-container {
+    flex: auto;
+    border-bottom: 1px solid #212121 !important;
+  }
+  
   .ql-toolbar, .ql-container {
-    border: 1px solid #222222;
+    border: none;
     border-top: 0;
   }
 `;

@@ -13,6 +13,7 @@ class MainApp extends App {
         <Head>
           <title>yolog</title>
         </Head>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
       </>
     );

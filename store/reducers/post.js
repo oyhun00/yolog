@@ -17,10 +17,12 @@ export const getPost = (id) => ({
   payload: id,
 });
 
-export const addPost = (data) => ({
+export const addPost = (data) => {
+  console.log(data);
+  return ({
   type: ADD_POST,
   payload: data,
-});
+  })};
 
 const initialState = {
   selectedPost: '',
@@ -78,7 +80,10 @@ const reducer = (state = initialState, action = {}) => {
     case ADD_POST:
       return {
         ...state,
-        title: action.payload.title,
+        // post: {
+        //   ...post,
+        //   title,
+        // },
       };
     default:
       return state;
