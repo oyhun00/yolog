@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPost } from '@Store/reducers/post';
 import MainLayout from '@Components/Layout';
@@ -9,49 +9,28 @@ import {
 } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { mediaWidth } from '@Constants/responsive';
-import { useQuill } from 'react-quilljs';
 
 const PostWrite = () => {
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-      ['link', 'image'],
-      [{ align: [] }, { color: [] }, { background: [] }],
-    ],
-  };
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image',
-    'align', 'color', 'background',
-  ];
-
-  const { quill, quillRef } = useQuill({ modules, formats });
-
-  const [content, setContent] = useState({ title: '', desc: '' });
-  const onChange = (e) => setContent({ ...content, title: e.target.value });
   const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const onChangeTitle = (e) => setTitle(e.target.value);
   const submitPost = useCallback(() => {
-    setContent((prevContent) => ({ ...prevContent, desc: quill.current.firstChild.innerHTML }));
-    console.log('1 ', content);
-    dispatch(addPost(content));
-  }, [content, dispatch, quill]);
+    const data = { title, content };
+    dispatch(addPost(data));
+  }, [dispatch, title, content]);
 
   return (
     <MainLayout>
       <SizeSet>
         <Row gutter={[24, 24]}>
           <Col span={24}>
-            <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChange} value={content.title} />
+            <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={title} />
           </Col>
         </Row>
         <Row gutter={[24, 24]}>
           <Col span={24}>
-            <PostEditor quillRef={quillRef} />
+            <PostEditor setContent={setContent} content={content} />
           </Col>
         </Row>
         <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>

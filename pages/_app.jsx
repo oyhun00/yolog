@@ -4,6 +4,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
+import 'quill/dist/quill.snow.css';
 
 class MainApp extends App {
   render() {

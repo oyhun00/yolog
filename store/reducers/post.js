@@ -5,7 +5,9 @@ import {
   GET_POST_REQUEST,
   GET_POST_SUCCESS,
   GET_POST_FAILURE,
-  ADD_POST,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE,
 } from '@Constants/actionTypes';
 
 export const getPostList = () => ({
@@ -17,12 +19,10 @@ export const getPost = (id) => ({
   payload: id,
 });
 
-export const addPost = (data) => {
-  console.log(data);
-  return ({
-  type: ADD_POST,
+export const addPost = (data) => ({
+  type: ADD_POST_REQUEST,
   payload: data,
-  })};
+});
 
 const initialState = {
   selectedPost: '',
@@ -77,13 +77,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-    case ADD_POST:
+    case ADD_POST_REQUEST:
       return {
         ...state,
-        // post: {
-        //   ...post,
-        //   title,
-        // },
+      };
+    case ADD_POST_SUCCESS:
+      return {
+        ...state,
+      };
+    case ADD_POST_FAILURE:
+      return {
+        ...state,
       };
     default:
       return state;

@@ -1,12 +1,35 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import 'quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
 
-const PostEditor = ({ quillRef }) => (
-  <CustomEditor>
-    <div ref={quillRef} />
-  </CustomEditor>
-);
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    ['link', 'image'],
+    [{ align: [] }, { color: [] }, { background: [] }],
+  ],
+};
+
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image',
+  'align', 'color', 'background',
+];
+
+const Quill = dynamic(import('react-quill'), { ssr: false, loading: () => <p>Loading ...</p> });
+const PostEditor = ({ setContent, content }) => {
+  // const onChange = () => setContent({ ...content, desc: e.target.value });
+
+  return (
+    <CustomEditor>
+      <Quill name="desc" onChange={setContent} value={content} />
+    </CustomEditor>
+  );
+};
 
 const CustomEditor = styled.div`
   display: flex;

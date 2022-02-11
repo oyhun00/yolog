@@ -1,7 +1,9 @@
 import db from '@Server/dataBase';
 
 const handler = async (req, res) => {
-  if (req.method === 'GET' && !req.query.id) { await getPostList(req, res); } else { await getPost(req, res); }
+  if (req.method === 'GET' && !req.query.id) { await getPostList(req, res); }
+  else if (req.method === 'GET' && req.query.id) { await getPost(req, res); }
+  else if (req.method === 'POST') { await addPost(req, res); }
 };
 
 const getPostList = async (req, res) => {
@@ -23,6 +25,11 @@ const getPost = async (req, res) => {
   } catch (e) {
     res.status(500).end();
   }
+};
+
+const addPost = async (req, res) => {
+  const { data } = req;
+  console.log('addPost', req.query);
 };
 
 const SELECT_POST_LIST = `
