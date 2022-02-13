@@ -14,9 +14,10 @@ const PostWrite = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [image, setImage] = useState('');
   const onChangeTitle = (e) => setTitle(e.target.value);
   const submitPost = useCallback(() => {
-    const data = { title, content };
+    const data = { title, content, image };
     dispatch(addPost(data));
   }, [dispatch, title, content]);
 

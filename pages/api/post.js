@@ -8,8 +8,8 @@ const handler = async (req, res) => {
 
 const getPostList = async (req, res) => {
   try {
-    const data = await db.any(SELECT_POST_LIST);
-    res.status(200).json(data);
+    const result = await db.any(SELECT_POST_LIST);
+    res.status(200).json(result);
   } catch (e) {
     res.status(500).end();
   }
@@ -20,16 +20,23 @@ const getPost = async (req, res) => {
   const params = [parseInt(id, 10)];
 
   try {
-    const data = await db.one(SELECT_POST, params);
-    res.status(200).json(data);
+    const result = await db.one(SELECT_POST, params);
+    res.status(200).json(result);
   } catch (e) {
     res.status(500).end();
   }
 };
 
 const addPost = async (req, res) => {
-  const { data } = req;
-  console.log('addPost', req.query);
+  const { title, content, image } = req.body.params.data;
+  const values = [title, content, image];
+
+  try {
+    await db.none(INSERT_POST, values);
+    res.status(301).redirect('/post');
+  } catch (e) {
+    res.status(500).end();
+  }
 };
 
 const SELECT_POST_LIST = `
@@ -57,6 +64,20 @@ const SELECT_POST = `
   FROM YLG_POST p
   WHERE p.delete_fl = false
     AND p.id = $1
+`;
+
+const INSERT_POST = `
+  INSERT INTO YLG_POST (
+    title,
+    content,
+    crt_dttm,
+    title_image
+  ) VALUES (
+    $1,
+    $2,
+    NOW(),
+    $3
+  )
 `;
 
 export default handler;
