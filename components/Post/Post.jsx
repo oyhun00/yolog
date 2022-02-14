@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Typography, Divider, Breadcrumb } from 'antd';
 import styled from '@emotion/styled';
+import parse from 'html-react-parser';
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
@@ -9,6 +10,8 @@ const Post = () => {
   const {
     id, title, content, crtDttm, udtDttm, deleteFl,
   } = post;
+
+  console.log(parse(content));
 
   return (
     <Typography>
@@ -19,7 +22,7 @@ const Post = () => {
       </Breadcrumb>
       <Divider />
       <Paragraph>
-        {content}
+        {parse(content)}
       </Paragraph>
     </Typography>
   );
