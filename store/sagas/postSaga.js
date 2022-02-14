@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   all, fork, put, call, takeLatest,
 } from 'redux-saga/effects';
+import { push } from 'connected-next-router';
 import {
   GET_POST_LIST_REQUEST,
   GET_POST_LIST_SUCCESS,
@@ -40,6 +41,7 @@ function* addPost(action) {
   try {
     const result = yield call(addPostApi, { data: action.payload });
     yield put({ type: ADD_POST_SUCCESS, result });
+    yield put(push({ pathname: '/post' }));
   } catch (err) {
     yield put({ type: ADD_POST_FAILURE, result: err.response });
   }
