@@ -29,6 +29,7 @@ function* getPostList() {
 }
 
 function* getPost(action) {
+  console.log('getPost', action.payload);
   try {
     const result = yield call(getPostApi, { id: action.payload });
     yield put({ type: GET_POST_SUCCESS, result });

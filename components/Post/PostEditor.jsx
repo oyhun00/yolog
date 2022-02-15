@@ -21,12 +21,14 @@ const formats = [
 ];
 
 const Quill = dynamic(import('react-quill'), { ssr: false, loading: () => <p>Loading ...</p> });
-const PostEditor = ({ setContent, content }) => {
-  // const onChange = () => setContent({ ...content, desc: e.target.value });
+const PostEditor = ({ setPost, post }) => {
+  const onChangeEditor = (string, delta, source, editor) => {
+    setPost({ ...post, content: string, thumbnailText: editor.getText(0, 200) });
+  };
 
   return (
     <CustomEditor>
-      <Quill name="desc" onChange={setContent} value={content} />
+      <Quill onChange={onChangeEditor} value={post.content} />
     </CustomEditor>
   );
 };

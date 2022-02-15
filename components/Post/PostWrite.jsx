@@ -1,37 +1,43 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPost } from '@Store/reducers/post';
-import MainLayout from '@Components/Layout';
-import PostEditor from '@Components/Post/PostEditor';
+import { toast } from 'react-toastify';
 import styled from '@emotion/styled';
 import {
   Input, Button, Row, Col,
 } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
+
+import { addPost } from '@Store/reducers/post';
+import MainLayout from '@Components/Layout';
+import PostEditor from '@Components/Post/PostEditor';
 import { mediaWidth } from '@Constants/responsive';
 
 const PostWrite = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
-  const onChangeTitle = (e) => setTitle(e.target.value);
+  const [post, setPost] = useState({
+    title: '',
+    content: '',
+    thumbnail: '',
+    thumbnailText: '',
+  });
+  const onChangeTitle = (e) => setPost({ ...post, title: e.target.value });
   const submitPost = useCallback(() => {
-    const data = { title, content, image };
-    dispatch(addPost(data));
-  }, [dispatch, title, content]);
+    if (!post.title) { return toast.error('제목을 입력해주세요'); }
+    if (!post.thumbnailText.trim() || post.thumbnailText.trim() === '') { return toast.error('내용을 입력해주세요'); }
+    return dispatch(addPost(post));
+  }, [dispatch, post]);
 
   return (
     <MainLayout>
       <SizeSet>
         <Row gutter={[24, 24]}>
           <Col span={24}>
-            <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={title} />
+            <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={post.title} />
           </Col>
         </Row>
         <Row gutter={[24, 24]}>
           <Col span={24}>
-            <PostEditor setContent={setContent} content={content} />
+            <PostEditor setPost={setPost} post={post} />
           </Col>
         </Row>
         <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>

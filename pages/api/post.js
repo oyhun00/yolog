@@ -11,6 +11,7 @@ const getPostList = async (req, res) => {
     const result = await db.any(SELECT_POST_LIST);
     res.status(200).json(result);
   } catch (e) {
+    console.log('@!$!@#$!@$', e);
     res.status(500).end();
   }
 };
@@ -28,8 +29,10 @@ const getPost = async (req, res) => {
 };
 
 const addPost = async (req, res) => {
-  const { title, content, image } = req.body.params.data;
-  const values = [title, content, image];
+  const {
+    title, content, thumbnail, thumbnailText,
+  } = req.body.params.data;
+  const values = [title, content, thumbnail, thumbnailText];
 
   try {
     await db.none(INSERT_POST, values);
@@ -41,13 +44,14 @@ const addPost = async (req, res) => {
 
 const SELECT_POST_LIST = `
   SELECT
-    p.ID as id
-    , p.title as title
-    , p.title_image as titleImage
-    , p.content as content
-    , p.crt_dttm as crtDttm
-    , p.udt_dttm as udtDttm
-    , p.delete_fl as deleteFl
+    p.ID
+    , p.title
+    , p.thumbnail
+    , p.thumbnail_text as "thumbnailText"
+    , p.content
+    , p.crt_dttm as "crtDttm"
+    , p.udt_dttm as "udtDttm"
+    , p.delete_fl as "deleteFl"
   FROM YLG_POST p
   WHERE p.delete_fl = false
 `;
@@ -56,7 +60,7 @@ const SELECT_POST = `
   SELECT
     p.ID
     , p.title
-    , p.title_image as "titleImage"
+    , p.thumbnail
     , p.content
     , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
     , p.udt_dttm as "udtDttm"
@@ -71,12 +75,14 @@ const INSERT_POST = `
     title,
     content,
     crt_dttm,
-    title_image
+    thumbnail,
+    thumbnail_text
   ) VALUES (
     $1,
     $2,
     NOW(),
-    $3
+    $3,
+    $4
   )
 `;
 

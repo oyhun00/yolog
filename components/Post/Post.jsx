@@ -8,16 +8,14 @@ const { Title, Paragraph } = Typography;
 const Post = () => {
   const { post } = useSelector((state) => state.post);
   const {
-    id, title, content, crtDttm, udtDttm, deleteFl,
+    title, content, crtDttm, udtDttm,
   } = post;
-
-  console.log(parse(content));
 
   return (
     <Typography>
       <CustomTitle>{title}</CustomTitle>
       <Breadcrumb>
-        <Breadcrumb.Item>{crtDttm}</Breadcrumb.Item>
+        <Breadcrumb.Item>{udtDttm || crtDttm}</Breadcrumb.Item>
         <Breadcrumb.Item>portfolio</Breadcrumb.Item>
       </Breadcrumb>
       <Divider />
