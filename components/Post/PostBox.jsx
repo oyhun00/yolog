@@ -1,5 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
+import * as PropTypes from 'prop-types';
 import { Card } from 'antd';
 import styled from '@emotion/styled';
 
@@ -19,6 +20,15 @@ const PostBox = ({ data }) => {
       </CustomCard>
     </div>
   );
+};
+
+PostBox.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    thumbnailText: PropTypes.string,
+  }).isRequired,
 };
 
 const CustomCard = styled(Card)`

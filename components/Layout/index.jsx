@@ -1,6 +1,7 @@
 import React from 'react';
 import MainHeader from '@Components/Layout/Header';
 import { Layout } from 'antd';
+import * as PropTypes from 'prop-types';
 
 const { Content } = Layout;
 const MainLayout = ({ children }) => (
@@ -11,5 +12,9 @@ const MainLayout = ({ children }) => (
     </Content>
   </Layout>
 );
+
+MainLayout.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default MainLayout;

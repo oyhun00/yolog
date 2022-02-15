@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
+import * as PropTypes from 'prop-types';
 
 const modules = {
   toolbar: [
@@ -31,6 +32,17 @@ const PostEditor = ({ setPost, post }) => {
       <Quill onChange={onChangeEditor} value={post.content} />
     </CustomEditor>
   );
+};
+
+PostEditor.propTypes = {
+  setPost: PropTypes.func.isRequired,
+  post: PropTypes.shape({
+    content: PropTypes.string,
+  }),
+};
+
+PostEditor.defaultProps = {
+  post: {},
 };
 
 const CustomEditor = styled.div`
