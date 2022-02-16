@@ -4,8 +4,8 @@
 #__next { height: 100% }
 
 @basic-black: #030303;
+@point-color: #1671ff;
 @primary-color: @basic-black;
-
 @layout-header-background: @basic-black;
 @layout-body-background: @basic-black;
 @layout-header-background: @basic-black;
@@ -19,9 +19,12 @@
 @text-color: white;
 @text-color-secondary: white;
 @text-color-inverse: white;
+@heading-color: white;
 
 @divider-color: white;
 
 @select-item-selected-color: white;
 
+.ant-card-meta-title { color: @basic-black !important; }
+.ant-typography blockquote { border-left: 4px solid @point-color !important; background: #10213c; }
 // lessc --js ./public/style/yolog.less ./public/style/yolog.css
