@@ -1,29 +1,35 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useCallback, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 import * as PropTypes from 'prop-types';
 import { uploadImage } from '@Store/reducers/util';
+import axios from 'axios';
 
 const Quill = dynamic(import('react-quill'), { ssr: false, loading: () => <p>Loading ...</p> });
 const PostEditor = ({ setPost, post }) => {
   const dispatch = useDispatch();
-  const QuillRef = useRef();
-  const imageHandler = () => {
+  // const [thumb, setThumb] = useState([]);
+  const quillRef = useRef();
+  const imageHandler = useCallback(() => {
     const input = document.createElement('input');
 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
     input.click();
 
+    const test = Quill.getEditor();
+
     input.onchange = async (e) => {
       const { files } = e.target;
       const formData = new FormData();
       formData.append('files', files[0]);
-
-      dispatch(uploadImage(formData));
+      const localImage = await axios.post('/api/util', formData);
+      // setThumb([...thumb, ...localImage.data]);
+      test.insertEmbed(1, 'image', localImage.path);
+      console.log(localImage);
     };
-  };
+  }, []);
 
   const modules = useMemo(() => ({
     toolbar: {
@@ -53,11 +59,7 @@ const PostEditor = ({ setPost, post }) => {
   return (
     <CustomEditor>
       <Quill
-        ref={(element) => {
-          if (element !== null) {
-            QuillRef.current = element;
-          }
-        }}
+        forwardedRef={quillRef}
         onChange={onChangeEditor}
         value={post.content}
         modules={modules}

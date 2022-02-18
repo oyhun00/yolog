@@ -1,6 +1,7 @@
 import {
   SET_HEADER_SELECTED_KEYS,
   UPLOAD_POST_IMAGE,
+  UPLOAD_POST_IMAGE_SUCCESS,
 } from '@Constants/actionTypes';
 
 export const selectedKeys = (id) => ({
@@ -28,6 +29,13 @@ const util = (state = initialState, action = {}) => {
       return {
         ...state,
       };
+    case UPLOAD_POST_IMAGE_SUCCESS: {
+      console.log('UPLOAD_POST_IMAGE_SUCCESS', action.payload);
+
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }
