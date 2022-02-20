@@ -19,15 +19,21 @@ const Post = () => {
         <Breadcrumb.Item>portfolio</Breadcrumb.Item>
       </Breadcrumb>
       <Divider />
-      <Paragraph>
+      <CustomParagraph>
         {parse(content)}
-      </Paragraph>
+      </CustomParagraph>
     </Typography>
   );
 };
 
 const CustomTitle = styled(Title)`
   color: #fff !important;
+`;
+
+const CustomParagraph = styled(Paragraph)`
+  img {
+    width: 100%;
+  }
 `;
 
 export default Post;

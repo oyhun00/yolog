@@ -8,7 +8,8 @@
       "@Pages/*": ["./pages/*"],
       "@Components/*": ["./components/*"],
       "@Server/*": ["./server/*"],
-      "@Public/*": ["./public/*"]
+      "@Public/*": ["./public/*"],
+      "@Config/*": ["./config/*"],
     },
     "experimentalDecorators": true
   }

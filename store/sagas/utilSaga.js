@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  all, fork, put, call, takeLatest, takeLeading,
+  all, fork, put, call, takeLeading,
 } from 'redux-saga/effects';
 import { UPLOAD_POST_IMAGE, UPLOAD_POST_IMAGE_SUCCESS } from '@Constants/actionTypes';
 

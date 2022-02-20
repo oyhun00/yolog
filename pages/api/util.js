@@ -1,10 +1,21 @@
 import nextConnect from 'next-connect';
 import multer from 'multer';
+import multerS3 from 'multer-s3';
+import AWS from 'aws-sdk';
+
+AWS.config.update({
+  accessKeyId: process.env.REACT_APP_S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_S3_SECRET_ACCESS_KEY,
+  region: process.env.REACT_APP_S3_REGION,
+});
 
 const upload = multer({
-  storage: multer.diskStorage({
-    destination: './public/uploads',
-    filename: (req, file, cb) => cb(null, file.originalname),
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: process.env.REACT_APP_S3_BUCKET,
+    key(req, file, cb) {
+      cb(null, `${Date.now()}_${file.originalname}`);
+    },
   }),
 });
 
@@ -26,6 +37,6 @@ export default handler;
 
 export const config = {
   api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
+    bodyParser: false,
   },
 };

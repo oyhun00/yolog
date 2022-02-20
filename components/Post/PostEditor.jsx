@@ -1,15 +1,19 @@
-import React, { useMemo, useCallback, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo, useCallback, useRef } from 'react';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 import * as PropTypes from 'prop-types';
-import { uploadImage } from '@Store/reducers/util';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const Quill = dynamic(import('react-quill'), { ssr: false, loading: () => <p>Loading ...</p> });
+const Quill = dynamic(async () => {
+  const { default: ReactQuill } = await import('react-quill');
+  return function editor({ forwardedRef, ...props }) {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <ReactQuill ref={forwardedRef} {...props} />;
+  };
+}, { ssr: false, loading: () => <p>Loading ...</p> });
+
 const PostEditor = ({ setPost, post }) => {
-  const dispatch = useDispatch();
-  // const [thumb, setThumb] = useState([]);
   const quillRef = useRef();
   const imageHandler = useCallback(() => {
     const input = document.createElement('input');
@@ -18,16 +22,22 @@ const PostEditor = ({ setPost, post }) => {
     input.setAttribute('accept', 'image/*');
     input.click();
 
-    const test = Quill.getEditor();
-
     input.onchange = async (e) => {
-      const { files } = e.target;
       const formData = new FormData();
-      formData.append('files', files[0]);
-      const localImage = await axios.post('/api/util', formData);
-      // setThumb([...thumb, ...localImage.data]);
-      test.insertEmbed(1, 'image', localImage.path);
-      console.log(localImage);
+      formData.append('files', e.target.files[0]);
+
+      try {
+        const localImage = await axios.post('/api/util', formData);
+        const { location } = localImage.data;
+        const range = quillRef.current.getEditorSelection();
+
+        quillRef.current.getEditor().insertEmbed(range.index, 'image', location);
+        quillRef.current.getEditor().setSelection(range.index + 1);
+
+        document.body.querySelector(':scope > input').remove();
+      } catch (error) {
+        toast.error(error);
+      }
     };
   }, []);
 
@@ -42,7 +52,7 @@ const PostEditor = ({ setPost, post }) => {
       ],
       handlers: { image: imageHandler },
     },
-  }), []);
+  }), [imageHandler]);
 
   const formats = [
     'header',

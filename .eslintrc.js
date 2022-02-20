@@ -15,6 +15,7 @@ module.exports = {
           ['@Components', './components'],
           ['@Server', './server'],
           ['@Public', './public'],
+          ['@Config', './config'],
         ],
       },
       node: {
