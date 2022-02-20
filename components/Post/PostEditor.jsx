@@ -4,6 +4,12 @@ import dynamic from 'next/dynamic';
 import * as PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark-reasonable.css';
+
+hljs.configure({
+  languages: ['javascript'],
+});
 
 const Quill = dynamic(async () => {
   const { default: ReactQuill } = await import('react-quill');
@@ -42,12 +48,15 @@ const PostEditor = ({ setPost, post }) => {
   }, []);
 
   const modules = useMemo(() => ({
+    syntax: {
+      highlight: (text) => hljs.highlightAuto(text).value,
+    },
     toolbar: {
       container: [
         [{ header: [1, 2, false] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-        ['link', 'image'],
+        ['link', 'image', 'code-block'],
         [{ align: [] }, { color: [] }, { background: [] }],
       ],
       handlers: { image: imageHandler },
@@ -58,7 +67,7 @@ const PostEditor = ({ setPost, post }) => {
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
-    'link', 'image',
+    'link', 'image', 'code-block',
     'align', 'color', 'background',
   ];
 

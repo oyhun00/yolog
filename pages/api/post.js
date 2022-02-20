@@ -53,6 +53,7 @@ const SELECT_POST_LIST = `
     , p.delete_fl as "deleteFl"
   FROM YLG_POST p
   WHERE p.delete_fl = false
+  ORDER BY p.ID DESC
 `;
 
 const SELECT_POST = `
