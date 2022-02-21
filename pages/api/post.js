@@ -29,9 +29,9 @@ const getPost = async (req, res) => {
 
 const addPost = async (req, res) => {
   const {
-    title, content, thumbnail, thumbnailText,
+    title, content, thumbnail, thumbnailText, tags,
   } = req.body.params.data;
-  const values = [title, content, thumbnail, thumbnailText];
+  const values = [title, content, thumbnail, thumbnailText, tags];
 
   try {
     await db.none(INSERT_POST, values);
@@ -65,6 +65,7 @@ const SELECT_POST = `
     , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
     , p.udt_dttm as "udtDttm"
     , p.delete_fl as "deleteFl"
+    , p.tag as "tags"
   FROM YLG_POST p
   WHERE p.delete_fl = false
     AND p.id = $1
@@ -76,13 +77,15 @@ const INSERT_POST = `
     content,
     crt_dttm,
     thumbnail,
-    thumbnail_text
+    thumbnail_text,
+    tag
   ) VALUES (
     $1,
     $2,
     NOW(),
     $3,
-    $4
+    $4,
+    $5
   )
 `;
 

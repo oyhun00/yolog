@@ -100,9 +100,13 @@ PostEditor.defaultProps = {
 };
 
 const CustomEditor = styled.div`
-  display: flex;
-  flex-flow: column;
   height: 100%;
+  
+  .quill {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
 
   .ql-container {
     flex: auto;

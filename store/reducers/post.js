@@ -33,6 +33,7 @@ const initialState = {
     content: '',
     thumbnail: '',
     thumbnailText: '',
+    tags: '',
     crtDttm: '',
     udtDttm: '',
     deleteFl: false,
@@ -60,7 +61,7 @@ const reducer = (state = initialState, action = {}) => {
       };
     case GET_POST_SUCCESS: {
       const {
-        id, title, content, thumbnail, crtDttm, udtDttm, deleteFl,
+        id, title, content, thumbnail, tags, crtDttm, udtDttm, deleteFl,
       } = action.result.data;
 
       return {
@@ -70,6 +71,7 @@ const reducer = (state = initialState, action = {}) => {
           title,
           content,
           thumbnail,
+          tags,
           crtDttm,
           udtDttm,
           deleteFl,

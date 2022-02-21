@@ -14,25 +14,69 @@ import { mediaWidth } from '@Constants/responsive';
 
 const PostWrite = () => {
   const dispatch = useDispatch();
+
+  const [tag, setTag] = useState('');
   const [post, setPost] = useState({
     title: '',
     content: '',
     thumbnail: '',
     thumbnailText: '',
+    tags: [],
   });
+
   const onChangeTitle = (e) => setPost({ ...post, title: e.target.value });
+
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter' && (tag && tag.trim() !== '')) {
+      setPost({
+        ...post,
+        tags: post.tags.concat(tag),
+      });
+
+      setTag('');
+    }
+  };
+
+  const tagDelete = (index) => {
+    const filtered = post.tags.filter((v, i) => i !== index);
+    setPost({
+      ...post,
+      tags: filtered,
+    });
+  };
+
   const submitPost = useCallback(() => {
     if (!post.title) { return toast.error('제목을 입력해주세요'); }
     if (!post.thumbnailText.trim() || post.thumbnailText.trim() === '') { return toast.error('내용을 입력해주세요'); }
     return dispatch(addPost(post));
   }, [dispatch, post]);
 
+  const tagList = post.tags.map((v, index) => (
+    <Tag key={v} onClick={() => tagDelete(index)}>{v}</Tag>
+  ));
+
   return (
     <MainLayout>
       <SizeSet>
         <Row gutter={[24, 24]}>
           <Col span={24}>
-            <CustomInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={post.title} />
+            <TitleInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={post.title} />
+          </Col>
+        </Row>
+        <Row gutter={[24, 24]}>
+          <Col span={24}>
+            <TagInput
+              placeholder="태그를 입력하세요"
+              name="tag"
+              onChange={(e) => setTag(e.target.value)}
+              onKeyPress={onKeyPress}
+              value={tag}
+            />
+          </Col>
+        </Row>
+        <Row gutter={[24, 24]}>
+          <Col span={24}>
+            <TagArea>{tagList}</TagArea>
           </Col>
         </Row>
         <Row gutter={[24, 24]}>
@@ -51,26 +95,60 @@ const PostWrite = () => {
 };
 
 const SizeSet = styled.div`
-  width: 100%;
+  width: 70%;
   height: 100%;
   display: flex;
   flex-flow: column;
   
-  & > div:nth-child(2) {
+  & > div:nth-child(4) {
     flex: auto;
   }
   
   ${mediaWidth.MEDIA_TABLET} {
-    width: 70%;
+    width: 90%;
+  }
+
+  ${mediaWidth.MEDIA_MOBILE} {
+    width: 100%;
   }
 `;
 
-const CustomInput = styled(Input)`
+const TitleInput = styled(Input)`
   font-size: 40px;
   background: transparent;
   border: 0;
   border-bottom: 1px solid #222222;
   padding: 0 0 8px 0;
+
+  :hover, :active, :focus {
+    border-color: #323232;
+  }
+`;
+
+const TagArea = styled.div`
+  display: flex;
+`;
+
+const Tag = styled.div`
+  background: rgb(24 144 255 / 38%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 2px 16px;
+  margin: 6px 6px 12px 0;
+  cursor: pointer;
+  
+  :hover {
+    opacity: 0.7;
+  }
+`;
+
+const TagInput = styled(Input)`
+  font-size: 16px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #222222;
+  padding: 0 0 8px 0;
+  margin: 12px 0;
 
   :hover, :active, :focus {
     border-color: #323232;
