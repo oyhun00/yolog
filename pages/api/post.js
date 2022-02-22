@@ -4,6 +4,7 @@ const handler = async (req, res) => {
   if (req.method === 'GET' && !req.query.id) { await getPostList(req, res); }
   if (req.method === 'GET' && req.query.id) { await getPost(req, res); }
   if (req.method === 'POST') { await addPost(req, res); }
+  if (req.method === 'DELETE') { await deletePost(req, res); }
 };
 
 const getPostList = async (req, res) => {
@@ -37,6 +38,19 @@ const addPost = async (req, res) => {
     await db.none(INSERT_POST, values);
     res.status(301).redirect('/post');
   } catch (e) {
+    res.status(500).end();
+  }
+};
+
+const deletePost = async (req, res) => {
+  const { id } = req.query;
+  const params = [parseInt(id, 10)];
+
+  try {
+    await db.none(DELETE_POST, params);
+    res.status(301).redirect('/post');
+  } catch (e) {
+    console.log(e);
     res.status(500).end();
   }
 };
@@ -87,6 +101,12 @@ const INSERT_POST = `
     $4,
     $5
   )
+`;
+
+const DELETE_POST = `
+  UPDATE YLG_POST
+  SET delete_fl = true
+  WHERE id = $1
 `;
 
 export default handler;

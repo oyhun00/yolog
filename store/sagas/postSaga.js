@@ -4,20 +4,16 @@ import {
 } from 'redux-saga/effects';
 import { push } from 'connected-next-router';
 import {
-  GET_POST_LIST_REQUEST,
-  GET_POST_LIST_SUCCESS,
-  GET_POST_LIST_FAILURE,
-  GET_POST_REQUEST,
-  GET_POST_SUCCESS,
-  GET_POST_FAILURE,
-  ADD_POST_REQUEST,
-  ADD_POST_SUCCESS,
-  ADD_POST_FAILURE,
+  GET_POST_LIST_REQUEST, GET_POST_LIST_SUCCESS, GET_POST_LIST_FAILURE,
+  GET_POST_REQUEST, GET_POST_SUCCESS, GET_POST_FAILURE,
+  ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
+  DELETE_POST_REQUEST, DELETE_POST_SUCCESS, DELETE_POST_FAILURE,
 } from '@Constants/actionTypes';
 
 const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`);
 const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
 const addPostApi = (data) => axios.post('/api/post', { params: data });
+const deletePostApi = (id) => axios.delete('/api/post', { params: id });
 
 function* getPostList() {
   try {
@@ -47,6 +43,17 @@ function* addPost(action) {
   }
 }
 
+function* deletePost(action) {
+  try {
+    const result = yield call(deletePostApi, { id: action.payload });
+    yield put({ type: DELETE_POST_SUCCESS, result });
+    yield put(push({ pathname: '/post' }));
+  } catch (err) {
+    console.log(err);
+    yield put({ type: DELETE_POST_FAILURE, result: err.response });
+  }
+}
+
 function* watchGetPostList() {
   yield takeLatest(GET_POST_LIST_REQUEST, getPostList);
 }
@@ -59,10 +66,15 @@ function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
 
+function* watchDeletePost() {
+  yield takeLatest(DELETE_POST_REQUEST, deletePost);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchGetPostList),
     fork(watchGetPost),
     fork(watchAddPost),
+    fork(watchDeletePost),
   ]);
 }

@@ -8,6 +8,7 @@ import {
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
   ADD_POST_FAILURE,
+  DELETE_POST_REQUEST,
 } from '@Constants/actionTypes';
 
 export const getPostList = () => ({
@@ -22,6 +23,11 @@ export const getPost = (id) => ({
 export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
   payload: data,
+});
+
+export const deletePost = (id) => ({
+  type: DELETE_POST_REQUEST,
+  payload: id,
 });
 
 const initialState = {
@@ -91,6 +97,10 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
       };
     case ADD_POST_FAILURE:
+      return {
+        ...state,
+      };
+    case DELETE_POST_REQUEST:
       return {
         ...state,
       };

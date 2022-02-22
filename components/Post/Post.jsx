@@ -1,21 +1,36 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Typography, Divider, Breadcrumb } from 'antd';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, Divider } from 'antd';
+import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import parse from 'html-react-parser';
+
 import { mediaWidth } from '@Constants/responsive';
+import { deletePost } from '@Store/reducers/post';
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
+  const dispatch = useDispatch();
+  const postDelete = useCallback((id) => {
+    dispatch(deletePost(id));
+  }, [dispatch]);
   const { post } = useSelector((state) => state.post);
   const {
-    title, content, crtDttm, udtDttm, tags,
+    id, title, content, crtDttm, udtDttm, tags,
   } = post;
 
   const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
 
   return (
     <CustomTypography>
+      <AdminArea offsetTop={120}>
+        <Icon onClick={() => postDelete(id)}>
+          <DeleteOutlined style={{ fontSize: '22px' }} />
+        </Icon>
+        <Icon>
+          <FormOutlined style={{ fontSize: '22px' }} />
+        </Icon>
+      </AdminArea>
       <CustomTitle>{title}</CustomTitle>
       <PostInfo>
         <PostDate>{udtDttm || crtDttm}</PostDate>
@@ -29,9 +44,31 @@ const Post = () => {
   );
 };
 
+const AdminArea = styled.div`
+  position: absolute;
+  right: -40px;
+`;
+
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: rgb(255 255 255 / 15%);
+  border: 2px solid rgb(255 255 255 / 61%);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  :hover {
+    opacity: 0.7;
+  }
+`;
+
 const CustomTypography = styled(Typography)`
   width: 60%;
   margin: 0 auto;
+  position: relative;
 
   ${mediaWidth.MEDIA_TABLET} {
     width: 70%;
