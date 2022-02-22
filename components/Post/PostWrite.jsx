@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import styled from '@emotion/styled';
 import {
@@ -7,12 +8,15 @@ import {
 } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
-import { addPost } from '@Store/reducers/post';
+import { addPost, getPost } from '@Store/reducers/post';
 import MainLayout from '@Components/Layout';
 import PostEditor from '@Components/Post/PostEditor';
 import { mediaWidth } from '@Constants/responsive';
+import axios from "axios";
+import { GET_POST_REQUEST } from "@Constants/actionTypes";
 
 const PostWrite = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const [tag, setTag] = useState('');
@@ -54,6 +58,16 @@ const PostWrite = () => {
   const tagList = post.tags.map((v, index) => (
     <Tag key={v} onClick={() => tagDelete(index)}>{v}</Tag>
   ));
+
+  useEffect(async () => {
+    const { id } = router.query;
+    console.log({ params: id });
+    if (id) {
+      const postData = await axios.get('/api/post', { params: id });
+      console.log(postData);
+      // dispatch({ type: GET_POST_REQUEST, payload: id });
+    }
+  }, [dispatch, router]);
 
   return (
     <MainLayout>

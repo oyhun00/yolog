@@ -10,7 +10,7 @@ import {
   DELETE_POST_REQUEST, DELETE_POST_SUCCESS, DELETE_POST_FAILURE,
 } from '@Constants/actionTypes';
 
-const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`);
+const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/list`);
 const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
 const addPostApi = (data) => axios.post('/api/post', { params: data });
 const deletePostApi = (id) => axios.delete('/api/post', { params: id });

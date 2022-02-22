@@ -1,19 +1,10 @@
 import db from '@Server/dataBase';
 
 const handler = async (req, res) => {
-  if (req.method === 'GET' && !req.query.id) { await getPostList(req, res); }
+  console.log('getPost ^^^^^^^^^^', req.query);
   if (req.method === 'GET' && req.query.id) { await getPost(req, res); }
   if (req.method === 'POST') { await addPost(req, res); }
   if (req.method === 'DELETE') { await deletePost(req, res); }
-};
-
-const getPostList = async (req, res) => {
-  try {
-    const result = await db.any(SELECT_POST_LIST);
-    res.status(200).json(result);
-  } catch (e) {
-    res.status(500).end();
-  }
 };
 
 const getPost = async (req, res) => {
@@ -36,7 +27,7 @@ const addPost = async (req, res) => {
 
   try {
     await db.none(INSERT_POST, values);
-    res.status(301).redirect('/post');
+    res.status(200).end();
   } catch (e) {
     res.status(500).end();
   }
@@ -48,27 +39,12 @@ const deletePost = async (req, res) => {
 
   try {
     await db.none(DELETE_POST, params);
-    res.status(301).redirect('/post');
+    res.status(200).end();
   } catch (e) {
     console.log(e);
     res.status(500).end();
   }
 };
-
-const SELECT_POST_LIST = `
-  SELECT
-    p.ID
-    , p.title
-    , p.thumbnail
-    , p.thumbnail_text as "thumbnailText"
-    , p.content
-    , p.crt_dttm as "crtDttm"
-    , p.udt_dttm as "udtDttm"
-    , p.delete_fl as "deleteFl"
-  FROM YLG_POST p
-  WHERE p.delete_fl = false
-  ORDER BY p.ID DESC
-`;
 
 const SELECT_POST = `
   SELECT

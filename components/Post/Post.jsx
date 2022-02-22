@@ -7,6 +7,7 @@ import parse from 'html-react-parser';
 
 import { mediaWidth } from '@Constants/responsive';
 import { deletePost } from '@Store/reducers/post';
+import Router from "next/router";
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
@@ -27,7 +28,7 @@ const Post = () => {
         <Icon onClick={() => postDelete(id)}>
           <DeleteOutlined style={{ fontSize: '22px' }} />
         </Icon>
-        <Icon>
+        <Icon onClick={() => Router.push(`/post/modify/${id}`)}>
           <FormOutlined style={{ fontSize: '22px' }} />
         </Icon>
       </AdminArea>
