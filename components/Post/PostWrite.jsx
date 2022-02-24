@@ -8,12 +8,11 @@ import {
 } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
-import { addPost, getPost } from '@Store/reducers/post';
+import { addPost } from '@Store/reducers/post';
 import MainLayout from '@Components/Layout';
 import PostEditor from '@Components/Post/PostEditor';
 import { mediaWidth } from '@Constants/responsive';
-import axios from "axios";
-import { GET_POST_REQUEST } from "@Constants/actionTypes";
+import axios from 'axios';
 
 const PostWrite = () => {
   const router = useRouter();
@@ -55,19 +54,32 @@ const PostWrite = () => {
     return dispatch(addPost(post));
   }, [dispatch, post]);
 
-  const tagList = post.tags.map((v, index) => (
+  const tagList = post.tags?.map((v, index) => (
     <Tag key={v} onClick={() => tagDelete(index)}>{v}</Tag>
   ));
 
-  useEffect(async () => {
+  const getUpdatePost = async () => {
     const { id } = router.query;
-    console.log({ params: id });
-    if (id) {
-      const postData = await axios.get('/api/post', { params: id });
-      console.log(postData);
-      // dispatch({ type: GET_POST_REQUEST, payload: id });
-    }
-  }, [dispatch, router]);
+    const { data } = await axios.get('/api/post', { params: { id } });
+    const { title, content, tags } = data;
+
+    setPost({
+      ...post,
+      title,
+      content,
+      tags,
+    });
+  };
+
+  useEffect(() => {
+    console.log('useEffect 1 ', post);
+    if (router.query) { getUpdatePost(); }
+    console.log('useEffect 2 ', post);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('useEffect', post);
+  // }, [post]);
 
   return (
     <MainLayout>
