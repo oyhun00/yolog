@@ -72,9 +72,13 @@ const PostEditor = ({ setPost, post }) => {
   ];
 
   const onChangeEditor = (string, delta, source, editor) => {
-    console.log('onChangeEditor 1 ', post);
-    // setPost({ ...post, content: string, thumbnailText: editor.getText(0, 200) });
-    console.log('onChangeEditor 2 ', post);
+    setPost((prevState) => (
+      {
+        ...prevState,
+        content: string,
+        thumbnailText: editor.getText(0, 200),
+      }
+    ));
   };
 
   return (

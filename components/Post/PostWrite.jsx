@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
-import { addPost } from '@Store/reducers/post';
+import { addPost, updatePost } from '@Store/reducers/post';
 import MainLayout from '@Components/Layout';
 import PostEditor from '@Components/Post/PostEditor';
 import { mediaWidth } from '@Constants/responsive';
@@ -20,6 +20,7 @@ const PostWrite = () => {
 
   const [tag, setTag] = useState('');
   const [post, setPost] = useState({
+    id: '',
     title: '',
     content: '',
     thumbnail: '',
@@ -51,6 +52,7 @@ const PostWrite = () => {
   const submitPost = useCallback(() => {
     if (!post.title) { return toast.error('제목을 입력해주세요'); }
     if (!post.thumbnailText.trim() || post.thumbnailText.trim() === '') { return toast.error('내용을 입력해주세요'); }
+    if (router.query.id) { return dispatch(updatePost(post)); }
     return dispatch(addPost(post));
   }, [dispatch, post]);
 
@@ -65,21 +67,16 @@ const PostWrite = () => {
 
     setPost({
       ...post,
+      id,
       title,
       content,
-      tags,
+      tags: tags || [],
     });
   };
 
   useEffect(() => {
-    console.log('useEffect 1 ', post);
     if (router.query) { getUpdatePost(); }
-    console.log('useEffect 2 ', post);
   }, []);
-
-  // useEffect(() => {
-  //   console.log('useEffect', post);
-  // }, [post]);
 
   return (
     <MainLayout>

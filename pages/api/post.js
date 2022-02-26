@@ -1,10 +1,10 @@
 import db from '@Server/dataBase';
 
 const handler = async (req, res) => {
-  console.log('getPost ^^^^^^^^^^', req);
   if (req.method === 'GET' && req.query.id) { await getPost(req, res); }
   if (req.method === 'POST') { await addPost(req, res); }
   if (req.method === 'DELETE') { await deletePost(req, res); }
+  if (req.method === 'PUT') { await updatePost(req, res); }
 };
 
 const getPost = async (req, res) => {
@@ -46,6 +46,20 @@ const deletePost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  const {
+    id, title, content, thumbnail, thumbnailText, tags,
+  } = req.body.params.data;
+  const values = [id, title, content, thumbnail, thumbnailText, tags];
+
+  try {
+    await db.none(UPDATE_POST, values);
+    res.status(200).end();
+  } catch (e) {
+    res.status(500).end();
+  }
+};
+
 const SELECT_POST = `
   SELECT
     p.ID
@@ -63,12 +77,12 @@ const SELECT_POST = `
 
 const INSERT_POST = `
   INSERT INTO YLG_POST (
-    title,
-    content,
-    crt_dttm,
-    thumbnail,
-    thumbnail_text,
-    tag
+    title
+    , content
+    , crt_dttm
+    , thumbnail
+    , thumbnail_text
+    , tag
   ) VALUES (
     $1,
     $2,
@@ -82,6 +96,17 @@ const INSERT_POST = `
 const DELETE_POST = `
   UPDATE YLG_POST
   SET delete_fl = true
+  WHERE id = $1
+`;
+
+const UPDATE_POST = `
+  UPDATE YLG_POST
+  SET title = $2
+    , content = $3
+    , udt_dttm = NOW()
+    , thumbnail = $4
+    , thumbnail_text = $5
+    , tag = $6
   WHERE id = $1
 `;
 
