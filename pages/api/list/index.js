@@ -20,8 +20,9 @@ const SELECT_POST_LIST = `
     , p.thumbnail
     , p.thumbnail_text as "thumbnailText"
     , p.content
-    , p.crt_dttm as "crtDttm"
-    , p.udt_dttm as "udtDttm"
+    , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
+    , TO_CHAR(p.udt_dttm, 'YYYY-MM-DD') as "udtDttm"
+    , p.tag as "tags"
     , p.delete_fl as "deleteFl"
   FROM YLG_POST p
   WHERE p.delete_fl = false
