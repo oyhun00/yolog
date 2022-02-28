@@ -37,6 +37,13 @@ const PostEditor = ({ setPost, post }) => {
         const { location } = localImage.data;
         const range = quillRef.current.getEditorSelection();
 
+        setPost((prevState) => (
+          {
+            ...prevState,
+            thumbnail: location,
+          }
+        ));
+
         quillRef.current.getEditor().insertEmbed(range.index, 'image', location);
         quillRef.current.getEditor().setSelection(range.index + 1);
 

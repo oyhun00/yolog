@@ -4,18 +4,20 @@ import { useSelector } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
+
 import PostBox from '@Components/Post/PostBox';
+import { mediaWidth } from '@Constants/responsive';
 
 const PostComponent = () => {
   const { posts } = useSelector((state) => state.post);
   const postCards = posts.map((v) => (!v.deleteFl ? (
-    <Col key={v.id} className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={6}>
+    <Col key={v.id} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
       <PostBox key={v.id} data={v} />
     </Col>
   ) : ''));
 
   return (
-    <>
+    <PostListWrap>
       <Row gutter={[24, 24]}>
         <Col span={24} style={{ textAlign: 'right' }}>
           <CustomButton icon={<PlusOutlined />} size="large">
@@ -28,9 +30,18 @@ const PostComponent = () => {
       <Row gutter={[24, 24]}>
         {postCards}
       </Row>
-    </>
+    </PostListWrap>
   );
 };
+
+const PostListWrap = styled.div`
+  width: 75%;
+  margin: 0 auto;
+
+  ${mediaWidth.MEDIA_DESKTOP} {
+    width: 100%;
+  }
+`;
 
 const CustomButton = styled(Button)`
   background: transparent;

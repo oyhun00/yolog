@@ -7,5 +7,5 @@ export const breakPoint = {
 export const mediaWidth = {
   MEDIA_MOBILE: `@media only screen and (max-width: ${breakPoint.POINT_MOBILE}px)`,
   MEDIA_TABLET: `@media only screen and (max-width: ${breakPoint.POINT_TABLET}px)`,
-  // MEDIA_DESKTOP: `@media only screen and (min-width: ${breakPoint.POINT_DESKTOP}px)`,
+  MEDIA_DESKTOP: `@media only screen and (max-width: ${breakPoint.POINT_DESKTOP}px)`,
 };

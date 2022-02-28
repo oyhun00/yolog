@@ -7,7 +7,7 @@ import parse from 'html-react-parser';
 
 import { mediaWidth } from '@Constants/responsive';
 import { deletePost } from '@Store/reducers/post';
-import Router from "next/router";
+import Router from 'next/router';
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
@@ -47,7 +47,7 @@ const Post = () => {
 
 const AdminArea = styled.div`
   position: absolute;
-  right: -40px;
+  right: -70px;
 `;
 
 const Icon = styled.div`
@@ -67,7 +67,7 @@ const Icon = styled.div`
 `;
 
 const CustomTypography = styled(Typography)`
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
   position: relative;
 
@@ -82,7 +82,7 @@ const CustomTypography = styled(Typography)`
 
 const CustomTitle = styled(Title)`
   color: #fff !important;
-  margin-bottom: 0.3rem !important;
+  margin: 0 0 0.3rem 0 !important;
 `;
 
 const PostInfo = styled.div`
@@ -90,8 +90,8 @@ const PostInfo = styled.div`
 `;
 
 const PostDate = styled.div`
-  margin-right: 0.6rem;
-  font-size: 16px;
+  margin: 0.8rem 0.6rem 0 0;
+  font-size: 14px;
 `;
 
 const TagArea = styled.div`
@@ -113,6 +113,10 @@ const Tag = styled.div`
 `;
 
 const CustomParagraph = styled(Paragraph)`
+  p > span {
+    font-size: 1rem;
+  }
+  
   img {
     width: 100%;
   }

@@ -14,6 +14,7 @@ const PostBox = ({ data }) => {
     <div onClick={() => Router.push(`/post/${id}`)}>
       <CustomCard
         hoverable
+        bordered={false}
         cover={<img alt="example" src={thumbnail || 'https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg'} />}
       >
         <Meta title={title} description={thumbnailText} />
@@ -33,23 +34,35 @@ PostBox.propTypes = {
 
 const CustomCard = styled(Card)`
   &.ant-card-bordered {
-    border: 1px solid black;
+    //border: 1px solid black;
   }
 
   .ant-card-cover {
-    height: 130px;
+    height: 150px;
     overflow: hidden;
   }
 
   .ant-card-body {
     padding: 20px;
+    background: #1e1e1e;
+  }
+
+  .ant-card-meta-title {
+    color: #fff;
   }
 
   .ant-card-meta-description {
-    height: 90px;
+    height: 80px;
     overflow: hidden;
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.85);
+    font-size: 13px;
+    font-weight: 300;
+    color: #fff;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 `;
 

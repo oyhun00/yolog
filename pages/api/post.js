@@ -67,7 +67,7 @@ const SELECT_POST = `
     , p.thumbnail
     , p.content
     , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
-    , p.udt_dttm as "udtDttm"
+    , TO_CHAR(p.udt_dttm, 'YYYY-MM-DD') as "udtDttm"
     , p.delete_fl as "deleteFl"
     , p.tag as "tags"
   FROM YLG_POST p
