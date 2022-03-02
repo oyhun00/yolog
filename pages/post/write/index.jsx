@@ -1,8 +1,8 @@
 import React from 'react';
 import PostWrite from '@Components/Post/PostWrite';
 
-const Write = () => (
+const Index = () => (
   <PostWrite />
 );
 
-export default Write;
+export default Index;

@@ -1,7 +1,7 @@
 import db from '@Server/dataBase';
 
 const handler = async (req, res) => {
-  if (req.method === 'GET' && req.query.id) { await getPost(req, res); }
+  if (req.method === 'GET') { await getPost(req, res); }
   if (req.method === 'POST') { await addPost(req, res); }
   if (req.method === 'DELETE') { await deletePost(req, res); }
   if (req.method === 'PUT') { await updatePost(req, res); }

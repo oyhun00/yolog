@@ -31,6 +31,11 @@ const MainHeader = () => {
             <a>Post</a>
           </Link>
         </CustomMenuItem>
+        <CustomMenuItem key={3} onClick={() => setKeys('3')}>
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
+        </CustomMenuItem>
       </CustomMenu>
     </CustomHeader>
   );

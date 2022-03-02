@@ -9,6 +9,7 @@ const PostBox = ({ data }) => {
   const {
     id, title, thumbnail, thumbnailText, crtDttm, udtDttm, tags,
   } = data;
+  console.log(tags !== null);
 
   const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
 
@@ -17,7 +18,7 @@ const PostBox = ({ data }) => {
       <CustomCard
         hoverable
         bordered={false}
-        isTag={!!tags}
+        tags={tags !== null}
         cover={<img alt="example" src={thumbnail || 'https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg'} />}
       >
         <Date>{crtDttm || udtDttm}</Date>
@@ -90,8 +91,8 @@ const CustomCard = styled(Card)`
   }
 
   .ant-card-meta-description {
-    height: ${(props) => (props.isTag ? '80px' : '125px')};
-    margin-bottom: ${(props) => (props.isTag ? '0' : '10px')};
+    height: ${(props) => (props.tags ? '80px' : '125px')};
+    margin-bottom: ${(props) => (props.tags ? '0' : '10px')};
     overflow: hidden;
     font-size: 13px;
     font-weight: 300;
@@ -100,7 +101,7 @@ const CustomCard = styled(Card)`
     word-break: break-word;
     overflow-wrap: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: ${(props) => (props.isTag ? '4' : '6')};
+    -webkit-line-clamp: ${(props) => (props.tags ? '4' : '6')};
     -webkit-box-orient: vertical;
   }
 `;

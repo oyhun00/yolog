@@ -5,7 +5,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '@Store/reducers';
 import rootSaga from '@Store/sagas';
-import { createRouterMiddleware, initialRouterState, } from 'connected-next-router';
+import { createRouterMiddleware, initialRouterState } from 'connected-next-router';
 import Router from 'next/router';
 
 const configure = (context) => {

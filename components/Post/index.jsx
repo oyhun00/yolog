@@ -21,7 +21,7 @@ const PostComponent = () => {
       <Row gutter={[24, 24]}>
         <Col span={24} style={{ textAlign: 'right' }}>
           <CustomButton icon={<PlusOutlined />} size="large">
-            <Link href="/write">
+            <Link href="/post/write">
               <span>글쓰기</span>
             </Link>
           </CustomButton>
