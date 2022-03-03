@@ -8,4 +8,5 @@ module.exports = {
   '@Server': path.resolve(__dirname, './server'),
   '@Public': path.resolve(__dirname, './public'),
   '@Config': path.resolve(__dirname, './config'),
+  '@Middleware': path.resolve(__dirname, './middleware'),
 };

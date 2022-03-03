@@ -69,7 +69,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress",
-    "build": "webpack",
+    "build": "next build",
     "dev": "next"
   },
   "author": "",

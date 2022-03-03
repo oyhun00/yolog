@@ -1,9 +1,10 @@
 import db from '@Server/dataBase';
+import authMiddleware from '@Middleware/auth';
 
 const handler = async (req, res) => {
   if (req.method === 'GET') { await getPost(req, res); }
   if (req.method === 'POST') { await addPost(req, res); }
-  if (req.method === 'DELETE') { await deletePost(req, res); }
+  if (req.method === 'DELETE') { authMiddleware(req, res, deletePost); }
   if (req.method === 'PUT') { await updatePost(req, res); }
 };
 
@@ -36,6 +37,8 @@ const addPost = async (req, res) => {
 const deletePost = async (req, res) => {
   const { id } = req.query;
   const params = [parseInt(id, 10)];
+
+  console.log('deletePost ========== ', 3);
 
   try {
     await db.none(DELETE_POST, params);

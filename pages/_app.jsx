@@ -1,13 +1,18 @@
 import React from 'react';
-import wrapper from '@Store/configure';
+import withReduxSaga from 'next-redux-saga';
 import App from 'next/app';
 import Head from 'next/head';
 import { ConnectedRouter } from 'connected-next-router';
 import { ToastContainer } from 'react-toastify';
+import axios from 'axios';
+
+import wrapper from '@Store/configure';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
 import 'quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
+
+axios.defaults.withCredentials = true;
 
 class MainApp extends App {
   render() {
@@ -33,4 +38,4 @@ class MainApp extends App {
   }
 }
 
-export default wrapper.withRedux(MainApp);
+export default wrapper.withRedux(withReduxSaga(MainApp));

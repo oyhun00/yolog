@@ -16,6 +16,7 @@ module.exports = {
           ['@Server', './server'],
           ['@Public', './public'],
           ['@Config', './config'],
+          ['@Middleware', './middleware'],
         ],
       },
       node: {
