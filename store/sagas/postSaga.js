@@ -51,7 +51,7 @@ function* deletePost(action) {
     yield put({ type: DELETE_POST_SUCCESS, result });
     yield put(push({ pathname: '/post' }));
   } catch (err) {
-    console.log(err);
+    console.log('err', err);
     yield put({ type: DELETE_POST_FAILURE, result: err.response });
   }
 }

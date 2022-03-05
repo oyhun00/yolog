@@ -12,8 +12,8 @@ const loginApi = async (data) => axios.post('/api/login', { params: data });
 function* login(action) {
   try {
     const { data } = yield call(loginApi, { data: action.payload });
-    yield axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-    yield console.log(axios.defaults.headers.common.Authorization);
+    yield axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+    yield document.cookie = `auth=${data.token}`;
     yield put({ type: LOGIN_SUCCESS, data });
   } catch (err) {
     yield console.log('err ------', err);

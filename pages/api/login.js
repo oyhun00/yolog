@@ -1,26 +1,33 @@
 import db from '@Server/dataBase';
 import jwt from 'jsonwebtoken';
 
-const handler = async (req, res) => {
-  if (req.method === 'POST') { await login(req, res); }
-};
 const TEST_KEY = 'TEST_KEY';
-const login = async (req, res) => {
+const handler = async (req, res) => {
   const { id, password } = req.body.params.data;
   const values = [id, password];
 
   try {
-    // await db.one(SELECT_USER, values);
-
-    res.status(200).json({
-      token: jwt.sign(
-        { id },
-        TEST_KEY,
-        { expiresIn: '15m' },
-      ),
-    });
+    db.one(SELECT_USER, values)
+      .then((result) => {
+        if (result) {
+          res.status(200).json({
+            success: true,
+            token: jwt.sign(
+              { id },
+              TEST_KEY,
+              { expiresIn: '15m' },
+            ),
+          });
+        }
+      })
+      .catch(() => {
+        res.status(200).json({
+          success: false,
+          message: '로그인에 실패하였습니다',
+        });
+      });
   } catch (e) {
-    console.log(e);
+    console.log('catch', e);
     res.status(500).end();
   }
 };
