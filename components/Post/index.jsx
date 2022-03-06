@@ -9,12 +9,15 @@ import PostBox from '@Components/Post/PostBox';
 import { mediaWidth } from '@Constants/responsive';
 
 const PostComponent = () => {
-  const { posts } = useSelector((state) => state.post);
+  const { post, auth } = useSelector((state) => state);
+  const { posts } = post;
+  const { user } = auth;
   const postCards = posts.map((v) => (!v.deleteFl ? (
     <Col key={v.id} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
       <PostBox key={v.id} data={v} />
     </Col>
   ) : ''));
+  console.log(user);
 
   return (
     <PostListWrap>

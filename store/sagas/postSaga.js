@@ -14,7 +14,7 @@ import {
 const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/list`);
 const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
 const addPostApi = (data) => axios.post('/api/post', { params: data });
-const deletePostApi = (id) => axios.delete('/api/post', { params: id });
+const deletePostApi = (id) => axios.delete('/api/post', { params: id }, { withCredentials: true });
 const updatePostApi = (data) => axios.put('/api/post', { params: data });
 
 function* getPostList() {
@@ -39,7 +39,7 @@ function* addPost(action) {
   try {
     const result = yield call(addPostApi, { data: action.payload });
     yield put({ type: ADD_POST_SUCCESS, result });
-    yield put(push({ pathname: '/post' }));
+    yield put(push({ pathname: '/' }));
   } catch (err) {
     yield put({ type: ADD_POST_FAILURE, result: err.response });
   }
@@ -47,12 +47,16 @@ function* addPost(action) {
 
 function* deletePost(action) {
   try {
-    const result = yield call(deletePostApi, { id: action.payload });
-    yield put({ type: DELETE_POST_SUCCESS, result });
-    yield put(push({ pathname: '/post' }));
+    const { data } = yield call(deletePostApi, { id: action.payload });
+
+    if (data.success) {
+      yield put({ type: DELETE_POST_SUCCESS, result: data.message });
+      yield put(push({ pathname: '/post' }));
+    } else {
+      yield put({ type: DELETE_POST_FAILURE, result: data.message });
+    }
   } catch (err) {
-    console.log('err', err);
-    yield put({ type: DELETE_POST_FAILURE, result: err.response });
+    yield put({ type: DELETE_POST_FAILURE, result: '접근 권한이 없습니다' });
   }
 }
 

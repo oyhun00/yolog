@@ -1,12 +1,24 @@
 import jwt from 'jsonwebtoken';
+import jwtConfig from '@Config/jwt-config';
 
-const TEST_SECRET_KET = 'TEST_KEY';
 const authMiddleware = async (req, res, handler) => {
   let decoded;
-  try {
-    decoded = jwt.verify(req.cookies.auth, TEST_SECRET_KET);
+  const { secretKey } = jwtConfig;
 
-    return await handler(req, res);
+  try {
+    decoded = jwt.verify(req.cookies.auth, secretKey);
+    console.log('authMiddleware================ ', req.cookies);
+
+    if (decoded) {
+      if (decoded.userAuth === 'ADMIN') {
+        return await handler(req, res);
+      }
+
+      return res.status(200).json({
+        success: false,
+        message: '접근 권한이 없습니다.',
+      });
+    }
   } catch (e) {
     if (e.name === 'JsonWebTokenError') {
       return res.status(401).json({

@@ -2,9 +2,10 @@ import {
   GET_POST_LIST_REQUEST, GET_POST_LIST_SUCCESS, GET_POST_LIST_FAILURE,
   GET_POST_REQUEST, GET_POST_SUCCESS, GET_POST_FAILURE,
   ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
-  DELETE_POST_REQUEST,
+  DELETE_POST_REQUEST, DELETE_POST_SUCCESS, DELETE_POST_FAILURE,
   UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS, UPDATE_POST_FAILURE,
 } from '@Constants/actionTypes';
+import { toast } from 'react-toastify';
 
 export const getPostList = () => ({
   type: GET_POST_LIST_REQUEST,
@@ -100,10 +101,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-    case DELETE_POST_REQUEST:
-      return {
-        ...state,
-      };
     case UPDATE_POST_REQUEST:
       return {
         ...state,
@@ -116,6 +113,25 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
+    case DELETE_POST_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_POST_SUCCESS: {
+      toast.success(action.result);
+
+      return {
+        ...state,
+      };
+    }
+    case DELETE_POST_FAILURE: {
+      toast.error(action.result);
+
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }

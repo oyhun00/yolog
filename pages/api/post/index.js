@@ -38,14 +38,18 @@ const deletePost = async (req, res) => {
   const { id } = req.query;
   const params = [parseInt(id, 10)];
 
-  console.log('deletePost ========== ', 3);
-
   try {
     await db.none(DELETE_POST, params);
-    res.status(200).end();
+    res.status(200).json({
+      success: true,
+      message: '정상적으로 삭제됐어요.',
+    });
   } catch (e) {
     console.log(e);
-    res.status(500).end();
+    res.status(500).end({
+      success: false,
+      message: '삭제하지 못했어요.',
+    });
   }
 };
 

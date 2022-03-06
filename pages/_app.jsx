@@ -4,21 +4,25 @@ import App from 'next/app';
 import Head from 'next/head';
 import { ConnectedRouter } from 'connected-next-router';
 import { ToastContainer } from 'react-toastify';
-import axios from 'axios';
+import { createStore } from 'redux';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
+import rootReducer from '@Store/reducers';
 import wrapper from '@Store/configure';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
 import 'quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-axios.defaults.withCredentials = true;
-
 class MainApp extends App {
   render() {
     const { Component, pageProps } = this.props;
+    const store = createStore(rootReducer);
+    const persistor = persistStore(store);
+
     return (
-      <>
+      <PersistGate loading={null} persistor={persistor}>
         <Head>
           <title>yolog</title>
         </Head>
@@ -33,7 +37,7 @@ class MainApp extends App {
             theme="dark"
           />
         </ConnectedRouter>
-      </>
+      </PersistGate>
     );
   }
 }

@@ -75,7 +75,7 @@ const PostWrite = () => {
   };
 
   useEffect(() => {
-    if (router.query) { getUpdatePost(); }
+    if (Object.keys(router.query).length !== 0) { getUpdatePost(); }
   }, []);
 
   return (

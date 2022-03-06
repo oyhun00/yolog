@@ -1,7 +1,8 @@
 import db from '@Server/dataBase';
 import jwt from 'jsonwebtoken';
+import jwtConfig from '@Config/jwt-config';
 
-const TEST_KEY = 'TEST_KEY';
+const { secretKey, option } = jwtConfig;
 const handler = async (req, res) => {
   const { id, password } = req.body.params.data;
   const values = [id, password];
@@ -10,13 +11,18 @@ const handler = async (req, res) => {
     db.one(SELECT_USER, values)
       .then((result) => {
         if (result) {
+          const { userId, userAuth } = result;
+          const token = jwt.sign(
+            { userId, userAuth },
+            secretKey,
+            option,
+          );
+          res.setHeader('Set-Cookie', `auth=${token};`);
+          // res.setHeader('Set-Cookie', `auth=;`);
           res.status(200).json({
             success: true,
-            token: jwt.sign(
-              { id },
-              TEST_KEY,
-              { expiresIn: '15m' },
-            ),
+            token,
+            result,
           });
         }
       })
@@ -36,7 +42,6 @@ const SELECT_USER = `
   SELECT
     u.id
     , u.user_id as "userId"
-    , u.user_password as "userPassword"
     , u.user_auth as "userAuth"
   FROM YLG_USER u
   WHERE u.user_id = $1

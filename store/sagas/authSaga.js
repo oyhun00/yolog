@@ -12,9 +12,12 @@ const loginApi = async (data) => axios.post('/api/login', { params: data });
 function* login(action) {
   try {
     const { data } = yield call(loginApi, { data: action.payload });
-    yield axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-    yield document.cookie = `auth=${data.token}`;
-    yield put({ type: LOGIN_SUCCESS, data });
+
+    if (data.success) {
+      yield axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+      yield put({ type: LOGIN_SUCCESS, result: data.result });
+      yield put(push({ pathname: '/' }));
+    }
   } catch (err) {
     yield console.log('err ------', err);
     yield put({ type: LOGIN_FAILURE, result: err.response });

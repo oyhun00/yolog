@@ -10,7 +10,6 @@ export const login = (data) => ({
 const initialState = {
   user: {
     id: '',
-    password: '',
     author: '',
   },
 };
@@ -18,19 +17,20 @@ const initialState = {
 const auth = (state = initialState, action = {}) => {
   switch (action.type) {
     case LOGIN_REQUEST: {
-      return state;
+      return {
+        ...state,
+      };
     }
     case LOGIN_SUCCESS: {
-      // console.log('LOGIN_SUCCESS', action);
-      // const { userId, userPassword, userAuth } = action.result;
+      const { userId, userAuth } = action.result;
+      console.log(userId, userAuth);
 
       return {
         ...state,
-        // user: {
-        //   id: userId,
-        //   password: userPassword,
-        //   author: userAuth,
-        // },
+        user: {
+          id: userId,
+          author: userAuth,
+        },
       };
     }
     case LOGIN_FAILURE: {
