@@ -49,23 +49,20 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case GET_POST_LIST_REQUEST:
-      return {
-        ...state,
-      };
+    case GET_POST_LIST_REQUEST: {
+      return { ...state };
+    }
     case GET_POST_LIST_SUCCESS:
       return {
         ...state,
         posts: action.result.data,
       };
-    case GET_POST_LIST_FAILURE:
-      return {
-        ...state,
-      };
-    case GET_POST_REQUEST:
-      return {
-        ...state,
-      };
+    case GET_POST_LIST_FAILURE: {
+      return { ...state };
+    }
+    case GET_POST_REQUEST: {
+      return { ...state };
+    }
     case GET_POST_SUCCESS: {
       const {
         id, title, content, thumbnail, tags, crtDttm, udtDttm, deleteFl,
@@ -85,52 +82,41 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     }
-    case GET_POST_FAILURE:
-      return {
-        ...state,
-      };
-    case ADD_POST_REQUEST:
-      return {
-        ...state,
-      };
-    case ADD_POST_SUCCESS:
-      return {
-        ...state,
-      };
-    case ADD_POST_FAILURE:
-      return {
-        ...state,
-      };
-    case UPDATE_POST_REQUEST:
-      return {
-        ...state,
-      };
-    case UPDATE_POST_SUCCESS:
-      return {
-        ...state,
-      };
-    case UPDATE_POST_FAILURE:
-      return {
-        ...state,
-      };
+    case GET_POST_FAILURE: {
+      return { ...state };
+    }
+    case ADD_POST_REQUEST: {
+      return { ...state };
+    }
+    case ADD_POST_SUCCESS: {
+      toast.success(action.result);
+      return { ...state };
+    }
+    case ADD_POST_FAILURE: {
+      toast.error(action.result);
+      return { ...state };
+    }
+    case UPDATE_POST_REQUEST: {
+      return { ...state };
+    }
+    case UPDATE_POST_SUCCESS: {
+      toast.success(action.result);
+      return { ...state };
+    }
+    case UPDATE_POST_FAILURE: {
+      toast.error(action.result);
+      return { ...state };
+    }
     case DELETE_POST_REQUEST: {
-      return {
-        ...state,
-      };
+      return { ...state };
     }
     case DELETE_POST_SUCCESS: {
       toast.success(action.result);
-
-      return {
-        ...state,
-      };
+      return { ...state };
     }
     case DELETE_POST_FAILURE: {
       toast.error(action.result);
-
-      return {
-        ...state,
-      };
+      return { ...state };
     }
     default:
       return state;

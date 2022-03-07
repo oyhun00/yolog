@@ -3,9 +3,9 @@ import authMiddleware from '@Middleware/auth';
 
 const handler = async (req, res) => {
   if (req.method === 'GET') { await getPost(req, res); }
-  if (req.method === 'POST') { await addPost(req, res); }
+  if (req.method === 'POST') { authMiddleware(req, res, addPost); }
   if (req.method === 'DELETE') { authMiddleware(req, res, deletePost); }
-  if (req.method === 'PUT') { await updatePost(req, res); }
+  if (req.method === 'PUT') { authMiddleware(req, res, updatePost); }
 };
 
 const getPost = async (req, res) => {
@@ -28,9 +28,15 @@ const addPost = async (req, res) => {
 
   try {
     await db.none(INSERT_POST, values);
-    res.status(200).end();
+    res.status(200).json({
+      success: true,
+      message: '정상적으로 등록했어요.',
+    });
   } catch (e) {
-    res.status(500).end();
+    res.status(500).json({
+      success: true,
+      message: '등록하지 못했어요.',
+    });
   }
 };
 
@@ -45,7 +51,6 @@ const deletePost = async (req, res) => {
       message: '정상적으로 삭제됐어요.',
     });
   } catch (e) {
-    console.log(e);
     res.status(500).end({
       success: false,
       message: '삭제하지 못했어요.',
@@ -61,9 +66,15 @@ const updatePost = async (req, res) => {
 
   try {
     await db.none(UPDATE_POST, values);
-    res.status(200).end();
+    res.status(200).json({
+      success: true,
+      message: '정상적으로 수정됐어요.',
+    });
   } catch (e) {
-    res.status(500).end();
+    res.status(500).json({
+      success: true,
+      message: '수정하지 못했어요.',
+    });
   }
 };
 

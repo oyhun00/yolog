@@ -11,6 +11,7 @@ import Router from 'next/router';
 const configure = (context) => {
   const routerMiddleware = createRouterMiddleware();
   const { asPath } = context.ctx || Router.router || {};
+
   let initialState;
   if (asPath) {
     initialState = {
@@ -24,7 +25,6 @@ const configure = (context) => {
     ? compose(applyMiddleware(...middlewares))
     : composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(rootReducer, initialState, enhancer);
-
   store.sagaTask = sagaMiddleware.run(rootSaga);
 
   return store;

@@ -9,8 +9,6 @@ const PostBox = ({ data }) => {
   const {
     id, title, thumbnail, thumbnailText, crtDttm, udtDttm, tags,
   } = data;
-  console.log(tags !== null);
-
   const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
 
   return (
@@ -18,7 +16,7 @@ const PostBox = ({ data }) => {
       <CustomCard
         hoverable
         bordered={false}
-        tags={tags !== null}
+        tags={tags.length !== 0 ? 1 : 0}
         cover={<img alt="example" src={thumbnail || 'https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg'} />}
       >
         <Date>{crtDttm || udtDttm}</Date>

@@ -13,9 +13,9 @@ import {
 
 const getPostListApi = () => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/list`);
 const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
-const addPostApi = (data) => axios.post('/api/post', { params: data });
+const addPostApi = (data) => axios.post('/api/post', { params: data }, { withCredentials: true });
 const deletePostApi = (id) => axios.delete('/api/post', { params: id }, { withCredentials: true });
-const updatePostApi = (data) => axios.put('/api/post', { params: data });
+const updatePostApi = (data) => axios.put('/api/post', { params: data }, { withCredentials: true });
 
 function* getPostList() {
   try {
@@ -37,11 +37,16 @@ function* getPost(action) {
 
 function* addPost(action) {
   try {
-    const result = yield call(addPostApi, { data: action.payload });
-    yield put({ type: ADD_POST_SUCCESS, result });
-    yield put(push({ pathname: '/' }));
+    const { data } = yield call(addPostApi, { data: action.payload });
+
+    if (data.success) {
+      yield put({ type: ADD_POST_SUCCESS, result: data.message });
+      yield put(push({ pathname: '/' }));
+    } else {
+      yield put({ type: ADD_POST_FAILURE, result: data.message });
+    }
   } catch (err) {
-    yield put({ type: ADD_POST_FAILURE, result: err.response });
+    yield put({ type: ADD_POST_FAILURE, result: '접근 권한이 없습니다' });
   }
 }
 
@@ -62,12 +67,16 @@ function* deletePost(action) {
 
 function* updatePost(action) {
   try {
-    const result = yield call(updatePostApi, { data: action.payload });
-    yield put({ type: UPDATE_POST_SUCCESS, result });
-    yield put(push({ pathname: `/post/${action.payload.id}` }));
+    const { data } = yield call(updatePostApi, { data: action.payload });
+
+    if (data.success) {
+      yield put({ type: UPDATE_POST_SUCCESS, result: data.message });
+      yield put(push({ pathname: `/post/${action.payload.id}` }));
+    } else {
+      yield put({ type: UPDATE_POST_FAILURE, result: data.message });
+    }
   } catch (err) {
-    console.log(err);
-    yield put({ type: UPDATE_POST_FAILURE, result: err.response });
+    yield put({ type: UPDATE_POST_FAILURE, result: '접근 권한이 없습니다' });
   }
 }
 
