@@ -2,7 +2,6 @@ import db from '@Server/dataBase';
 import jwt from 'jsonwebtoken';
 import jwtConfig from '@Config/jwt-config';
 
-const { secretKey, option } = jwtConfig;
 const handler = async (req, res) => {
   const { id, password } = req.body.params.data;
   const values = [id, password];
@@ -18,6 +17,7 @@ const handler = async (req, res) => {
             option,
           );
           res.setHeader('Set-Cookie', `auth=${token};`);
+          // res.setHeader('Set-Cookie', `auth=;`);
           res.status(200).json({
             success: true,
             token,
@@ -32,7 +32,6 @@ const handler = async (req, res) => {
         });
       });
   } catch (e) {
-    console.log('catch', e);
     res.status(500).end();
   }
 };

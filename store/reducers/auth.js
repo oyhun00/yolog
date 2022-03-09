@@ -1,6 +1,7 @@
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
 } from '@Constants/actionTypes';
+import { toast } from 'react-toastify';
 
 export const login = (data) => ({
   type: LOGIN_REQUEST,
@@ -10,7 +11,7 @@ export const login = (data) => ({
 const initialState = {
   user: {
     id: '',
-    author: '',
+    auth: '',
   },
 };
 
@@ -23,17 +24,17 @@ const auth = (state = initialState, action = {}) => {
     }
     case LOGIN_SUCCESS: {
       const { userId, userAuth } = action.result;
-      console.log(userId, userAuth);
 
       return {
         ...state,
         user: {
           id: userId,
-          author: userAuth,
+          auth: userAuth,
         },
       };
     }
     case LOGIN_FAILURE: {
+      toast.error(action.result);
       return state;
     }
     default:

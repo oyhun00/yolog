@@ -34,7 +34,7 @@ export const updatePost = (data) => ({
 const initialState = {
   selectedPost: '',
   posts: [],
-  post: {
+  postDetail: {
     id: '',
     title: '',
     content: '',
@@ -70,7 +70,7 @@ const reducer = (state = initialState, action = {}) => {
 
       return {
         ...state,
-        post: {
+        postDetail: {
           id,
           title,
           content,

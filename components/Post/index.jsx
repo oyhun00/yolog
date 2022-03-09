@@ -17,18 +17,21 @@ const PostComponent = () => {
       <PostBox key={v.id} data={v} />
     </Col>
   ) : ''));
-  console.log(user);
 
   return (
     <PostListWrap>
       <Row gutter={[24, 24]}>
-        <Col span={24} style={{ textAlign: 'right' }}>
-          <CustomButton icon={<PlusOutlined />} size="large">
-            <Link href="/post/write">
-              <span>글쓰기</span>
-            </Link>
-          </CustomButton>
-        </Col>
+        {
+          user.auth === 'ADMIN' ? (
+            <Col span={24} style={{ textAlign: 'right' }}>
+              <CustomButton icon={<PlusOutlined />} size="large">
+                <Link href="/post/write">
+                  <span>글쓰기</span>
+                </Link>
+              </CustomButton>
+            </Col>
+          ) : ''
+        }
       </Row>
       <Row gutter={[24, 24]}>
         {postCards}

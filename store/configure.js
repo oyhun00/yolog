@@ -3,11 +3,15 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from '@Store/reducers';
+import rootReducer, { persistedReducer } from '@Store/reducers';
 import rootSaga from '@Store/sagas';
 import { createRouterMiddleware, initialRouterState } from 'connected-next-router';
 import Router from 'next/router';
+import { persistStore } from 'redux-persist';
 
+const makeCofiguredStore = (reducer, initialState, enhancer) => {
+  return createStore(reducer, initialState, enhancer);
+};
 const configure = (context) => {
   const routerMiddleware = createRouterMiddleware();
   const { asPath } = context.ctx || Router.router || {};
@@ -24,10 +28,21 @@ const configure = (context) => {
   const enhancer = process.env.NODE_ENV === 'production'
     ? compose(applyMiddleware(...middlewares))
     : composeWithDevTools(applyMiddleware(...middlewares));
-  const store = createStore(rootReducer, initialState, enhancer);
-  store.sagaTask = sagaMiddleware.run(rootSaga);
+  // const store = createStore(rootReducer, initialState, enhancer);
+  let store;
 
-  return store;
+  if (typeof window === 'undefined') {
+    store = makeCofiguredStore(rootReducer, initialState, enhancer);
+    store.sagaTask = sagaMiddleware.run(rootSaga);
+
+    return store;
+  }
+
+  store = makeCofiguredStore(persistedReducer, initialState, enhancer);
+  store.sagaTask = sagaMiddleware.run(rootSaga);
+  const persistor = persistStore(store);
+
+  return { persistor, ...store };
 };
 
 const wrapper = createWrapper(configure, {

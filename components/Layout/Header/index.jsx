@@ -11,7 +11,9 @@ const MainHeader = () => {
   const setKeys = useCallback((id) => {
     dispatch(selectedKeys(id));
   }, [dispatch]);
-  const { key } = useSelector((state) => state.util);
+  const { util, auth } = useSelector((state) => state);
+  const { key } = util;
+  const { user } = auth;
 
   return (
     <CustomHeader>

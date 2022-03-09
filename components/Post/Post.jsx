@@ -15,23 +15,30 @@ const Post = () => {
   const postDelete = useCallback((id) => {
     dispatch(deletePost(id));
   }, [dispatch]);
-  const { post } = useSelector((state) => state.post);
+  const { post, auth } = useSelector((state) => state);
+  const { postDetail } = post;
+  const { user } = auth;
   const {
     id, title, content, crtDttm, udtDttm, tags,
-  } = post;
+  } = postDetail;
+  console.log(user);
 
   const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
 
   return (
     <CustomTypography>
-      <AdminArea offsetTop={120}>
-        <Icon onClick={() => postDelete(id)}>
-          <DeleteOutlined style={{ fontSize: '22px' }} />
-        </Icon>
-        <Icon onClick={() => Router.push(`/post/modify/${id}`)}>
-          <FormOutlined style={{ fontSize: '22px' }} />
-        </Icon>
-      </AdminArea>
+      {
+        user.auth === 'ADMIN' ? (
+          <AdminArea offsetTop={120}>
+            <Icon onClick={() => postDelete(id)}>
+              <DeleteOutlined style={{ fontSize: '22px' }} />
+            </Icon>
+            <Icon onClick={() => Router.push(`/post/modify/${id}`)}>
+              <FormOutlined style={{ fontSize: '22px' }} />
+            </Icon>
+          </AdminArea>
+        ) : ''
+      }
       <CustomTitle>{title}</CustomTitle>
       <PostInfo>
         <PostDate>{udtDttm || crtDttm}</PostDate>
