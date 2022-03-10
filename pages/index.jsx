@@ -11,8 +11,8 @@ const PostPage = () => (
   </MainLayout>
 );
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
-  store.dispatch({ type: GET_POST_LIST_REQUEST });
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query }) => {
+  store.dispatch({ type: GET_POST_LIST_REQUEST, payload: query.tag });
   store.dispatch(END);
 
   await store.sagaTask.toPromise();

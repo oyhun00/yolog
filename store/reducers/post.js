@@ -7,8 +7,9 @@ import {
 } from '@Constants/actionTypes';
 import { toast } from 'react-toastify';
 
-export const getPostList = () => ({
+export const getPostList = (payload) => ({
   type: GET_POST_LIST_REQUEST,
+  payload,
 });
 
 export const getPost = (id) => ({

@@ -9,7 +9,17 @@ const PostBox = ({ data }) => {
   const {
     id, title, thumbnail, thumbnailText, crtDttm, udtDttm, tags,
   } = data;
-  const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
+  const onSearchByTag = (tag, e) => {
+    Router.push({
+      pathname: '/',
+      query: {
+        tag,
+      },
+    });
+
+    e.stopPropagation();
+  };
+  const tagList = tags?.map((v) => (<Tag key={v} onClick={(e) => onSearchByTag(v, e)}>{v}</Tag>));
 
   return (
     <div onClick={() => Router.push(`/post/${id}`)}>

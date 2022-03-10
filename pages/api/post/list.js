@@ -5,8 +5,11 @@ const handler = async (req, res) => {
 };
 
 const getPostList = async (req, res) => {
+  const { tag } = req.query;
+  const values = [tag];
+
   try {
-    const result = await db.any(SELECT_POST_LIST);
+    const result = await db.any(SELECT_POST_LIST, values);
     res.status(200).json(result);
   } catch (e) {
     res.status(500).end();
@@ -26,6 +29,9 @@ const SELECT_POST_LIST = `
     , p.delete_fl as "deleteFl"
   FROM YLG_POST p
   WHERE p.delete_fl = false
+    AND CASE WHEN $1 != 'undefined' THEN $1 = any(p.tag)
+        ELSE 1=1
+    END
   ORDER BY p.ID DESC
 `;
 

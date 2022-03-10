@@ -9,8 +9,10 @@ import { createRouterMiddleware, initialRouterState } from 'connected-next-route
 import Router from 'next/router';
 import { persistStore } from 'redux-persist';
 
-const makeCofiguredStore = (reducer, initialState, enhancer) => {
-  return createStore(reducer, initialState, enhancer);
+const makeCofiguredStore = (reducer, initialState, enhancer, sagaMiddleware) => {
+  const createdStore = createStore(reducer, initialState, enhancer);
+  createdStore.sagaTask = sagaMiddleware.run(rootSaga);
+  return createdStore;
 };
 const configure = (context) => {
   const routerMiddleware = createRouterMiddleware();
@@ -32,14 +34,14 @@ const configure = (context) => {
   let store;
 
   if (typeof window === 'undefined') {
-    store = makeCofiguredStore(rootReducer, initialState, enhancer);
-    store.sagaTask = sagaMiddleware.run(rootSaga);
+    store = makeCofiguredStore(rootReducer, initialState, enhancer, sagaMiddleware);
+    // store.sagaTask = sagaMiddleware.run(rootSaga);
 
     return store;
   }
 
-  store = makeCofiguredStore(persistedReducer, initialState, enhancer);
-  store.sagaTask = sagaMiddleware.run(rootSaga);
+  store = makeCofiguredStore(persistedReducer, initialState, enhancer, sagaMiddleware);
+  // store.sagaTask = sagaMiddleware.run(rootSaga);
   const persistor = persistStore(store);
 
   return { persistor, ...store };

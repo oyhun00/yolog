@@ -21,7 +21,6 @@ const Post = () => {
   const {
     id, title, content, crtDttm, udtDttm, tags,
   } = postDetail;
-  console.log(user);
 
   const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
 

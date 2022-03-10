@@ -11,7 +11,7 @@ const PostPage = () => (
   </MainLayout>
 );
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
   store.dispatch({ type: GET_POST_LIST_REQUEST });
   store.dispatch(END);
 
