@@ -5,20 +5,10 @@ import { Card } from 'antd';
 import styled from '@emotion/styled';
 
 const { Meta } = Card;
-const PostBox = ({ data }) => {
+const PostBox = ({ data, onSearchByTag }) => {
   const {
     id, title, thumbnail, thumbnailText, crtDttm, udtDttm, tags,
   } = data;
-  const onSearchByTag = (tag, e) => {
-    Router.push({
-      pathname: '/',
-      query: {
-        tag,
-      },
-    });
-
-    e.stopPropagation();
-  };
   const tagList = tags?.map((v) => (<Tag key={v} onClick={(e) => onSearchByTag(v, e)}>{v}</Tag>));
 
   return (
@@ -47,6 +37,7 @@ PostBox.propTypes = {
     udtDttm: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  onSearchByTag: PropTypes.func.isRequired,
 };
 
 const Date = styled.div`

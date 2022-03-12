@@ -22,7 +22,16 @@ const Post = () => {
     id, title, content, crtDttm, udtDttm, tags,
   } = postDetail;
 
-  const tagList = tags?.map((v) => (<Tag key={v}>{v}</Tag>));
+  const onSearchByTag = (tag) => {
+    Router.push({
+      pathname: '/',
+      query: {
+        tag,
+      },
+    });
+  };
+
+  const tagList = tags?.map((v) => (<Tag key={v} onClick={() => onSearchByTag(v)}>{v}</Tag>));
 
   return (
     <CustomTypography>
@@ -120,7 +129,8 @@ const Tag = styled.div`
 
 const CustomParagraph = styled(Paragraph)`
   p > span {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    font-weight: 300;
   }
   
   img {
