@@ -35,6 +35,7 @@ export const updatePost = (data) => ({
 const initialState = {
   selectedPost: '',
   posts: [],
+  tags: [],
   postDetail: {
     id: '',
     title: '',
@@ -53,11 +54,15 @@ const reducer = (state = initialState, action = {}) => {
     case GET_POST_LIST_REQUEST: {
       return { ...state };
     }
-    case GET_POST_LIST_SUCCESS:
+    case GET_POST_LIST_SUCCESS: {
+      const { posts, tags } = action.result.data;
+
       return {
         ...state,
-        posts: action.result.data,
+        posts,
+        tags,
       };
+    }
     case GET_POST_LIST_FAILURE: {
       return { ...state };
     }
