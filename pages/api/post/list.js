@@ -66,7 +66,7 @@ const SELECT_POST_GROUP_BY_TAG = `
   SELECT UNNEST(a.tag) as "mostTags"
   FROM YLG_POST a
   WHERE a.delete_fl = false
-  GROUP BY "mostTags"
+  GROUP BY "mostTags" HAVING COUNT(a.tag) > 1
   ORDER BY COUNT(a.tag) DESC
 `;
 

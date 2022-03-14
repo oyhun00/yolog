@@ -35,22 +35,15 @@ const PostComponent = () => {
     </div>
   );
 
-  const postCards = posts.map((v, index) => (v.isIndex && index !== 5 ? (
-    <Col key={v.id} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-      <PostBox key={v.id} data={v} onSearchByTag={onSearchByTag} />
-    </Col>
-  ) : ''));
-
-  const postSection = tags.reduce((acc, cur, idx) => {
-    // let section = <Category>{cur.mostTags}</Category>;
-    const temp = posts.map((v) => (v.tags.includes(cur.mostTags) ? (
-      <>
-        <Col key={v.id} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <PostBox key={v.id} data={v} onSearchByTag={onSearchByTag} />
-        </Col>
-      </>
+  const postSection = tags.reduce((acc, cur) => {
+    const category = <Category>{cur.mostTags}</Category>;
+    const postCards = posts.map((v) => (v.tags.includes(cur.mostTags) ? (
+      <Col key={v.id} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
+        <PostBox key={v.id + cur.mostTags} data={v} onSearchByTag={onSearchByTag} />
+      </Col>
     ) : ''));
-    acc.push(temp);
+    const postRow = <PostRow gutter={[24, 24]}>{postCards}</PostRow>;
+    acc.push(category, postRow);
     return acc;
   }, []);
 
@@ -72,9 +65,6 @@ const PostComponent = () => {
       <Row gutter={[24, 24]}>
         {postSection}
       </Row>
-      <PostRow gutter={[24, 24]}>
-        {/*{postCards}*/}
-      </PostRow>
     </PostListWrap>
   );
 };
@@ -108,8 +98,7 @@ const CustomButton = styled(Button)`
 `;
 
 const Category = styled.div`
-  margin-bottom: 0.7rem;
-  padding: 0 0.75rem;
+  margin: 1rem 0 -0.5rem 0;
   font-size: 2rem;
   font-weight: 400;
   text-shadow: 0 0 14px #ffffffe0;
