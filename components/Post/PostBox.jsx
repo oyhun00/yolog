@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from 'next/router';
 import * as PropTypes from 'prop-types';
-import { Card } from 'antd';
+import { Card, Col } from 'antd';
 import styled from '@emotion/styled';
 
 const { Meta } = Card;
@@ -12,7 +12,7 @@ const PostBox = ({ data, onSearchByTag }) => {
   const tagList = tags?.map((v) => (<Tag key={v} onClick={(e) => onSearchByTag(v, e)}>{v}</Tag>));
 
   return (
-    <div onClick={() => Router.push(`/post/${id}`)}>
+    <Col onClick={() => Router.push(`/post/${id}`)} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
       <CustomCard
         hoverable
         bordered={false}
@@ -23,7 +23,7 @@ const PostBox = ({ data, onSearchByTag }) => {
         <Meta title={title} description={thumbnailText} />
         <TagArea>{tagList}</TagArea>
       </CustomCard>
-    </div>
+    </Col>
   );
 };
 

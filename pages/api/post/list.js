@@ -9,8 +9,8 @@ const getPostList = async (req, res) => {
   const values = [tag];
 
   try {
-    const posts = await db.any(SELECT_POST_LIST, values);
     const tags = await db.any(SELECT_POST_GROUP_BY_TAG);
+    const posts = await db.any(SELECT_POST_LIST, values);
 
     res.status(200).json({
       posts,
@@ -32,38 +32,18 @@ const SELECT_POST_LIST = `
     , TO_CHAR(p.udt_dttm, 'YYYY-MM-DD') as "udtDttm"
     , p.tag as "tags"
     , p.delete_fl as "deleteFl"
-    , CASE WHEN $1 != 'undefined' THEN false ELSE true END as "isIndex"
   FROM YLG_POST p
   WHERE p.delete_fl = false
-    AND CASE WHEN $1 != 'undefined' THEN $1 = any(p.tag)
+  AND CASE WHEN $1 != 'undefined' THEN $1 = any(p.tag)
         ELSE 1=1
     END
   ORDER BY p.ID DESC
-`;
-
-const SELECT_MAIN_POST_LIST = `
-  SELECT
-    p.ID
-    , p.title
-    , p.thumbnail
-    , p.thumbnail_text as "thumbnailText"
-    , p.content
-    , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
-    , TO_CHAR(p.udt_dttm, 'YYYY-MM-DD') as "udtDttm"
-    , p.tag as "tags"
-    , p.delete_fl as "deleteFl"
-    , CASE WHEN $1 != 'undefined' THEN false ELSE true END as "isIndex"
-  FROM YLG_POST p
-  WHERE p.delete_fl = false
-    AND CASE WHEN $1 != 'undefined' THEN $1 = any(p.tag)
-        ELSE 1=1
-    END
-  ORDER BY p.ID DESC
-  LIMIT 5
 `;
 
 const SELECT_POST_GROUP_BY_TAG = `
-  SELECT UNNEST(a.tag) as "mostTags"
+  SELECT
+    UNNEST(a.tag) as "mostTags"
+    , COUNT(a.tag) as "tagCount"
   FROM YLG_POST a
   WHERE a.delete_fl = false
   GROUP BY "mostTags" HAVING COUNT(a.tag) > 1
