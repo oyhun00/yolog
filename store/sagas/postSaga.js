@@ -11,15 +11,16 @@ import {
   UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS, UPDATE_POST_FAILURE,
 } from '@Constants/actionTypes';
 
-const getPostListApi = (tag) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/list`, { params: tag });
+const getPostListApi = (query) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/list`, { params: query });
 const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
 const addPostApi = (data) => axios.post('/api/post', { params: data }, { withCredentials: true });
 const deletePostApi = (id) => axios.delete('/api/post', { params: id }, { withCredentials: true });
 const updatePostApi = (data) => axios.put('/api/post', { params: data }, { withCredentials: true });
 
 function* getPostList(action) {
+  const { tag, page } = action.payload;
   try {
-    const result = yield call(getPostListApi, { tag: action.payload });
+    const result = yield call(getPostListApi, { tag, page });
     yield put({ type: GET_POST_LIST_SUCCESS, result });
   } catch (err) {
     yield put({ type: GET_POST_LIST_FAILURE, result: err.response });

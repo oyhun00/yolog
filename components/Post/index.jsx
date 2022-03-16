@@ -16,8 +16,10 @@ import { mediaWidth } from '@Constants/responsive';
 const PostComponent = () => {
   const router = useRouter();
   const { post, auth } = useSelector((state) => state);
-  const { posts, tags } = post;
+  const { posts, tags, postsCount } = post;
   const { user } = auth;
+
+  console.log(postsCount);
 
   const onSearchByTag = (tag, e) => {
     Router.push({
@@ -61,6 +63,16 @@ const PostComponent = () => {
     return originalElement;
   };
 
+  const onChangePage = (page) => {
+    Router.push({
+      pathname: '/',
+      query: {
+        tag: router.query.tag,
+        page,
+      },
+    });
+  };
+
   return (
     <PostListWrap>
       <Row gutter={[24, 24]}>
@@ -76,14 +88,21 @@ const PostComponent = () => {
           ) : ''
         }
       </Row>
-      <Row gutter={[24, 24]}>
-        {postSection}
-      </Row>
-      <CustomPagination
-        size="small"
-        total={50}
-        itemRender={itemRender}
-      />
+      { router.query.tag ? (<Category>{router.query.tag}</Category>) : '' }
+      {/*<Row gutter={[24, 24]}>*/}
+        { postSection }
+      {/*</Row>*/}
+      {
+        router.query.tag ? (
+          <CustomPagination
+            size="small"
+            total={postsCount}
+            defaultPageSize={9}
+            itemRender={itemRender}
+            onChange={onChangePage}
+          />
+        ) : ''
+      }
     </PostListWrap>
   );
 };
@@ -117,10 +136,14 @@ const CustomButton = styled(Button)`
 `;
 
 const Category = styled.div`
-  margin: 1rem 0 -0.5rem 0;
+  margin: 3rem 0 0.5rem 0;
   font-size: 2rem;
   font-weight: 400;
   text-shadow: 0 0 14px #ffffffe0;
+  
+  & :first-child {
+    margin: 0 0 0.5rem 0;
+  }
 `;
 
 const ViewMoreBox = styled.div`

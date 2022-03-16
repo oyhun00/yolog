@@ -12,7 +12,15 @@ const PostPage = () => (
 );
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query }) => {
-  store.dispatch({ type: GET_POST_LIST_REQUEST, payload: query.tag });
+  const { tag, page } = query;
+
+  store.dispatch({
+    type: GET_POST_LIST_REQUEST,
+    payload: {
+      tag,
+      page,
+    },
+  });
   store.dispatch(END);
 
   await store.sagaTask.toPromise();

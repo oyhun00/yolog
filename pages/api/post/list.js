@@ -5,16 +5,18 @@ const handler = async (req, res) => {
 };
 
 const getPostList = async (req, res) => {
-  const { tag } = req.query;
-  const values = [tag];
+  const { tag, page } = req.query;
+  const values = [tag, page];
 
   try {
     const tags = await db.any(SELECT_POST_GROUP_BY_TAG);
     const posts = await db.any(SELECT_POST_LIST, values);
+    const { postsCount } = tag ? await db.one(SELECT_POST_COUNT, [tag]) : { postsCount: 0 };
 
     res.status(200).json({
       posts,
       tags,
+      postsCount,
     });
   } catch (e) {
     res.status(500).end();
@@ -34,10 +36,20 @@ const SELECT_POST_LIST = `
     , p.delete_fl as "deleteFl"
   FROM YLG_POST p
   WHERE p.delete_fl = false
-  AND CASE WHEN $1 != 'undefined' THEN $1 = any(p.tag)
+    AND CASE WHEN $1 != 'undefined' THEN $1 = any(p.tag)
         ELSE 1=1
     END
   ORDER BY p.ID DESC
+  LIMIT CASE WHEN $1 != 'undefined' THEN 9
+        ELSE null END
+  OFFSET ($2 * 9) - 9
+`;
+
+const SELECT_POST_COUNT = `
+  SELECT COUNT(p.ID) as "postsCount"
+  FROM YLG_POST p
+  WHERE p.delete_fl = false
+    AND $1 = any(p.tag)
 `;
 
 const SELECT_POST_GROUP_BY_TAG = `

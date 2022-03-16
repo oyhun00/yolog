@@ -80,6 +80,11 @@ const CustomCard = styled(Card)`
     overflow: hidden;
   }
 
+  .ant-card-cover img {
+    //height: 100%;
+    //width: 100%;
+  }
+
   .ant-card-body {
     padding: 20px;
     background: #1e1e1e;
