@@ -71,6 +71,8 @@ const Tag = styled.div`
 `;
 
 const CustomCard = styled(Card)`
+  border: 1px solid #1e1e1e;
+  
   &.ant-card-bordered {
     //border: 1px solid black;
   }

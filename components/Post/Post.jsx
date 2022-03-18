@@ -105,20 +105,22 @@ const PostInfo = styled.div`
 `;
 
 const PostDate = styled.div`
-  margin: 0.8rem 0.6rem 0 0;
-  font-size: 14px;
+  margin-top: 0.2rem;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #d5d5d5;
 `;
 
 const TagArea = styled.div`
   display: flex;
-  margin: 5px 0 -20px 0;
+  margin: 0.2rem 0 -1.25rem 0;
 `;
 
 const Tag = styled.div`
   background: rgb(24 144 255 / 38%);
   color: #fff;
   border-radius: 10px;
-  padding: 2px 16px;
+  padding: 0px 13px;
   margin: 6px 6px 12px 0;
   cursor: pointer;
   

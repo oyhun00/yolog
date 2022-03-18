@@ -1,6 +1,4 @@
-import React, {
-  useRef, useState, useEffect, useCallback,
-} from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -19,8 +17,6 @@ const PostComponent = () => {
   const { posts, tags, postsCount } = post;
   const { user } = auth;
 
-  console.log(postsCount);
-
   const onSearchByTag = (tag, e) => {
     Router.push({
       pathname: '/',
@@ -32,26 +28,37 @@ const PostComponent = () => {
     e.stopPropagation();
   };
 
+  const viewMoreBox = (tag) => (
+    <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8} onClick={(e) => onSearchByTag(tag, e)}>
+      <ViewMoreBox>
+        <EllipsisOutlined style={{ fontSize: '3rem' }} />
+        <div>&quot;{tag}&quot; 관련 포스트 더보기</div>
+      </ViewMoreBox>
+    </Col>
+  );
+
   const postSection = !router.query.tag ? tags.reduce((acc, cur) => {
-    const category = <Category>{cur.mostTags}</Category>;
-    const postCards = posts.map((v) => (v.tags.includes(cur.mostTags) ? (
-      <PostBox key={v.id} data={v} onSearchByTag={onSearchByTag} />
-    ) : ''));
-    const filteredCards = postCards.filter((i) => i.length !== 0).slice(0, 5);
-    const viewMoreBox = (
-      <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8} onClick={(e) => onSearchByTag(cur.mostTags, e)}>
-        <ViewMoreBox>
-          <EllipsisOutlined style={{ fontSize: '3rem' }} />
-          <div>&quot;{cur.mostTags}&quot; 관련 포스트 더보기</div>
-        </ViewMoreBox>
-      </Col>
-    );
-    const postRow = <PostRow gutter={[24, 24]}>{filteredCards}{cur.tagCount >= 5 ? viewMoreBox : ''}</PostRow>;
-    acc.push(category, postRow);
+    if (cur.tagCount > 1) {
+      const postCards = posts.map((v) => (v.tags.includes(cur.mostTags) ? (
+        <PostBox key={v.id} data={v} onSearchByTag={onSearchByTag} />
+      ) : ''));
+      const filteredCards = postCards.filter((i) => i.length !== 0).slice(0, 5);
+      const postRow = <PostRow gutter={[24, 24]}>{filteredCards}{cur.tagCount >= 5 ? viewMoreBox(cur.mostTags) : ''}</PostRow>;
+      const category = <Category>{cur.mostTags}</Category>;
+
+      acc.push(category, postRow);
+
+      return acc;
+    }
+
     return acc;
   }, []) : (
     posts.map((v) => (<PostBox key={v.id} data={v} onSearchByTag={onSearchByTag} />))
   );
+
+  const tagList = tags.map((v) => (
+    <div>#{v.mostTags} <span>({v.tagCount})</span></div>
+  ));
 
   const itemRender = (current, type, originalElement) => {
     if (type === 'prev') {
@@ -75,9 +82,9 @@ const PostComponent = () => {
 
   return (
     <PostListWrap>
-      <Row gutter={[24, 24]}>
-        {
-          user.auth === 'ADMIN' ? (
+      {
+        user.auth === 'ADMIN' ? (
+          <Row gutter={[24, 24]}>
             <Col span={24} style={{ textAlign: 'right' }}>
               <CustomButton icon={<PlusOutlined />} size="large">
                 <Link href="/post/write">
@@ -85,15 +92,15 @@ const PostComponent = () => {
                 </Link>
               </CustomButton>
             </Col>
-          ) : ''
-        }
-      </Row>
-      { router.query.tag ? (<Category>{router.query.tag}</Category>) : '' }
-      {/*<Row gutter={[24, 24]}>*/}
-        { postSection }
-      {/*</Row>*/}
-      {
-        router.query.tag ? (
+          </Row>
+        ) : ''
+      }
+      { router.query.tag ? (
+        <>
+          <Category>{router.query.tag}</Category>
+          <PostRow gutter={[24, 24]}>
+            { postSection }
+          </PostRow>
           <CustomPagination
             size="small"
             total={postsCount}
@@ -101,15 +108,25 @@ const PostComponent = () => {
             itemRender={itemRender}
             onChange={onChangePage}
           />
-        ) : ''
-      }
+        </>
+      ) : (
+        <>
+          <div style={{ position: 'relative' }}>
+            <TagAreaWrap>
+              <TagArea>{tagList}</TagArea>
+            </TagAreaWrap>
+          </div>
+          { postSection }
+        </>
+      )}
     </PostListWrap>
   );
 };
 
 const PostListWrap = styled.div`
-  width: 75%;
+  width: 65rem;
   margin: 0 auto;
+  padding-bottom: 2rem;
 
   ${mediaWidth.MEDIA_DESKTOP} {
     width: 100%;
@@ -118,6 +135,7 @@ const PostListWrap = styled.div`
 
 const PostRow = styled(Row)`
   position: relative;
+  margin-bottom: 3rem;
 `;
 
 const CustomButton = styled(Button)`
@@ -136,12 +154,12 @@ const CustomButton = styled(Button)`
 `;
 
 const Category = styled.div`
-  margin: 3rem 0 0.5rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 2rem;
   font-weight: 400;
   text-shadow: 0 0 14px #ffffffe0;
   
-  & :first-child {
+  &:first-of-type {
     margin: 0 0 0.5rem 0;
   }
 `;
@@ -193,6 +211,36 @@ const CustomPagination = styled(Pagination)`
   
   .ant-pagination-disabled > a {
     color: #505050;
+  }
+`;
+
+const TagAreaWrap = styled.div`
+  position: absolute;
+  left: 100%;
+
+  @media only screen and (max-width: 1375px) {
+    display: none;
+  }
+`;
+
+const TagArea = styled.div`
+  position: fixed;
+  font-weight: 100;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 2rem;
+  
+  > div {
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    text-shadow: 0 0 11px white;
+    
+    > span {
+      font-size: 0.8rem;
+    }
+    
+    :hover {
+      opacity: 0.7;
+    }
   }
 `;
 

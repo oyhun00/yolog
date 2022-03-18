@@ -30,8 +30,8 @@ const SELECT_POST_LIST = `
     , p.thumbnail
     , p.thumbnail_text as "thumbnailText"
     , p.content
-    , TO_CHAR(p.crt_dttm, 'YYYY-MM-DD') as "crtDttm"
-    , TO_CHAR(p.udt_dttm, 'YYYY-MM-DD') as "udtDttm"
+    , TO_CHAR(p.crt_dttm, 'Mon DD, YYYY') as "crtDttm"
+    , TO_CHAR(p.udt_dttm, 'Mon DD, YYYY') as "udtDttm"
     , p.tag as "tags"
     , p.delete_fl as "deleteFl"
   FROM YLG_POST p
@@ -58,7 +58,7 @@ const SELECT_POST_GROUP_BY_TAG = `
     , COUNT(a.tag) as "tagCount"
   FROM YLG_POST a
   WHERE a.delete_fl = false
-  GROUP BY "mostTags" HAVING COUNT(a.tag) > 1
+  GROUP BY "mostTags"
   ORDER BY COUNT(a.tag) DESC
 `;
 
