@@ -5,15 +5,17 @@ import {
 import { push } from 'connected-next-router';
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+  REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILURE,
 } from '@Constants/actionTypes';
 
 const loginApi = async (data) => axios.post('/api/login', { params: data });
+const silentRefreshApi = async () => true;
 
 function* login(action) {
   try {
     const { data } = yield call(loginApi, { data: action.payload });
     if (data.success) {
-      yield axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+      yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
       yield put({ type: LOGIN_SUCCESS, result: data.result });
       yield put(push({ pathname: '/' }));
     } else {
@@ -24,12 +26,26 @@ function* login(action) {
   }
 }
 
+function* silentRefresh() {
+  try {
+    const { data } = yield call(silentRefreshApi);
+    yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.result });
+  } catch (err) {
+    yield put({ type: REFRESH_TOKEN_FAILURE, result: err.response });
+  }
+}
+
 function* watchLogin() {
   yield takeLatest(LOGIN_REQUEST, login);
+}
+
+function* watchSilentRefresh() {
+  yield takeLatest(REFRESH_TOKEN_REQUEST, silentRefresh);
 }
 
 export default function* authSaga() {
   yield all([
     fork(watchLogin),
+    fork(watchSilentRefresh),
   ]);
 }

@@ -1,5 +1,6 @@
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+  REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILURE,
 } from '@Constants/actionTypes';
 import { toast } from 'react-toastify';
 
@@ -36,6 +37,21 @@ const auth = (state = initialState, action = {}) => {
     case LOGIN_FAILURE: {
       toast.error(action.result);
       return state;
+    }
+    case REFRESH_TOKEN_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case REFRESH_TOKEN_SUCCESS: {
+      return {
+        ...state,
+      };
+    }
+    case REFRESH_TOKEN_FAILURE: {
+      return {
+        ...state,
+      };
     }
     default:
       return state;

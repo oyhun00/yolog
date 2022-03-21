@@ -1,9 +1,10 @@
 import React from 'react';
 import { END } from 'redux-saga';
+import cookie from 'js-cookie';
 import wrapper from '@Store/configure';
 import MainLayout from '@Components/Layout';
 import PostComponent from '@Components/Post';
-import { GET_POST_LIST_REQUEST } from '@Constants/actionTypes';
+import { GET_POST_LIST_REQUEST, REFRESH_TOKEN_REQUEST } from '@Constants/actionTypes';
 
 const PostPage = () => (
   <MainLayout>
@@ -11,8 +12,9 @@ const PostPage = () => (
   </MainLayout>
 );
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query, req }) => {
   const { tag, page } = query;
+  console.log('asdadasdasasdasdasas', req.cookies);
 
   store.dispatch({
     type: GET_POST_LIST_REQUEST,
@@ -20,6 +22,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
       tag,
       page,
     },
+  });
+  store.dispatch({
+    type: REFRESH_TOKEN_REQUEST,
   });
   store.dispatch(END);
 
