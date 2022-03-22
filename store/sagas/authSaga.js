@@ -8,8 +8,8 @@ import {
   REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILURE,
 } from '@Constants/actionTypes';
 
-const loginApi = async (data) => axios.post('/api/login', { params: data });
-const silentRefreshApi = async () => true;
+const loginApi = async (data) => axios.post('/api/auth/login', { params: data });
+const silentRefreshApi = async (token) => axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth`, { params: token });
 
 function* login(action) {
   try {
@@ -26,9 +26,10 @@ function* login(action) {
   }
 }
 
-function* silentRefresh() {
+function* silentRefresh({ payload }) {
   try {
-    const { data } = yield call(silentRefreshApi);
+    const { data } = yield call(silentRefreshApi, { token: payload });
+    yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
     yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.result });
   } catch (err) {
     yield put({ type: REFRESH_TOKEN_FAILURE, result: err.response });

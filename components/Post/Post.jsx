@@ -36,7 +36,7 @@ const Post = () => {
   return (
     <CustomTypography>
       {
-        user.auth === 'ADMIN' ? (
+        // user.auth === 'ADMIN' ? (
           <AdminArea offsetTop={120}>
             <Icon onClick={() => postDelete(id)}>
               <DeleteOutlined style={{ fontSize: '22px' }} />
@@ -45,7 +45,7 @@ const Post = () => {
               <FormOutlined style={{ fontSize: '22px' }} />
             </Icon>
           </AdminArea>
-        ) : ''
+        // ) : ''
       }
       <CustomTitle>{title}</CustomTitle>
       <PostInfo>

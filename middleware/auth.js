@@ -3,10 +3,11 @@ import jwtConfig from '@Config/jwt-config';
 
 const authMiddleware = async (req, res, handler) => {
   let decoded;
-  const { secretKey } = jwtConfig;
+  const { accessSecretKey } = jwtConfig;
+  const accessToken = req.headers.authorization.split(' ')[1];
 
   try {
-    decoded = jwt.verify(req.cookies.auth, secretKey);
+    decoded = jwt.verify(accessToken, accessSecretKey);
 
     if (decoded) {
       if (decoded.userAuth === 'ADMIN') {

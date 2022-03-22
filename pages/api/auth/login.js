@@ -11,22 +11,23 @@ const handler = async (req, res) => {
       .then((result) => {
         if (result) {
           const { userId, userAuth } = result;
-          const { secretKey, accessOption, refreshOption } = jwtConfig;
+          const {
+            accessSecretKey, refreshSecretKey, accessOption, refreshOption,
+          } = jwtConfig;
 
           const accessToken = jwt.sign(
             { userId, userAuth },
-            secretKey,
+            accessSecretKey,
             accessOption,
           );
 
           const refreshToken = jwt.sign(
             { userId, userAuth },
-            secretKey,
+            refreshSecretKey,
             refreshOption,
           );
 
-          res.setHeader('Set-Cookie', `auth=${accessToken}; refreshToken=${refreshToken}`);
-          // res.setHeader('Set-Cookie', `auth=;`);
+          res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/; httpOnly=true; secure=true;`);
           res.status(200).json({
             success: true,
             accessToken,
@@ -34,7 +35,7 @@ const handler = async (req, res) => {
           });
         }
       })
-      .catch(() => {
+      .catch((e) => {
         res.status(200).json({
           success: false,
           message: '로그인에 실패하였습니다',

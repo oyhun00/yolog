@@ -3,46 +3,47 @@ import jwt from 'jsonwebtoken';
 import jwtConfig from '@Config/jwt-config';
 
 const handler = async (req, res) => {
-  const { id, password } = req.body.params.data;
-  const values = [id, password];
+  const {
+    accessSecretKey, refreshSecretKey, accessOption,
+  } = jwtConfig;
+  const refreshToken = req.body.params.token;
 
   try {
-    db.one(SELECT_USER, values)
-      .then((result) => {
-        if (result) {
-          const { userId, userAuth } = result;
-          const { secretKey, accessOption, refreshOption } = jwtConfig;
+    const { userId, userAuth } = jwt.verify(refreshToken, refreshSecretKey);
 
-          const accessToken = jwt.sign(
-            { userId, userAuth },
-            secretKey,
-            accessOption,
-          );
+    if (userId && userAuth) {
+      const accessToken = jwt.sign(
+        { userId, userAuth },
+        accessSecretKey,
+        accessOption,
+      );
 
-          const refreshToken = jwt.sign(
-            { userId, userAuth },
-            secretKey,
-            refreshOption,
-          );
-
-          res.setHeader('Set-Cookie', `auth=${accessToken}; refreshToken=${refreshToken}`);
-          // res.setHeader('Set-Cookie', `auth=;`);
-          res.status(200).json({
-            success: true,
-            accessToken,
-            result,
-          });
-        }
-      })
-      .catch(() => {
-        res.status(200).json({
-          success: false,
-          message: '로그인에 실패하였습니다',
-        });
+      res.status(200).json({
+        success: true,
+        accessToken,
       });
+    }
   } catch (e) {
-    res.status(500).end();
+    if (e.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        code: 401,
+        message: '유효하지 않은 토큰',
+      });
+    }
+
+    if (e.name === 'TokenExpiredError') {
+      return res.status(419).json({
+        success: false,
+        code: 419,
+        message: '토큰 만료',
+      });
+    }
   }
+
+  res.status(200).json({
+    success: true,
+  });
 };
 
 const SELECT_USER = `
@@ -52,7 +53,6 @@ const SELECT_USER = `
     , u.user_auth as "userAuth"
   FROM YLG_USER u
   WHERE u.user_id = $1
-    AND u.user_password = $2
 `;
 
 export default handler;

@@ -83,7 +83,7 @@ const PostComponent = () => {
   return (
     <PostListWrap>
       {
-        user.auth === 'ADMIN' ? (
+        // user.auth === 'ADMIN' ? (
           <Row gutter={[24, 24]}>
             <Col span={24} style={{ textAlign: 'right' }}>
               <CustomButton icon={<PlusOutlined />} size="large">
@@ -93,7 +93,7 @@ const PostComponent = () => {
               </CustomButton>
             </Col>
           </Row>
-        ) : ''
+        // ) : ''
       }
       { router.query.tag ? (
         <>

@@ -58,7 +58,7 @@ function* deletePost(action) {
 
     if (data.success) {
       yield put({ type: DELETE_POST_SUCCESS, result: data.message });
-      yield put(push({ pathname: '/post' }));
+      yield put(push({ pathname: '/' }));
     } else {
       yield put({ type: DELETE_POST_FAILURE, result: data.message });
     }
