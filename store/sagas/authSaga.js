@@ -29,8 +29,10 @@ function* login(action) {
 function* silentRefresh({ payload }) {
   try {
     const { data } = yield call(silentRefreshApi, { token: payload });
-    yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
-    yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.result });
+    yield axios.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
+    yield console.log('@#@#@#@#@#@#@#@#@#@# ', data.accessToken);
+    yield console.log('@#@#@#@#@#@#@#@#@#@# ', axios.defaults.headers.common.Authorization);
+    yield put({ type: REFRESH_TOKEN_SUCCESS });
   } catch (err) {
     yield put({ type: REFRESH_TOKEN_FAILURE, result: err.response });
   }

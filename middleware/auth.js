@@ -4,7 +4,7 @@ import jwtConfig from '@Config/jwt-config';
 const authMiddleware = async (req, res, handler) => {
   let decoded;
   const { accessSecretKey } = jwtConfig;
-  const accessToken = req.headers.authorization.split(' ')[1];
+  const accessToken = req.headers.authorization?.split(' ')[1];
 
   try {
     decoded = jwt.verify(accessToken, accessSecretKey);

@@ -7,22 +7,29 @@ const handler = async (req, res) => {
     accessSecretKey, refreshSecretKey, accessOption,
   } = jwtConfig;
   const refreshToken = req.body.params.token;
+  let decoded;
 
   try {
-    const { userId, userAuth } = jwt.verify(refreshToken, refreshSecretKey);
+    decoded = jwt.verify(refreshToken, refreshSecretKey);
 
-    if (userId && userAuth) {
-      const accessToken = jwt.sign(
-        { userId, userAuth },
-        accessSecretKey,
-        accessOption,
-      );
-
-      res.status(200).json({
-        success: true,
-        accessToken,
+    if (!decoded) {
+      return res.status(200).json({
+        success: false,
+        message: '접근 권한이 없습니다.',
       });
     }
+
+    const { userId, userAuth } = decoded;
+    const accessToken = jwt.sign(
+      { userId, userAuth },
+      accessSecretKey,
+      accessOption,
+    );
+
+    return res.status(200).json({
+      success: true,
+      accessToken,
+    });
   } catch (e) {
     if (e.name === 'JsonWebTokenError') {
       return res.status(401).json({

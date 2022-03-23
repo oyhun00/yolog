@@ -44,6 +44,8 @@ const auth = (state = initialState, action = {}) => {
       };
     }
     case REFRESH_TOKEN_SUCCESS: {
+      toast.info('success');
+      console.log('REFRESH_TOKEN_SUCCESS');
       return {
         ...state,
       };
