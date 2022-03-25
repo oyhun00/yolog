@@ -9,7 +9,7 @@ import {
 } from '@Constants/actionTypes';
 
 const loginApi = async (data) => axios.post('/api/auth/login', { params: data });
-const silentRefreshApi = async (token) => axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth`, { params: token });
+const silentRefreshApi = async (token) => axios.post(`/api/auth`, { params: token });
 
 function* login(action) {
   try {
@@ -34,6 +34,7 @@ function* silentRefresh({ payload }) {
     yield console.log('@#@#@#@#@#@#@#@#@#@# ', axios.defaults.headers.common.Authorization);
     yield put({ type: REFRESH_TOKEN_SUCCESS });
   } catch (err) {
+    yield console.log('@#@#@#@#@#@#@#@#@#@# ', err);
     yield put({ type: REFRESH_TOKEN_FAILURE, result: err.response });
   }
 }

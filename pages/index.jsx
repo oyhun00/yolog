@@ -21,10 +21,10 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
       page,
     },
   });
-  store.dispatch({
-    type: REFRESH_TOKEN_REQUEST,
-    payload: req.cookies.refreshToken,
-  });
+  // store.dispatch({
+  //   type: REFRESH_TOKEN_REQUEST,
+  //   payload: req.cookies.refreshToken,
+  // });
   store.dispatch(END);
 
   await store.sagaTask.toPromise();

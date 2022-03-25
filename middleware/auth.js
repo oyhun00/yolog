@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import jwtConfig from '@Config/jwt-config';
 
 const authMiddleware = async (req, res, handler) => {
+  console.log('@#@#@#@#@#@#@#@#@#@# ', req.headers.authorization);
   let decoded;
   const { accessSecretKey } = jwtConfig;
   const accessToken = req.headers.authorization?.split(' ')[1];
