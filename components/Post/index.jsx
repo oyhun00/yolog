@@ -136,6 +136,11 @@ const PostListWrap = styled.div`
 const PostRow = styled(Row)`
   position: relative;
   margin-bottom: 3rem;
+  
+  img {
+    object-fit: cover;
+    height: 100%;
+  }
 `;
 
 const CustomButton = styled(Button)`

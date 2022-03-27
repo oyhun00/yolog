@@ -9,16 +9,14 @@ const authMiddleware = async (req, res, handler) => {
   try {
     decoded = jwt.verify(accessToken, accessSecretKey);
 
-    if (decoded) {
-      if (decoded.userAuth === 'ADMIN') {
-        return await handler(req, res);
-      }
-
+    if (!decoded || decoded.userAuth !== 'ADMIN') {
       return res.status(200).json({
         success: false,
         message: '접근 권한이 없습니다.',
       });
     }
+
+    return await handler(req, res);
   } catch (e) {
     if (e.name === 'JsonWebTokenError') {
       return res.status(401).json({
@@ -35,6 +33,11 @@ const authMiddleware = async (req, res, handler) => {
         message: '토큰 만료',
       });
     }
+
+    return res.status(200).json({
+      success: false,
+      message: '접근 권한이 없습니다.',
+    });
   }
 };
 

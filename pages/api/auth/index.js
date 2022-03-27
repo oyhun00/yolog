@@ -1,4 +1,3 @@
-import db from '@Server/dataBase';
 import jwt from 'jsonwebtoken';
 import jwtConfig from '@Config/jwt-config';
 
@@ -47,20 +46,12 @@ const handler = async (req, res) => {
         message: '토큰 만료',
       });
     }
+
+    return res.status(200).json({
+      success: false,
+      message: '접근 권한이 없습니다.',
+    });
   }
-
-  res.status(200).json({
-    success: true,
-  });
 };
-
-const SELECT_USER = `
-  SELECT
-    u.id
-    , u.user_id as "userId"
-    , u.user_auth as "userAuth"
-  FROM YLG_USER u
-  WHERE u.user_id = $1
-`;
 
 export default handler;
