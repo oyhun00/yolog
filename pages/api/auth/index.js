@@ -6,7 +6,7 @@ const handler = async (req, res) => {
   const {
     accessSecretKey, refreshSecretKey, accessOption,
   } = jwtConfig;
-  const refreshToken = req.body.params.token;
+  const { refreshToken } = req.cookies;
   let decoded;
 
   try {
@@ -28,6 +28,7 @@ const handler = async (req, res) => {
 
     return res.status(200).json({
       success: true,
+      isLogin: true,
       accessToken,
     });
   } catch (e) {

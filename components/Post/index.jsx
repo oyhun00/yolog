@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Row, Col, Button, Pagination,
 } from 'antd';
@@ -10,13 +10,12 @@ import styled from '@emotion/styled';
 
 import PostBox from '@Components/Post/PostBox';
 import { mediaWidth } from '@Constants/responsive';
-import {REFRESH_TOKEN_REQUEST} from "@Constants/actionTypes";
 
 const PostComponent = () => {
   const router = useRouter();
   const { post, auth } = useSelector((state) => state);
   const { posts, tags, postsCount } = post;
-  const { user } = auth;
+  const { isLogin } = auth;
 
   const onSearchByTag = (tag, e) => {
     Router.push({
@@ -81,15 +80,10 @@ const PostComponent = () => {
     });
   };
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: 'REFRESH_TOKEN_REQUEST', payload: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzeXN0ZW1hZG1pbiIsInVzZXJBdXRoIjoiQURNSU4iLCJpYXQiOjE2NDgxOTM3OTksImV4cCI6MTY0ODQ1Mjk5OSwiaXNzIjoieW9sb2cifQ.8gnUUx1FkUX5uQD7e2doJoKgHK4GCgXwkOXlQhzFpb8'})
-  }, []);
-
   return (
     <PostListWrap>
       {
-        // user.auth === 'ADMIN' ? (
+        isLogin ? (
           <Row gutter={[24, 24]}>
             <Col span={24} style={{ textAlign: 'right' }}>
               <CustomButton icon={<PlusOutlined />} size="large">
@@ -99,7 +93,7 @@ const PostComponent = () => {
               </CustomButton>
             </Col>
           </Row>
-        // ) : ''
+        ) : ''
       }
       { router.query.tag ? (
         <>

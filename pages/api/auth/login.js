@@ -30,12 +30,12 @@ const handler = async (req, res) => {
           res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/; httpOnly=true; secure=true;`);
           res.status(200).json({
             success: true,
+            isLogin: true,
             accessToken,
-            result,
           });
         }
       })
-      .catch((e) => {
+      .catch(() => {
         res.status(200).json({
           success: false,
           message: '로그인에 실패하였습니다',

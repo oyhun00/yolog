@@ -2,7 +2,6 @@ import db from '@Server/dataBase';
 import authMiddleware from '@Middleware/auth';
 
 const handler = async (req, res) => {
-  console.log('@#@#@#@#@#@#@#@#@#@# decoded', req);
   if (req.method === 'GET') { await getPost(req, res); }
   if (req.method === 'POST') { authMiddleware(req, res, addPost); }
   if (req.method === 'DELETE') { authMiddleware(req, res, deletePost); }

@@ -32,7 +32,6 @@ function* getPost(action) {
     const result = yield call(getPostApi, { id: action.payload });
     yield put({ type: GET_POST_SUCCESS, result });
   } catch (err) {
-    console.log(err);
     yield put({ type: GET_POST_FAILURE, result: err.response });
   }
 }

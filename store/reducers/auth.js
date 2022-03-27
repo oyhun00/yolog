@@ -14,6 +14,7 @@ const initialState = {
     id: '',
     auth: '',
   },
+  isLogin: false,
 };
 
 const auth = (state = initialState, action = {}) => {
@@ -24,14 +25,9 @@ const auth = (state = initialState, action = {}) => {
       };
     }
     case LOGIN_SUCCESS: {
-      const { userId, userAuth } = action.result;
-
       return {
         ...state,
-        user: {
-          id: userId,
-          auth: userAuth,
-        },
+        isLogin: action.result,
       };
     }
     case LOGIN_FAILURE: {
@@ -44,10 +40,9 @@ const auth = (state = initialState, action = {}) => {
       };
     }
     case REFRESH_TOKEN_SUCCESS: {
-      toast.info('success');
-      console.log('REFRESH_TOKEN_SUCCESS');
       return {
         ...state,
+        isLogin: action.result,
       };
     }
     case REFRESH_TOKEN_FAILURE: {

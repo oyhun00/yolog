@@ -9,32 +9,29 @@ import {
 } from '@Constants/actionTypes';
 
 const loginApi = async (data) => axios.post('/api/auth/login', { params: data });
-const silentRefreshApi = async (token) => axios.post(`/api/auth`, { params: token });
+const silentRefreshApi = async () => axios.post('/api/auth');
 
 function* login(action) {
   try {
     const { data } = yield call(loginApi, { data: action.payload });
     if (data.success) {
       yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
-      yield put({ type: LOGIN_SUCCESS, result: data.result });
+      yield put({ type: LOGIN_SUCCESS, result: data.isLogin });
       yield put(push({ pathname: '/' }));
     } else {
-      yield put({ type: LOGIN_FAILURE, result: data.result });
+      yield put({ type: LOGIN_FAILURE, result: data.message });
     }
   } catch (err) {
     yield put({ type: LOGIN_FAILURE, result: err.response });
   }
 }
 
-function* silentRefresh({ payload }) {
+function* silentRefresh() {
   try {
-    const { data } = yield call(silentRefreshApi, { token: payload });
-    yield axios.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
-    yield console.log('@#@#@#@#@#@#@#@#@#@# ', data.accessToken);
-    yield console.log('@#@#@#@#@#@#@#@#@#@# ', axios.defaults.headers.common.Authorization);
-    yield put({ type: REFRESH_TOKEN_SUCCESS });
+    const { data } = yield call(silentRefreshApi);
+    yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
+    yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.isLogin });
   } catch (err) {
-    yield console.log('@#@#@#@#@#@#@#@#@#@# ', err);
     yield put({ type: REFRESH_TOKEN_FAILURE, result: err.response });
   }
 }

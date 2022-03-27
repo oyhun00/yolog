@@ -17,7 +17,7 @@ const Post = () => {
   }, [dispatch]);
   const { post, auth } = useSelector((state) => state);
   const { postDetail } = post;
-  const { user } = auth;
+  const { isLogin } = auth;
   const {
     id, title, content, crtDttm, udtDttm, tags,
   } = postDetail;
@@ -36,7 +36,7 @@ const Post = () => {
   return (
     <CustomTypography>
       {
-        // user.auth === 'ADMIN' ? (
+        isLogin ? (
           <AdminArea offsetTop={120}>
             <Icon onClick={() => postDelete(id)}>
               <DeleteOutlined style={{ fontSize: '22px' }} />
@@ -45,7 +45,7 @@ const Post = () => {
               <FormOutlined style={{ fontSize: '22px' }} />
             </Icon>
           </AdminArea>
-        // ) : ''
+        ) : ''
       }
       <CustomTitle>{title}</CustomTitle>
       <PostInfo>
