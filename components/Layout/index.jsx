@@ -9,23 +9,32 @@ import { mediaWidth } from '@Constants/responsive';
 
 const { Content } = Layout;
 const MainLayout = ({ children }) => (
-  <Layout className="layout">
+  <CustomLayout className="layout">
     <MainHeader />
     <MainContent>
       {children}
     </MainContent>
     <MainFooter />
-  </Layout>
+  </CustomLayout>
 );
 
-const MainContent = styled(Content)`
+const CustomLayout = styled(Layout)`
   width: 65rem;
   margin: 0 auto;
-  padding-bottom: 3.125rem;
 
   ${mediaWidth.MEDIA_DESKTOP} {
-    width: 100%;
+    width: 40rem;
   }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    //width: 100%;
+    //padding: 0 3rem;
+  }
+`;
+
+const MainContent = styled(Content)`
+  margin: 0 auto;
+  padding-bottom: 3.125rem;
 `;
 
 MainLayout.propTypes = {

@@ -36,7 +36,15 @@ const Post = () => {
   return (
     <PostWrap>
       <LeftContents>
-        hihihi
+        <div style={{ position: 'absolute' }}>
+          <div style={{ position: 'fixed' }}>
+            <PostInfo>
+              <PostDate>{udtDttm || crtDttm}</PostDate>
+            </PostInfo>
+            <h4>Tags</h4>
+            <TagArea>{tagList}</TagArea>
+          </div>
+        </div>
       </LeftContents>
       <CustomTypography>
         {
@@ -52,11 +60,13 @@ const Post = () => {
           ) : ''
         }
         <CustomTitle>{title}</CustomTitle>
-        <PostInfo>
-          <PostDate>{udtDttm || crtDttm}</PostDate>
-        </PostInfo>
-        <TagArea>{tagList}</TagArea>
-        <Divider />
+        <DescriptionsArea>
+          <PostInfo>
+            <PostDate className="post-date">{udtDttm || crtDttm}</PostDate>
+          </PostInfo>
+          <TagArea>{tagList}</TagArea>
+          <Divider />
+        </DescriptionsArea>
         <CustomParagraph>
           {parse(content)}
         </CustomParagraph>
@@ -70,7 +80,17 @@ const PostWrap = styled.div`
 `;
 
 const LeftContents = styled.div`
-  flex: 1;
+  width: 23%;
+  position: relative;
+  
+  h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  ${mediaWidth.MEDIA_DESKTOP} {
+    display: none;
+  }
 `;
 
 const AdminArea = styled.div`
@@ -95,23 +115,36 @@ const Icon = styled.div`
 `;
 
 const CustomTypography = styled(Typography)`
-  //width: 50%;
-  flex: 4;
+  width: 77%;
   margin: 0 auto;
   position: relative;
 
-  // ${mediaWidth.MEDIA_TABLET} {
-  //   width: 70%;
-  // }
-  //
-  // ${mediaWidth.MEDIA_MOBILE} {
-  //   width: 100%;
-  // }
+  ${mediaWidth.MEDIA_DESKTOP} {
+    width: 100%;
+  }
 `;
 
 const CustomTitle = styled(Title)`
   color: #fff !important;
-  margin: 0 0 0.3rem 0 !important;
+  margin: 0 0 3rem 0 !important;
+  text-align: center;
+  
+  ${mediaWidth.MEDIA_DESKTOP} {
+    margin: 0 0 1rem 0 !important;
+    text-align: left;
+  }
+`;
+
+const DescriptionsArea = styled.div`
+  display: none;
+
+  .post-date {
+    margin-bottom: 0;
+  }
+  
+  ${mediaWidth.MEDIA_DESKTOP} {
+    display: block;
+  }
 `;
 
 const PostInfo = styled.div`
@@ -119,14 +152,14 @@ const PostInfo = styled.div`
 `;
 
 const PostDate = styled.div`
-  margin-top: 0.2rem;
+  margin-bottom: 1rem;
   font-size: 1rem;
   font-weight: 300;
   color: #d5d5d5;
 `;
 
 const TagArea = styled.div`
-  display: flex;
+  //display: flex;
   margin: 0.2rem 0 -1.25rem 0;
 `;
 
@@ -137,6 +170,8 @@ const Tag = styled.div`
   padding: 0px 13px;
   margin: 6px 6px 12px 0;
   cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
   
   :hover {
     opacity: 0.7;

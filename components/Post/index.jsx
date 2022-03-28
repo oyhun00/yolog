@@ -56,7 +56,9 @@ const PostComponent = () => {
   );
 
   const tagList = tags.map((v) => (
-    <div>#{v.mostTags} <span>({v.tagCount})</span></div>
+    <div onClick={(e) => onSearchByTag(v.mostTags, e)}>
+      #{v.mostTags} <span>({v.tagCount})</span>
+    </div>
   ));
 
   const itemRender = (current, type, originalElement) => {

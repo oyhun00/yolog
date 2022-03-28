@@ -12,7 +12,7 @@ const PostBox = ({ data, onSearchByTag }) => {
   const tagList = tags?.map((v) => (<Tag key={v} onClick={(e) => onSearchByTag(v, e)}>{v}</Tag>));
 
   return (
-    <Col onClick={() => Router.push(`/post/${id}`)} className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
+    <Col onClick={() => Router.push(`/post/${id}`)} className="gutter-row" xs={24} sm={24} md={12} lg={12} xl={8}>
       <CustomCard
         hoverable
         bordered={false}

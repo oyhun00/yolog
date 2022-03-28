@@ -17,11 +17,11 @@ const MainHeader = () => {
 
   return (
     <CustomHeader>
-      <div className="logo">
+      <Logo className="logo">
         <Link href="/">
-          <a>yolog</a>
+          <a>YoLog</a>
         </Link>
-      </div>
+      </Logo>
       <CustomMenu mode="horizontal" defaultSelectedKeys={[key]}>
         <CustomMenuItem key={1} onClick={() => setKeys('1')}>
           <Link href="/introduce">
@@ -46,6 +46,17 @@ const MainHeader = () => {
 const CustomHeader = styled(Header)`
   display: flex;
   justify-content: space-between;
+  padding: 1.5rem 0 2.5rem 0;
+  height: auto;
+`;
+
+const Logo = styled.div`
+  a {
+    color: #fff;
+    text-shadow: 0 0 10px #ffffffb0;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
 `;
 
 const CustomMenu = styled(Menu)`

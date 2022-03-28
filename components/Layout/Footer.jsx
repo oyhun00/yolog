@@ -23,7 +23,7 @@ const MainFooter = () => (
 );
 
 const CustomFooter = styled(Footer)`
-  width: 65rem;
+  width: 100%;
   margin: 0 auto;
   padding: 1rem 0 2.4rem 0;
   display: flex;
@@ -32,7 +32,6 @@ const CustomFooter = styled(Footer)`
   font-weight: 100;
   
   ${mediaWidth.MEDIA_DESKTOP} {
-    width: 100%;
     padding: 1rem 3.125rem 2.4rem 3.125rem;
   }
 `;
