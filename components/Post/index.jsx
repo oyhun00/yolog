@@ -9,7 +9,6 @@ import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import PostBox from '@Components/Post/PostBox';
-import { mediaWidth } from '@Constants/responsive';
 
 const PostComponent = () => {
   const router = useRouter();
@@ -124,13 +123,7 @@ const PostComponent = () => {
 };
 
 const PostListWrap = styled.div`
-  width: 65rem;
   margin: 0 auto;
-  padding-bottom: 2rem;
-
-  ${mediaWidth.MEDIA_DESKTOP} {
-    width: 100%;
-  }
 `;
 
 const PostRow = styled(Row)`
@@ -140,6 +133,11 @@ const PostRow = styled(Row)`
   img {
     object-fit: cover;
     height: 100%;
+  }
+  
+  :last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 `;
 

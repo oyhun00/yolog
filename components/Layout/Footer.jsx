@@ -5,36 +5,35 @@ import { GithubOutlined, InstagramOutlined } from '@ant-design/icons';
 import { mediaWidth } from '@Constants/responsive';
 
 const { Footer } = Layout;
-const MainFooter = () => {
-  return (
-    <CustomFooter>
-      <Breadcrumb separator="•">
-        <Breadcrumb.Item>© 2022</Breadcrumb.Item>
-        <Breadcrumb.Item>Yolog</Breadcrumb.Item>
-      </Breadcrumb>
-      <IconArea>
-        <a href="https://github.com/oyhun00" target="_blank" rel="noreferrer">
-          <GithubOutlined style={{ fontSize: '1.4rem' }} />
-        </a>
-        <a href="https://www.instagram.com/yong_hooooon" target="_blank" rel="noreferrer">
-          <InstagramOutlined style={{ fontSize: '1.4rem' }} />
-        </a>
-      </IconArea>
-    </CustomFooter>
-  );
-};
+const MainFooter = () => (
+  <CustomFooter>
+    <Breadcrumb separator="•">
+      <Breadcrumb.Item>© 2022</Breadcrumb.Item>
+      <Breadcrumb.Item>Yolog</Breadcrumb.Item>
+    </Breadcrumb>
+    <IconArea>
+      <a href="https://github.com/oyhun00" target="_blank" rel="noreferrer">
+        <GithubOutlined style={{ fontSize: '1.4rem' }} />
+      </a>
+      <a href="https://www.instagram.com/yong_hooooon" target="_blank" rel="noreferrer">
+        <InstagramOutlined style={{ fontSize: '1.4rem' }} />
+      </a>
+    </IconArea>
+  </CustomFooter>
+);
 
 const CustomFooter = styled(Footer)`
   width: 65rem;
   margin: 0 auto;
-  padding: 0 0 2.4rem 0;
+  padding: 1rem 0 2.4rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-weight: 100;
   
   ${mediaWidth.MEDIA_DESKTOP} {
     width: 100%;
-    padding: 0 3.125rem 2.4rem 3.125rem;
+    padding: 1rem 3.125rem 2.4rem 3.125rem;
   }
 `;
 

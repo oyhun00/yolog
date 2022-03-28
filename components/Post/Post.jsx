@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 import { Typography, Divider } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
@@ -7,7 +8,6 @@ import parse from 'html-react-parser';
 
 import { mediaWidth } from '@Constants/responsive';
 import { deletePost } from '@Store/reducers/post';
-import Router from 'next/router';
 
 const { Title, Paragraph } = Typography;
 const Post = () => {
@@ -34,31 +34,44 @@ const Post = () => {
   const tagList = tags?.map((v) => (<Tag key={v} onClick={() => onSearchByTag(v)}>{v}</Tag>));
 
   return (
-    <CustomTypography>
-      {
-        isLogin ? (
-          <AdminArea offsetTop={120}>
-            <Icon onClick={() => postDelete(id)}>
-              <DeleteOutlined style={{ fontSize: '22px' }} />
-            </Icon>
-            <Icon onClick={() => Router.push(`/post/modify/${id}`)}>
-              <FormOutlined style={{ fontSize: '22px' }} />
-            </Icon>
-          </AdminArea>
-        ) : ''
-      }
-      <CustomTitle>{title}</CustomTitle>
-      <PostInfo>
-        <PostDate>{udtDttm || crtDttm}</PostDate>
-      </PostInfo>
-      <TagArea>{tagList}</TagArea>
-      <Divider />
-      <CustomParagraph>
-        {parse(content)}
-      </CustomParagraph>
-    </CustomTypography>
+    <PostWrap>
+      <LeftContents>
+        hihihi
+      </LeftContents>
+      <CustomTypography>
+        {
+          isLogin ? (
+            <AdminArea offsetTop={120}>
+              <Icon onClick={() => postDelete(id)}>
+                <DeleteOutlined style={{ fontSize: '22px' }} />
+              </Icon>
+              <Icon onClick={() => Router.push(`/post/modify/${id}`)}>
+                <FormOutlined style={{ fontSize: '22px' }} />
+              </Icon>
+            </AdminArea>
+          ) : ''
+        }
+        <CustomTitle>{title}</CustomTitle>
+        <PostInfo>
+          <PostDate>{udtDttm || crtDttm}</PostDate>
+        </PostInfo>
+        <TagArea>{tagList}</TagArea>
+        <Divider />
+        <CustomParagraph>
+          {parse(content)}
+        </CustomParagraph>
+      </CustomTypography>
+    </PostWrap>
   );
 };
+
+const PostWrap = styled.div`
+  display: flex;
+`;
+
+const LeftContents = styled.div`
+  flex: 1;
+`;
 
 const AdminArea = styled.div`
   position: absolute;
@@ -82,17 +95,18 @@ const Icon = styled.div`
 `;
 
 const CustomTypography = styled(Typography)`
-  width: 50%;
+  //width: 50%;
+  flex: 4;
   margin: 0 auto;
   position: relative;
 
-  ${mediaWidth.MEDIA_TABLET} {
-    width: 70%;
-  }
-
-  ${mediaWidth.MEDIA_MOBILE} {
-    width: 100%;
-  }
+  // ${mediaWidth.MEDIA_TABLET} {
+  //   width: 70%;
+  // }
+  //
+  // ${mediaWidth.MEDIA_MOBILE} {
+  //   width: 100%;
+  // }
 `;
 
 const CustomTitle = styled(Title)`
