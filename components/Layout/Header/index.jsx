@@ -1,47 +1,24 @@
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectedKeys } from '@Store/reducers/util';
+import React from 'react';
 import Link from 'next/link';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import styled from '@emotion/styled';
 
 const { Header } = Layout;
-const MainHeader = () => {
-  const dispatch = useDispatch();
-  const setKeys = useCallback((id) => {
-    dispatch(selectedKeys(id));
-  }, [dispatch]);
-  const { util, auth } = useSelector((state) => state);
-  const { key } = util;
-  const { user } = auth;
-
-  return (
-    <CustomHeader>
-      <Logo className="logo">
-        <Link href="/">
-          <a>YoLog</a>
-        </Link>
-      </Logo>
-      <CustomMenu mode="horizontal" defaultSelectedKeys={[key]}>
-        <CustomMenuItem key={1} onClick={() => setKeys('1')}>
-          <Link href="/introduce">
-            <a>Introduce</a>
-          </Link>
-        </CustomMenuItem>
-        <CustomMenuItem key={2} onClick={() => setKeys('2')}>
-          <Link href="/post">
-            <a>Post</a>
-          </Link>
-        </CustomMenuItem>
-        <CustomMenuItem key={3} onClick={() => setKeys('3')}>
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
-        </CustomMenuItem>
-      </CustomMenu>
-    </CustomHeader>
-  );
-};
+const MainHeader = () => (
+  <CustomHeader>
+    <Logo className="logo">
+      <Link href="/">YoLog</Link>
+    </Logo>
+    <Menu>
+      <MenuItem>
+        <Link href="/about">About</Link>
+      </MenuItem>
+      <MenuItem>
+        <Link href="/">Post</Link>
+      </MenuItem>
+    </Menu>
+  </CustomHeader>
+);
 
 const CustomHeader = styled(Header)`
   display: flex;
@@ -59,13 +36,23 @@ const Logo = styled.div`
   }
 `;
 
-const CustomMenu = styled(Menu)`
+const Menu = styled.div`
+  display: flex;
   justify-content: flex-end;
   border-bottom: 0;
 `;
 
-const CustomMenuItem = styled(Menu.Item)`
-
+const MenuItem = styled.div`
+  margin-left: 2rem;
+  
+  > a {
+    color: #fff;
+    
+    :hover {
+      text-shadow: 0 0 13px #ffffffdb;
+      transition: 0.4s;
+    }
+  }
 `;
 
 export default MainHeader;
