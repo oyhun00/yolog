@@ -24,6 +24,7 @@ const CustomLayout = styled(Layout)`
 
   ${mediaWidth.MEDIA_DESKTOP} {
     width: 40rem;
+    padding: 0 2rem;
   }
   
   ${mediaWidth.MEDIA_MOBILE} {
