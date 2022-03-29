@@ -39,11 +39,11 @@ const PostComponent = () => {
   const postSection = !router.query.tag ? tags.reduce((acc, cur) => {
     if (cur.tagCount > 1) {
       const postCards = posts.map((v) => (v.tags.includes(cur.mostTags) ? (
-        <PostBox key={v.id} data={v} onSearchByTag={onSearchByTag} />
+        <PostBox key={v.id + cur.mostTags} data={v} onSearchByTag={onSearchByTag} />
       ) : ''));
       const filteredCards = postCards.filter((i) => i.length !== 0).slice(0, 5);
-      const postRow = <PostRow gutter={[24, 24]}>{filteredCards}{cur.tagCount >= 5 ? viewMoreBox(cur.mostTags) : ''}</PostRow>;
-      const category = <Category>{cur.mostTags}</Category>;
+      const postRow = <PostRow key={`Row${cur.mostTags}`} gutter={[24, 24]}>{filteredCards}{cur.tagCount >= 5 ? viewMoreBox(cur.mostTags) : ''}</PostRow>;
+      const category = <Category key={`Category${cur.mostTags}`}>{cur.mostTags}</Category>;
 
       acc.push(category, postRow);
 
@@ -56,7 +56,7 @@ const PostComponent = () => {
   );
 
   const tagList = tags.map((v) => (
-    <div onClick={(e) => onSearchByTag(v.mostTags, e)}>
+    <div key={v.mostTags} onClick={(e) => onSearchByTag(v.mostTags, e)}>
       #{v.mostTags} <span>({v.tagCount})</span>
     </div>
   ));
