@@ -4,6 +4,8 @@ module.exports = {
   resolve: {
     alias,
   },
+  loader: 'less-loader',
+  options: { javascriptEnabled: true },
   module: {
     rules: [
       {

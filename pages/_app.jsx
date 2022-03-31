@@ -7,7 +7,7 @@ import 'quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import wrapper from '@Store/configure';
-import '@Public/style/yolog.less';
+import '@Public/style/yolog.css';
 import '@Public/font/font.css';
 
 // eslint-disable-next-line react/prop-types

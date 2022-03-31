@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 import {
   Input, Button, Row, Col,
 } from 'antd';
-import { CheckOutlined } from '@ant-design/icons';
+import { CheckOutlined, UserAddOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { login } from '@Store/reducers/auth';
+import { login, signUp } from '@Store/reducers/auth';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,10 @@ const Login = () => {
     dispatch(login(authInfo));
   }, [authInfo, dispatch]);
 
+  const onSignUp = useCallback(() => {
+    dispatch(signUp(authInfo));
+  }, [authInfo, dispatch]);
+
   return (
     <LoginWrap>
       <Row gutter={[24, 24]}>
@@ -36,6 +40,7 @@ const Login = () => {
       </Row>
       <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>
         <Col span={24} style={{ textAlign: 'right' }}>
+          <CustomButton icon={<UserAddOutlined />} size="large" onClick={onSignUp}>Sign Up</CustomButton>
           <CustomButton icon={<CheckOutlined />} size="large" onClick={authSubmit}>Login</CustomButton>
         </Col>
       </Row>
@@ -44,8 +49,7 @@ const Login = () => {
 };
 
 const LoginWrap = styled.div`
-  width: 60%;
-  height: 600px;
+  width: 35rem;
   background: #1e1e1e;
   margin: 0 auto;
   padding: 60px;

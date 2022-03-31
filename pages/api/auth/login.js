@@ -1,37 +1,49 @@
-import db from '@Server/dataBase';
+import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+
 import jwtConfig from '@Config/jwt-config';
+import db from '@Server/dataBase';
 
 const handler = async (req, res) => {
   const { id, password } = req.body.params.data;
-  const values = [id, password];
+  const values = [id];
 
   try {
     db.one(SELECT_USER, values)
       .then((result) => {
         if (result) {
-          const { userId, userAuth } = result;
-          const {
-            accessSecretKey, refreshSecretKey, accessOption, refreshOption,
-          } = jwtConfig;
+          const { userId, userAuth, userPassword } = result;
 
-          const accessToken = jwt.sign(
-            { userId, userAuth },
-            accessSecretKey,
-            accessOption,
-          );
+          bcryptjs.compare(password, userPassword, (err, compareResult) => {
+            if (compareResult) {
+              const {
+                accessSecretKey, refreshSecretKey, accessOption, refreshOption,
+              } = jwtConfig;
 
-          const refreshToken = jwt.sign(
-            { userId, userAuth },
-            refreshSecretKey,
-            refreshOption,
-          );
+              const accessToken = jwt.sign(
+                { userId, userAuth },
+                accessSecretKey,
+                accessOption,
+              );
 
-          res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/; httpOnly=true; secure=true;`);
-          res.status(200).json({
-            success: true,
-            isLogin: true,
-            accessToken,
+              const refreshToken = jwt.sign(
+                { userId, userAuth },
+                refreshSecretKey,
+                refreshOption,
+              );
+
+              res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/; httpOnly=true; secure=true;`);
+              res.status(200).json({
+                success: true,
+                isLogin: true,
+                accessToken,
+              });
+            } else {
+              res.status(200).json({
+                success: false,
+                message: '비밀번호가 올바르지 않습니다.',
+              });
+            }
           });
         }
       })
@@ -51,9 +63,9 @@ const SELECT_USER = `
     u.id
     , u.user_id as "userId"
     , u.user_auth as "userAuth"
+    , u.user_password as "userPassword"
   FROM YLG_USER u
   WHERE u.user_id = $1
-    AND u.user_password = $2
 `;
 
 export default handler;

@@ -9,7 +9,7 @@ import { mediaWidth } from '@Constants/responsive';
 
 const { Content } = Layout;
 const MainLayout = ({ children }) => (
-  <CustomLayout className="layout" hasSider>
+  <CustomLayout className="layout">
     <MainHeader />
     <MainContent>
       {children}
