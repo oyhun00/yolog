@@ -9,6 +9,7 @@ import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import PostBox from '@Components/Post/PostBox';
+import { mediaWidth } from '@Constants/responsive';
 
 const PostComponent = () => {
   const router = useRouter();
@@ -171,6 +172,7 @@ const Category = styled.div`
 
 const ViewMoreBox = styled.div`
   height: 100%;
+  min-height: 23.5625rem;
   background: linear-gradient(135deg, #2c2c2c, #1e1e1e);
   display: flex;
   flex-direction: column;
@@ -181,9 +183,13 @@ const ViewMoreBox = styled.div`
   & > div {
     margin-top: 0.4rem;
   }
-  
+
   :hover {
     background: linear-gradient(135deg, #222222, #1a1a1a);
+  }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    font-size: 1.2rem;
   }
 `;
 

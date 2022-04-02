@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Layout } from 'antd';
 import styled from '@emotion/styled';
+import { mediaWidth } from '@Constants/responsive';
 
 const { Header } = Layout;
 const MainHeader = () => (
@@ -51,6 +52,10 @@ const MenuItem = styled.div`
     :hover {
       text-shadow: 0 0 13px #ffffffdb;
       transition: 0.4s;
+    }
+
+    ${mediaWidth.MEDIA_MOBILE} {
+      font-size: 1.4rem;
     }
   }
 `;

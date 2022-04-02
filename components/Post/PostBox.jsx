@@ -3,6 +3,7 @@ import Router from 'next/router';
 import * as PropTypes from 'prop-types';
 import { Card, Col } from 'antd';
 import styled from '@emotion/styled';
+import { mediaWidth } from '@Constants/responsive';
 
 const { Meta } = Card;
 const PostBox = ({ data, onSearchByTag }) => {
@@ -41,9 +42,13 @@ PostBox.propTypes = {
 };
 
 const Date = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 300;
   margin-bottom: 0.4rem;
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    font-size: 1.1rem;
+  }
 `;
 
 const TagArea = styled.div`
@@ -58,28 +63,33 @@ const Tag = styled.div`
   background: rgb(24 144 255 / 38%);
   color: #fff;
   border-radius: 10px;
-  padding: 0px 9px;
-  margin: 36px 4px 0 0;
+  padding: 0 0.5625rem;
+  margin: 2.25rem 0.25rem 0 0;
   cursor: pointer;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
   display: inline-block;
   
   :hover {
     opacity: 0.7;
   }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    padding: 0.2rem 0.8rem;
+    font-size: 1.2rem;
+  }
 `;
 
 const CustomCard = styled(Card)`
-  border: 1px solid #1e1e1e;
-  
-  &.ant-card-bordered {
-    //border: 1px solid black;
-  }
+  background: 0;
 
   .ant-card-cover {
-    height: 150px;
+    height: 9.375rem;
     overflow: hidden;
+
+    ${mediaWidth.MEDIA_MOBILE} {
+      height: 13rem;
+    }
   }
 
   .ant-card-cover img {
@@ -88,19 +98,23 @@ const CustomCard = styled(Card)`
   }
 
   .ant-card-body {
-    padding: 20px;
+    padding: 1.25rem;
     background: #1e1e1e;
   }
 
   .ant-card-meta-title {
     color: #fff;
+
+    ${mediaWidth.MEDIA_MOBILE} {
+      font-size: 1.6rem;
+    }
   }
 
   .ant-card-meta-description {
-    height: ${(props) => (props.tags ? '80px' : '125px')};
-    margin-bottom: ${(props) => (props.tags ? '0' : '10px')};
+    height: ${(props) => (props.tags ? '5rem' : '7.8125rem')};
+    margin-bottom: ${(props) => (props.tags ? '0' : '0.625rem')};
     overflow: hidden;
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 300;
     color: #fff;
     text-overflow: ellipsis;
@@ -109,6 +123,15 @@ const CustomCard = styled(Card)`
     display: -webkit-box;
     -webkit-line-clamp: ${(props) => (props.tags ? '4' : '6')};
     -webkit-box-orient: vertical;
+
+    ${mediaWidth.MEDIA_TABLET} {
+    }
+
+    ${mediaWidth.MEDIA_MOBILE} {
+      height: 5.8rem;
+      font-size: 1.2rem;
+      -webkit-line-clamp: 3;
+    }
   }
   
   :hover {

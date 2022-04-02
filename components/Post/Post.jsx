@@ -96,6 +96,10 @@ const LeftContents = styled.div`
 const AdminArea = styled.div`
   position: absolute;
   right: -70px;
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    display: none;
+  }
 `;
 
 const Icon = styled.div`
@@ -156,6 +160,10 @@ const PostDate = styled.div`
   font-size: 1rem;
   font-weight: 300;
   color: #d5d5d5;
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    font-size: 1.2rem;
+  }
 `;
 
 const TagArea = styled.div`
@@ -176,12 +184,26 @@ const Tag = styled.div`
   :hover {
     opacity: 0.7;
   }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    font-size: 1.2rem;
+  }
 `;
 
 const CustomParagraph = styled(Paragraph)`
+  p {
+    ${mediaWidth.MEDIA_MOBILE} {
+      font-size: 1.4rem;
+    }  
+  }
+  
   p > span {
     font-size: 0.95rem;
     font-weight: 300;
+    
+    ${mediaWidth.MEDIA_MOBILE} {
+      font-size: 1.4rem;
+    }
   }
   
   img {
