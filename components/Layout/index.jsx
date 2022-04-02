@@ -34,6 +34,7 @@ const CustomLayout = styled(Layout)`
 `;
 
 const MainContent = styled(Content)`
+  width: 100%;
   margin: 0 auto;
   padding-bottom: 3.125rem;
 `;
