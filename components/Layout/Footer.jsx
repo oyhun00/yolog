@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import styled from '@emotion/styled';
 import { GithubOutlined, InstagramOutlined } from '@ant-design/icons';
+import { mediaWidth } from '@Constants/responsive';
 
 const { Footer } = Layout;
 const MainFooter = () => (
@@ -29,6 +30,10 @@ const CustomFooter = styled(Footer)`
   align-items: center;
   justify-content: space-between;
   font-weight: 100;
+
+  ${mediaWidth.MEDIA_MOBILE} {
+    padding: 1rem 0 3rem 0;
+  }
 `;
 
 const IconArea = styled.div`

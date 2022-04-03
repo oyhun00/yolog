@@ -137,6 +137,10 @@ const CustomTitle = styled(Title)`
     margin: 0 0 1rem 0 !important;
     text-align: left;
   }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    font-size: 1.6rem !important;
+  }
 `;
 
 const DescriptionsArea = styled.div`
@@ -162,7 +166,7 @@ const PostDate = styled.div`
   color: #d5d5d5;
   
   ${mediaWidth.MEDIA_MOBILE} {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -186,14 +190,14 @@ const Tag = styled.div`
   }
   
   ${mediaWidth.MEDIA_MOBILE} {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
   }
 `;
 
 const CustomParagraph = styled(Paragraph)`
   p {
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.4rem;
+      font-size: 0.9rem;
     }  
   }
   
@@ -202,7 +206,7 @@ const CustomParagraph = styled(Paragraph)`
     font-weight: 300;
     
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.4rem;
+      font-size: 0.9rem;
     }
   }
   

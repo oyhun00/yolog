@@ -29,7 +29,7 @@ const PostComponent = () => {
   };
 
   const viewMoreBox = (tag) => (
-    <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8} onClick={(e) => onSearchByTag(tag, e)}>
+    <Col className="gutter-row" xs={24} sm={24} md={12} lg={12} xl={8} onClick={(e) => onSearchByTag(tag, e)}>
       <ViewMoreBox>
         <EllipsisOutlined style={{ fontSize: '3rem' }} />
         <div>&quot;{tag}&quot; 관련 포스트 더보기</div>
@@ -131,7 +131,7 @@ const PostListWrap = styled.div`
 
 const PostRow = styled(Row)`
   position: relative;
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
   
   img {
     object-fit: cover;
@@ -189,7 +189,7 @@ const ViewMoreBox = styled.div`
   }
   
   ${mediaWidth.MEDIA_MOBILE} {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;
 

@@ -47,7 +47,7 @@ const Date = styled.div`
   margin-bottom: 0.4rem;
   
   ${mediaWidth.MEDIA_MOBILE} {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -75,8 +75,8 @@ const Tag = styled.div`
   }
   
   ${mediaWidth.MEDIA_MOBILE} {
-    padding: 0.2rem 0.8rem;
-    font-size: 1.2rem;
+    padding: 0 0.8rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -106,7 +106,7 @@ const CustomCard = styled(Card)`
     color: #fff;
 
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -128,8 +128,8 @@ const CustomCard = styled(Card)`
     }
 
     ${mediaWidth.MEDIA_MOBILE} {
-      height: 5.8rem;
-      font-size: 1.2rem;
+      height: 4.4rem;
+      font-size: 0.9rem;
       -webkit-line-clamp: 3;
     }
   }

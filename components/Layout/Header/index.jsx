@@ -26,6 +26,10 @@ const CustomHeader = styled(Header)`
   justify-content: space-between;
   padding: 1.5rem 0 2.5rem 0;
   height: auto;
+
+  ${mediaWidth.MEDIA_MOBILE} {
+    padding: 1.5rem 0 0.6rem 0;
+  }
 `;
 
 const Logo = styled.div`
@@ -34,6 +38,10 @@ const Logo = styled.div`
     text-shadow: 0 0 10px #ffffffb0;
     font-size: 2.5rem;
     font-weight: 600;
+
+    ${mediaWidth.MEDIA_MOBILE} {
+      font-size: 1.8rem;
+    }
   }
 `;
 
@@ -55,7 +63,7 @@ const MenuItem = styled.div`
     }
 
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.4rem;
+      font-size: 0.8rem;
     }
   }
 `;

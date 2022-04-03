@@ -23,13 +23,13 @@ const CustomLayout = styled(Layout)`
   margin: 0 auto;
 
   ${mediaWidth.MEDIA_DESKTOP} {
-    width: 40rem;
-    padding: 0 2rem;
+    width: 100%;
+    padding: 0 3rem;
   }
   
   ${mediaWidth.MEDIA_MOBILE} {
     //width: 100%;
-    //padding: 0 3rem;
+    padding: 0 1rem;
   }
 `;
 
