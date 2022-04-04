@@ -56,6 +56,7 @@ const MenuItem = styled.div`
   
   > a {
     color: #fff;
+    font-size: 1rem;
     
     :hover {
       text-shadow: 0 0 13px #ffffffdb;

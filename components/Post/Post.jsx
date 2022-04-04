@@ -43,22 +43,18 @@ const Post = () => {
             </PostInfo>
             <h4>Tags</h4>
             <TagArea>{tagList}</TagArea>
+            {
+              isLogin ? (
+                <AdminArea>
+                  <div onClick={() => postDelete(id)} aria-hidden="true"><DeleteOutlined />삭제</div>
+                  <div onClick={() => Router.push(`/post/modify/${id}`)} aria-hidden="true"><FormOutlined />수정</div>
+                </AdminArea>
+              ) : ''
+            }
           </div>
         </div>
       </LeftContents>
       <CustomTypography>
-        {
-          isLogin ? (
-            <AdminArea offsetTop={120}>
-              <Icon onClick={() => postDelete(id)}>
-                <DeleteOutlined style={{ fontSize: '22px' }} />
-              </Icon>
-              <Icon onClick={() => Router.push(`/post/modify/${id}`)}>
-                <FormOutlined style={{ fontSize: '22px' }} />
-              </Icon>
-            </AdminArea>
-          ) : ''
-        }
         <CustomTitle>{title}</CustomTitle>
         <DescriptionsArea>
           <PostInfo>
@@ -94,27 +90,20 @@ const LeftContents = styled.div`
 `;
 
 const AdminArea = styled.div`
-  position: absolute;
-  right: -70px;
+  margin-top: 3rem;
+  
+  > div {
+    margin-bottom: 0.2rem;
+    color: #d1d1d1;
+    
+    > span {
+      margin-right: 0.4rem;
+      font-size: 0.9rem;
+    }
+  }
   
   ${mediaWidth.MEDIA_MOBILE} {
     display: none;
-  }
-`;
-
-const Icon = styled.div`
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  background: rgb(255 255 255 / 15%);
-  border: 2px solid rgb(255 255 255 / 61%);
-  border-radius: 50%;
-  margin-bottom: 10px;
-  cursor: pointer;
-
-  :hover {
-    opacity: 0.7;
   }
 `;
 

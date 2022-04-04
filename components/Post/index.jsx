@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   Row, Col, Button, Pagination,
 } from 'antd';
-import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import PostBox from '@Components/Post/PostBox';
@@ -84,19 +84,6 @@ const PostComponent = () => {
 
   return (
     <PostListWrap>
-      {
-        isLogin ? (
-          <Row gutter={[24, 24]}>
-            <Col span={24} style={{ textAlign: 'right' }}>
-              <CustomButton icon={<PlusOutlined />} size="large">
-                <Link href="/post/write">
-                  <span>글쓰기</span>
-                </Link>
-              </CustomButton>
-            </Col>
-          </Row>
-        ) : ''
-      }
       { router.query.tag ? (
         <>
           <Category>{router.query.tag}</Category>
@@ -115,6 +102,15 @@ const PostComponent = () => {
         <>
           <div style={{ position: 'relative' }}>
             <TagAreaWrap>
+              {
+                isLogin ? (
+                  <AdminArea>
+                    <Link href="/post/write">
+                      <span><EditOutlined /> 글쓰기</span>
+                    </Link>
+                  </AdminArea>
+                ) : ''
+              }
               <TagArea>{tagList}</TagArea>
             </TagAreaWrap>
           </div>
@@ -252,6 +248,15 @@ const TagArea = styled.div`
     :hover {
       opacity: 0.7;
     }
+  }
+`;
+
+const AdminArea = styled.div`
+  position: fixed;
+  margin: -1.7rem 0 0 2rem;
+  
+  span {
+    font-size: 1rem;
   }
 `;
 
