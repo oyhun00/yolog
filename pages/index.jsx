@@ -1,17 +1,14 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import wrapper from '@Store/configure';
-import MainLayout from '@Components/Layout';
 import PostComponent from '@Components/Post';
-import { GET_POST_LIST_REQUEST, REFRESH_TOKEN_REQUEST } from '@Constants/actionTypes';
+import { GET_POST_LIST_REQUEST } from '@Constants/actionTypes';
 
 const PostPage = () => (
-  <MainLayout>
-    <PostComponent />
-  </MainLayout>
+  <PostComponent />
 );
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query, req }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query }) => {
   const { tag, page } = query;
 
   store.dispatch({
@@ -21,10 +18,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
       page,
     },
   });
-  // store.dispatch({
-  //   type: REFRESH_TOKEN_REQUEST,
-  //   payload: req.cookies.refreshToken,
-  // });
   store.dispatch(END);
 
   await store.sagaTask.toPromise();

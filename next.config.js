@@ -1,7 +1,6 @@
-const withAntdLess = require('next-plugin-antd-less');
 const aliases = require('./alias-config');
 
-module.exports = withAntdLess({
+module.exports = {
   lessVarsFilePath: './public/style/yolog.less',
   lessVarsFilePathAppendToEndOfContent: true,
   cssLoaderOptions: {},
@@ -17,4 +16,4 @@ module.exports = withAntdLess({
 
     return config;
   },
-});
+};

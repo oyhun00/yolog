@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import MainLayout from '@Components/Layout';
 import wrapper from '@Store/configure';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
@@ -26,8 +27,10 @@ function MainApp({ Component, pageProps }) {
         <title>yolog</title>
       </Head>
       <ConnectedRouter>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Component {...pageProps} />
+        <MainLayout>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Component {...pageProps} />
+        </MainLayout>
         <ToastContainer
           position="top-center"
           autoClose={1000}

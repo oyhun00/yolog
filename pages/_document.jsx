@@ -4,6 +4,7 @@ import Document, {
 } from 'next/document';
 
 React.useLayoutEffect = React.useEffect;
+
 class MyDocument extends Document {
   render() {
     return (

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import {
-  Row, Col, Button, Pagination,
+  Row, Col, Pagination,
 } from 'antd';
 import { EditOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
@@ -57,7 +57,7 @@ const PostComponent = () => {
   );
 
   const tagList = tags.map((v) => (
-    <div key={v.mostTags} onClick={(e) => onSearchByTag(v.mostTags, e)}>
+    <div key={v.mostTags} onClick={(e) => onSearchByTag(v.mostTags, e)} aria-hidden="true">
       #{v.mostTags} <span>({v.tagCount})</span>
     </div>
   ));
@@ -137,21 +137,6 @@ const PostRow = styled(Row)`
   :last-child {
     padding-bottom: 0;
     margin-bottom: 0;
-  }
-`;
-
-const CustomButton = styled(Button)`
-  background: transparent;
-  border: transparent;
-  border-radius: 30px;
-
-  & a {
-    color: #fff;
-  }
-
-  :hover, :focus, :active {
-    background: #fff;
-    color: #030303;
   }
 `;
 
