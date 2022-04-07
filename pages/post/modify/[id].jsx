@@ -1,6 +1,8 @@
 import React from 'react';
-import PostComponent from '@Components/Post/PostWrite';
+import dynamic from 'next/dynamic';
 
-const Modify = () => <PostComponent />;
+const PostModify = dynamic(() => import('@Components/Post/PostWrite'));
+
+const Modify = () => <PostModify />;
 
 export default Modify;

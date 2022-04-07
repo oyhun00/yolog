@@ -1,5 +1,7 @@
 import React from 'react';
-import PostWrite from '@Components/Post/PostWrite';
+import dynamic from 'next/dynamic';
+
+const PostWrite = dynamic(() => import('@Components/Post/PostWrite'));
 
 const Index = () => (
   <PostWrite />
