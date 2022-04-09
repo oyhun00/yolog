@@ -1,4 +1,3 @@
-import React from 'react';
 import Router from 'next/router';
 import * as PropTypes from 'prop-types';
 import { Card, Col } from 'antd';

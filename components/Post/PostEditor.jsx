@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useRef } from 'react';
+import { useMemo, useCallback, useRef } from 'react';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 import * as PropTypes from 'prop-types';

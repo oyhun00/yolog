@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import styled from '@emotion/styled';
 import { GithubOutlined, InstagramOutlined } from '@ant-design/icons';

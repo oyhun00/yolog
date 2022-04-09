@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -64,10 +63,10 @@ const PostComponent = () => {
 
   const itemRender = (current, type, originalElement) => {
     if (type === 'prev') {
-      return <a>Prev</a>;
+      return <a href={() => false}>Prev</a>;
     }
     if (type === 'next') {
-      return <a>Next</a>;
+      return <a href={() => false}>Next</a>;
     }
     return originalElement;
   };

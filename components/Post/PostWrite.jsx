@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -53,7 +53,7 @@ const PostWrite = () => {
     if (!post.thumbnailText.trim() || post.thumbnailText.trim() === '') { return toast.error('내용을 입력해주세요'); }
     if (router.query.id) { return dispatch(updatePost(post)); }
     return dispatch(addPost(post));
-  }, [dispatch, post]);
+  }, [dispatch, post, router.query.id]);
 
   const tagList = post.tags?.map((v, index) => (
     <Tag key={v} onClick={() => tagDelete(index)}>{v}</Tag>
@@ -75,6 +75,7 @@ const PostWrite = () => {
 
   useEffect(() => {
     if (Object.keys(router.query).length !== 0) { getUpdatePost(); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

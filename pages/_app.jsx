@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { ConnectedRouter } from 'connected-next-router';
@@ -12,7 +12,7 @@ import '@Public/style/yolog.css';
 import '@Public/font/font.css';
 
 // eslint-disable-next-line react/prop-types
-function MainApp({ Component, pageProps }) {
+const MainApp = ({ Component, pageProps }) => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state);
   const { isLogin } = auth;
@@ -41,6 +41,6 @@ function MainApp({ Component, pageProps }) {
       </ConnectedRouter>
     </>
   );
-}
+};
 
 export default wrapper.withRedux(MainApp);

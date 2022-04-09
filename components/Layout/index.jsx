@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout } from 'antd';
 import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
@@ -21,6 +20,7 @@ const MainLayout = ({ children }) => (
 const CustomLayout = styled(Layout)`
   width: 65rem;
   margin: 0 auto;
+  min-height: 100%;
 
   ${mediaWidth.MEDIA_DESKTOP} {
     width: 100%;

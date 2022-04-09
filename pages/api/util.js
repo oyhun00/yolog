@@ -21,7 +21,6 @@ const upload = multer({
 
 const handler = nextConnect({
   onError: (err, req, res) => {
-    console.error(err.stack);
     res.status(500).end('Something broke!');
   },
   onNoMatch: (req, res) => {
