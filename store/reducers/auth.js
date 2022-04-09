@@ -25,26 +25,15 @@ const initialState = {
 
 const auth = (state = initialState, action = {}) => {
   switch (action.type) {
-    case LOGIN_REQUEST: {
-      return {
-        ...state,
-      };
-    }
+    case LOGIN_REQUEST:
     case LOGIN_SUCCESS: {
       return {
         ...state,
         isLogin: action.result,
       };
     }
-    case LOGIN_FAILURE: {
-      toast.error(action.result);
-      return state;
-    }
-    case SIGN_UP_REQUEST: {
-      return {
-        ...state,
-      };
-    }
+    case LOGIN_FAILURE: return toast.error(action.result);
+    case SIGN_UP_REQUEST:
     case SIGN_UP_SUCCESS: {
       toast.info('SUCCESS');
       return {
@@ -57,22 +46,13 @@ const auth = (state = initialState, action = {}) => {
         ...state,
       };
     }
-    case REFRESH_TOKEN_REQUEST: {
-      return {
-        ...state,
-      };
-    }
     case REFRESH_TOKEN_SUCCESS: {
       return {
         ...state,
         isLogin: action.result,
       };
     }
-    case REFRESH_TOKEN_FAILURE: {
-      return {
-        ...state,
-      };
-    }
+    case REFRESH_TOKEN_FAILURE: return state;
     default:
       return state;
   }

@@ -52,7 +52,7 @@ const PostEditor = ({ setPost, post }) => {
         toast.error(error);
       }
     };
-  }, []);
+  }, [setPost]);
 
   const modules = useMemo(() => ({
     syntax: {

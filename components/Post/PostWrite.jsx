@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -9,7 +9,6 @@ import {
 import { CheckOutlined } from '@ant-design/icons';
 
 import { addPost, updatePost } from '@Store/reducers/post';
-import MainLayout from '@Components/Layout';
 import PostEditor from '@Components/Post/PostEditor';
 import { mediaWidth } from '@Constants/responsive';
 import axios from 'axios';
@@ -79,41 +78,39 @@ const PostWrite = () => {
   }, []);
 
   return (
-    <MainLayout>
-      <SizeSet>
-        <Row gutter={[24, 24]}>
-          <Col span={24}>
-            <TitleInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={post.title} />
-          </Col>
-        </Row>
-        <Row gutter={[24, 24]}>
-          <Col span={24}>
-            <TagInput
-              placeholder="태그를 입력하세요"
-              name="tag"
-              onChange={(e) => setTag(e.target.value)}
-              onKeyPress={onKeyPress}
-              value={tag}
-            />
-          </Col>
-        </Row>
-        <Row gutter={[24, 24]}>
-          <Col span={24}>
-            <TagArea>{tagList}</TagArea>
-          </Col>
-        </Row>
-        <Row gutter={[24, 24]}>
-          <Col span={24}>
-            <PostEditor setPost={setPost} post={post} />
-          </Col>
-        </Row>
-        <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>
-          <Col span={24} style={{ textAlign: 'right' }}>
-            <CustomButton icon={<CheckOutlined />} size="large" onClick={submitPost}>작성완료</CustomButton>
-          </Col>
-        </Row>
-      </SizeSet>
-    </MainLayout>
+    <SizeSet>
+      <Row gutter={[24, 24]}>
+        <Col span={24}>
+          <TitleInput placeholder="제목을 입력하세요" name="title" onChange={onChangeTitle} value={post.title} />
+        </Col>
+      </Row>
+      <Row gutter={[24, 24]}>
+        <Col span={24}>
+          <TagInput
+            placeholder="태그를 입력하세요"
+            name="tag"
+            onChange={(e) => setTag(e.target.value)}
+            onKeyPress={onKeyPress}
+            value={tag}
+          />
+        </Col>
+      </Row>
+      <Row gutter={[24, 24]}>
+        <Col span={24}>
+          <TagArea>{tagList}</TagArea>
+        </Col>
+      </Row>
+      <Row gutter={[24, 24]}>
+        <Col span={24}>
+          <PostEditor setPost={setPost} post={post} />
+        </Col>
+      </Row>
+      <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>
+        <Col span={24} style={{ textAlign: 'right' }}>
+          <CustomButton icon={<CheckOutlined />} size="large" onClick={submitPost}>작성완료</CustomButton>
+        </Col>
+      </Row>
+    </SizeSet>
   );
 };
 

@@ -30,12 +30,12 @@ const Login = () => {
     <LoginWrap>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <LoginInput placeholder="ID" name="id" onChange={onChange} />
+          <LoginInput placeholder="ID" name="id" type="text" onChange={onChange} />
         </Col>
       </Row>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <LoginInput placeholder="PASSWORD" name="password" onChange={onChange} />
+          <LoginInput placeholder="PASSWORD" name="password" type="password" onChange={onChange} />
         </Col>
       </Row>
       <Row gutter={[24, 24]} style={{ marginTop: '10px' }}>

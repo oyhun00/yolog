@@ -45,10 +45,15 @@ function* signUp(action) {
 function* silentRefresh() {
   try {
     const { data } = yield call(silentRefreshApi);
-    yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
-    yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.isLogin });
+
+    if (data.success) {
+      yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
+      yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.isLogin });
+    } else {
+      yield put({ type: REFRESH_TOKEN_FAILURE });
+    }
   } catch (err) {
-    yield put({ type: REFRESH_TOKEN_FAILURE, result: err.response });
+    yield put({ type: REFRESH_TOKEN_FAILURE });
   }
 }
 
