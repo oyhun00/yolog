@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 import { ConnectedRouter } from 'connected-next-router';
 import { ToastContainer } from 'react-toastify';
-import 'quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import MainLayout from '@Components/Layout';
 import wrapper from '@Store/configure';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
+
+const MainLayout = dynamic(() => import('@Components/Layout'));
 
 // eslint-disable-next-line react/prop-types
 const MainApp = ({ Component, pageProps }) => {
