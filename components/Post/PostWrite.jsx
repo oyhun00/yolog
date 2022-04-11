@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import Router, { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import styled from '@emotion/styled';
 import {
@@ -16,6 +16,8 @@ import axios from 'axios';
 const PostWrite = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { auth } = useSelector((state) => state);
+  const { isLogin } = auth;
 
   const [tag, setTag] = useState('');
   const [post, setPost] = useState({
@@ -74,6 +76,7 @@ const PostWrite = () => {
   };
 
   useEffect(() => {
+    if (!isLogin) { Router.push({ pathname: '/' }); }
     if (Object.keys(router.query).length !== 0) { getUpdatePost(); }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

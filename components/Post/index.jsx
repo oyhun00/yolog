@@ -36,7 +36,7 @@ const PostComponent = () => {
     </Col>
   );
 
-  const postSection = !router.query.tag ? tags.reduce((acc, cur) => {
+  const postSection = !router.query.tag ? tags?.reduce((acc, cur) => {
     if (cur.tagCount > 1) {
       const postCards = posts.map((v) => (v.tags.includes(cur.mostTags) ? (
         <PostBox key={v.id + cur.mostTags} data={v} onSearchByTag={onSearchByTag} />

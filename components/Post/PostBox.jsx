@@ -1,8 +1,11 @@
 import Router from 'next/router';
+import Image from 'next/image';
 import * as PropTypes from 'prop-types';
 import { Card, Col } from 'antd';
 import styled from '@emotion/styled';
+
 import { mediaWidth } from '@Constants/responsive';
+import thumbnailImage from '@Public/thumbnail.png';
 
 const { Meta } = Card;
 const PostBox = ({ data, onSearchByTag }) => {
@@ -17,7 +20,7 @@ const PostBox = ({ data, onSearchByTag }) => {
         hoverable
         bordered={false}
         tags={tags.length !== 0 ? 1 : 0}
-        cover={<img alt="example" src={thumbnail || 'https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg'} />}
+        cover={<Image alt="example" src={thumbnail || thumbnailImage} width="100%" height="100%" layout="responsive" objectFit="cover" />}
       >
         <Date>{crtDttm || udtDttm}</Date>
         <Meta title={title} description={thumbnailText} />
@@ -85,6 +88,10 @@ const CustomCard = styled(Card)`
   .ant-card-cover {
     height: 9.375rem;
     overflow: hidden;
+    
+    > span {
+      height: 100% !important;
+    }
 
     ${mediaWidth.MEDIA_MOBILE} {
       height: 13rem;
