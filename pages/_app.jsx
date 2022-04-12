@@ -26,7 +26,25 @@ const MainApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>yolog</title>
+        <title>Yolog</title>
+        <meta name="keywords" content="JavaScript, JS, React, ReactJS, Web Programming, Web Development, 웹 개발, 리액트, 자바스크립트" />
+        <meta name="author" content="Yong Hoon" />
+        <meta name="og:site_name" content="Yolog" />
+        <meta name="og:title" content="Yolog" />
+        <meta
+          name="og:description"
+          content="웹 개발과 관련된 이야기를 주로 다룹니다."
+        />
+        <meta name="og:type" content="website" />
+        <meta name="og:url" content="https://" />
+        <meta
+          name="og:image"
+          content=""
+        />
+        <meta
+          name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1.0"
+        />
       </Head>
       <ConnectedRouter>
         <MainLayout>
