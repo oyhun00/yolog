@@ -4,15 +4,15 @@ import multerS3 from 'multer-s3';
 import AWS from 'aws-sdk';
 
 AWS.config.update({
-  accessKeyId: process.env.REACT_APP_S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.REACT_APP_S3_SECRET_ACCESS_KEY,
-  region: process.env.REACT_APP_S3_REGION,
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: process.env.S3_REGION,
 });
 
 const upload = multer({
   storage: multerS3({
     s3: new AWS.S3(),
-    bucket: process.env.REACT_APP_S3_BUCKET,
+    bucket: process.env.S3_BUCKET,
     key(req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);
     },

@@ -11,3 +11,6 @@ public/style/yolog.css
 package-lock.json
 
 config/
+
+.DS_Store
+out/

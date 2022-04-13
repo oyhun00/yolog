@@ -11,8 +11,8 @@ import {
   UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS, UPDATE_POST_FAILURE,
 } from '@Constants/actionTypes';
 
-const getPostListApi = (query) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/list`, { params: query });
-const getPostApi = (id) => axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, { params: id });
+const getPostListApi = (query) => axios.get(`${process.env.APP_BASE_URL}/api/post/list`, { params: query });
+const getPostApi = (id) => axios.get(`${process.env.APP_BASE_URL}/api/post`, { params: id });
 const addPostApi = (data) => axios.post('/api/post', { params: data }, { withCredentials: true });
 const deletePostApi = (id) => axios.delete('/api/post', { params: id }, { withCredentials: true });
 const updatePostApi = (data) => axios.put('/api/post', { params: data }, { withCredentials: true });
