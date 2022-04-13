@@ -21,6 +21,7 @@ const CustomLayout = styled(Layout)`
   width: 65rem;
   margin: 0 auto;
   min-height: 100%;
+  background: transparent;
 
   ${mediaWidth.MEDIA_DESKTOP} {
     width: 100%;

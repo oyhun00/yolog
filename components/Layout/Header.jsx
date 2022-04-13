@@ -25,6 +25,7 @@ const CustomHeader = styled(Header)`
   justify-content: space-between;
   padding: 1.5rem 0 2.5rem 0;
   height: auto;
+  background: transparent;
 
   ${mediaWidth.MEDIA_MOBILE} {
     padding: 1.5rem 0 0.6rem 0;

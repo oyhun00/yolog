@@ -44,12 +44,12 @@ PostBox.propTypes = {
 };
 
 const Date = styled.div`
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 300;
   margin-bottom: 0.4rem;
   
   ${mediaWidth.MEDIA_MOBILE} {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -68,7 +68,7 @@ const Tag = styled.div`
   padding: 0 0.5625rem;
   margin: 2.25rem 0.25rem 0 0;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   line-height: 1.125rem;
   display: inline-block;
   
@@ -84,6 +84,11 @@ const Tag = styled.div`
 
 const CustomCard = styled(Card)`
   background: 0;
+  transition: opacity 0.3s;
+  
+  :hover {
+    opacity: 0.7;
+  }
 
   .ant-card-cover {
     height: 9.375rem;
@@ -110,6 +115,7 @@ const CustomCard = styled(Card)`
 
   .ant-card-meta-title {
     color: #fff;
+    font-size: 1.1rem;
 
     ${mediaWidth.MEDIA_MOBILE} {
       font-size: 1.2rem;
@@ -117,17 +123,17 @@ const CustomCard = styled(Card)`
   }
 
   .ant-card-meta-description {
-    height: ${(props) => (props.tags ? '5rem' : '7.8125rem')};
+    height: ${(props) => (props.tags ? '4.3rem' : '7.8125rem')};
     margin-bottom: ${(props) => (props.tags ? '0' : '0.625rem')};
     overflow: hidden;
-    font-size: 0.8125rem;
+    font-size: 0.9rem;
     font-weight: 300;
     color: #fff;
     text-overflow: ellipsis;
     word-break: break-word;
     overflow-wrap: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: ${(props) => (props.tags ? '4' : '6')};
+    -webkit-line-clamp: ${(props) => (props.tags ? '3' : '6')};
     -webkit-box-orient: vertical;
 
     ${mediaWidth.MEDIA_TABLET} {

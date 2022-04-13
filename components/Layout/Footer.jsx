@@ -29,6 +29,7 @@ const CustomFooter = styled(Footer)`
   align-items: center;
   justify-content: space-between;
   font-weight: 100;
+  background: transparent;
 
   ${mediaWidth.MEDIA_MOBILE} {
     padding: 1rem 0 3rem 0;
