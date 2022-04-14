@@ -1,23 +1,29 @@
-import { useEffect } from 'react';
 import { Pagination } from 'antd';
 import styled from '@emotion/styled';
 import * as PropTypes from 'prop-types';
 
-const PostPagination = ({ current, total, itemRender, onChange }) => {
-  useEffect(() => {
-    console.log('PostPagination');
-    return
-  });
+const PostPagination = ({
+  current, total, itemRender, onChange,
+}) => (
+  <CustomPagination
+    size="small"
+    total={total}
+    current={parseInt(current, 10) || 1}
+    defaultPageSize={9}
+    itemRender={itemRender}
+    onChange={onChange}
+  />
+);
 
-  return (
-    <CustomPagination
-      size="small"
-      total={total}
-      defaultPageSize={9}
-      itemRender={itemRender}
-      onChange={onChange}
-    />
-  );
+PostPagination.defaultProps = {
+  current: 1,
+};
+
+PostPagination.propTypes = {
+  current: PropTypes.number,
+  total: PropTypes.number.isRequired,
+  itemRender: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 const CustomPagination = styled(Pagination)`

@@ -77,7 +77,7 @@ const PostComponent = () => {
           { postSection }
         </PostRow>
         <PostPagination
-          cuurent={router.query.page}
+          current={router.query.page}
           total={postsCount}
           itemRender={itemRender}
           onChange={onChangePage}
