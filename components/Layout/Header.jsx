@@ -28,7 +28,7 @@ const CustomHeader = styled(Header)`
   background: transparent;
 
   ${mediaWidth.MEDIA_MOBILE} {
-    padding: 1.5rem 0 0.6rem 0;
+    padding: 0.8rem 0 0.6rem 0;
   }
 `;
 
@@ -40,7 +40,7 @@ const Logo = styled.div`
     font-weight: 600;
 
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
   }
 `;
