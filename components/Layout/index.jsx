@@ -30,7 +30,7 @@ const CustomLayout = styled(Layout)`
   
   ${mediaWidth.MEDIA_MOBILE} {
     //width: 100%;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
 `;
 

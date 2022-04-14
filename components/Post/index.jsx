@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 
 import PostBox from '@Components/Post/PostBox';
 import PostPagination from '@Components/Post/Pagination';
+import { mediaWidth } from '@Constants/responsive';
 
 const PostComponent = () => {
   const router = useRouter();
@@ -77,8 +78,8 @@ const PostComponent = () => {
           { postSection }
         </PostRow>
         <PostPagination
-          current={router.query.page}
-          total={postsCount}
+          current={parseInt(router.query.page, 10)}
+          total={parseInt(postsCount, 10)}
           itemRender={itemRender}
           onChange={onChangePage}
         />
@@ -94,6 +95,14 @@ const PostListWrap = styled.div`
 const PostRow = styled(Row)`
   position: relative;
   padding-bottom: 3rem;
+
+  @media only screen and (max-width: 1375px) {
+    width: 90%;
+  }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
+    width: unset;
+  }
   
   img {
     object-fit: cover;
@@ -122,6 +131,10 @@ const TagAreaWrap = styled.div`
   left: 100%;
 
   @media only screen and (max-width: 1375px) {
+    left: 90%;
+  }
+  
+  ${mediaWidth.MEDIA_MOBILE} {
     display: none;
   }
 `;
@@ -130,12 +143,15 @@ const TagArea = styled.div`
   position: fixed;
   font-weight: 100;
   font-size: 0.9rem;
-  margin: 0.5rem 0 0 2rem;
+  margin: 0 0 0 2rem;
+
+  @media only screen and (max-width: 1375px) {
+    margin: 0;
+  }
   
   > div {
     margin-bottom: 0.4rem;
     cursor: pointer;
-    text-shadow: 0 0 11px white;
     
     > span {
       font-size: 0.8rem;
@@ -149,7 +165,15 @@ const TagArea = styled.div`
 
 const AdminArea = styled.div`
   position: fixed;
-  margin: -1.7rem 0 0 2rem;
+  margin: -1.9rem 0 0 2rem;
+  
+  @media only screen and (max-width: 1375px) {
+    margin: -1.9rem 0 0 0;
+  }
+
+  ${mediaWidth.MEDIA_MOBILE} {
+    display: none;
+  }
   
   span {
     font-size: 1rem;
