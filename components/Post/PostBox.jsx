@@ -5,7 +5,7 @@ import { Card, Col } from 'antd';
 import styled from '@emotion/styled';
 
 import { mediaWidth } from '@Constants/responsive';
-import thumbnailImage from '@Public/thumbnail.png';
+import thumbnailImage from '@Assets/thumbnail.png';
 
 const { Meta } = Card;
 const PostBox = ({ data, onSearchByTag }) => {

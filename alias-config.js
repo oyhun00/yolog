@@ -9,4 +9,5 @@ module.exports = {
   '@Public': path.resolve(__dirname, './public'),
   '@Config': path.resolve(__dirname, './config'),
   '@Middleware': path.resolve(__dirname, './middleware'),
+  '@Assets': path.resolve(__dirname, './assets'),
 };

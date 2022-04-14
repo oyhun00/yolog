@@ -10,7 +10,8 @@
       "@Server/*": ["./server/*"],
       "@Public/*": ["./public/*"],
       "@Config/*": ["./config/*"],
-      "@Middleware/*": ["./middleware/*"]
+      "@Middleware/*": ["./middleware/*"],
+      "@Assets/*": ["./assets/*"]
     },
     "experimentalDecorators": true
   }
