@@ -11,6 +11,8 @@ import wrapper from '@Store/configure';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
 import ogImage from '@Assets/og-image.png';
+import ico16 from '@Assets/favicon/favicon-16x16.ico';
+import ico152 from '@Assets/favicon/favicon-152x152.ico';
 
 const MainLayout = dynamic(() => import('@Components/Layout'));
 
@@ -39,13 +41,15 @@ const MainApp = ({ Component, pageProps }) => {
         <meta name="og:type" content="website" />
         <meta name="og:url" content="https://" />
         <meta
-          name="og:image"
-          content={ogImage}
+          property="og:image"
+          content={ogImage.src}
         />
         <meta
           name="viewport"
           content="user-scalable=no, width=device-width, initial-scale=1.0"
         />
+        <link rel="shortcut icon" href={ico16.src} />
+        <link rel="apple-touch-icon" sizes="152x152" href={ico152.src} />
       </Head>
       <ConnectedRouter>
         <MainLayout>

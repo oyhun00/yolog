@@ -71,7 +71,10 @@ const PostComponent = () => {
               </AdminArea>
             ) : ''
           }
-          <TagArea>{tagList}</TagArea>
+          <TagArea>
+            <TagAreaTitle>Tags</TagAreaTitle>
+            {tagList}
+          </TagArea>
         </TagAreaWrap>
         { router.query.tag ? (<Category>{router.query.tag}</Category>) : '' }
         <PostRow gutter={[24, 24]}>
@@ -139,11 +142,18 @@ const TagAreaWrap = styled.div`
   }
 `;
 
+const TagAreaTitle = styled.div`
+  font-size: 1.2rem !important;
+  font-weight: 500;
+  color: #fff;
+`;
+
 const TagArea = styled.div`
   position: fixed;
   font-weight: 100;
   font-size: 0.9rem;
-  margin: 0 0 0 2rem;
+  color: #bababa;
+  margin: -0.6rem 0 0 2rem;
 
   @media only screen and (max-width: 1375px) {
     margin: 0;
@@ -166,10 +176,10 @@ const TagArea = styled.div`
 
 const AdminArea = styled.div`
   position: fixed;
-  margin: -1.9rem 0 0 2rem;
+  margin: -2.5rem 0 0 2rem;
   
   @media only screen and (max-width: 1375px) {
-    margin: -1.9rem 0 0 0;
+    margin: -2.5rem 0 0 0;
   }
 
   ${mediaWidth.MEDIA_MOBILE} {

@@ -23,7 +23,7 @@ const MainHeader = () => (
 const CustomHeader = styled(Header)`
   display: flex;
   justify-content: space-between;
-  padding: 1.5rem 0 2.5rem 0;
+  padding: 1.5rem 0 1.5rem 0;
   height: auto;
   background: transparent;
 
@@ -35,7 +35,6 @@ const CustomHeader = styled(Header)`
 const Logo = styled.div`
   a {
     color: #fff;
-    text-shadow: 0 0 10px #ffffffb0;
     font-size: 2.5rem;
     font-weight: 600;
 

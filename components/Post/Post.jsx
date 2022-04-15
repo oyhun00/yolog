@@ -186,13 +186,16 @@ const Tag = styled.div`
 
 const CustomParagraph = styled(Paragraph)`
   p {
+    font-size: 1rem;
+    font-weight: 300;
+  
     ${mediaWidth.MEDIA_MOBILE} {
       font-size: 0.9rem;
     }  
   }
   
   p > span {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 300;
     
     ${mediaWidth.MEDIA_MOBILE} {

@@ -21,7 +21,6 @@ function* getPostList(action) {
   const { tag, page } = action.payload;
   try {
     const result = yield call(getPostListApi, { tag, page });
-    yield console.log(result);
     yield put({ type: GET_POST_LIST_SUCCESS, result });
   } catch (err) {
     yield put({ type: GET_POST_LIST_FAILURE, result: err.response });

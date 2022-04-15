@@ -7,7 +7,6 @@ const handler = async (req, res) => {
 const getPostList = async (req, res) => {
   const { tag, page } = req.query;
   const values = [tag, page || 1];
-  console.log('getPostListgetPostListgetPostListgetPostListgetPostList', page);
 
   try {
     const tags = await db.any(SELECT_POST_GROUP_BY_TAG);
