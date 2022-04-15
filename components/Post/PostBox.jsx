@@ -89,6 +89,12 @@ const CustomCard = styled(Card)`
   :hover {
     opacity: 0.7;
   }
+  
+  :active {
+    .ant-card-meta-title, .ant-card-meta-description {
+      text-decoration-line: underline;
+    }
+  }
 
   .ant-card-cover {
     height: 9.375rem;
@@ -110,15 +116,15 @@ const CustomCard = styled(Card)`
 
   .ant-card-body {
     padding: 1.25rem;
-    background: #1e1e1e;
+    background: #262626;
   }
 
   .ant-card-meta-title {
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1rem;
 
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
   }
 
@@ -128,7 +134,7 @@ const CustomCard = styled(Card)`
     overflow: hidden;
     font-size: 0.9rem;
     font-weight: 300;
-    color: #fff;
+    color: #a3a3a3;
     text-overflow: ellipsis;
     word-break: break-word;
     overflow-wrap: break-word;

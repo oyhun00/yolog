@@ -5,6 +5,7 @@ import { Typography, Divider } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import parse from 'html-react-parser';
+import 'highlight.js/styles/atom-one-dark-reasonable.css';
 
 import { mediaWidth } from '@Constants/responsive';
 import { deletePost } from '@Store/reducers/post';
@@ -128,7 +129,7 @@ const CustomTitle = styled(Title)`
   }
   
   ${mediaWidth.MEDIA_MOBILE} {
-    font-size: 1.6rem !important;
+    font-size: 1.4rem !important;
   }
 `;
 

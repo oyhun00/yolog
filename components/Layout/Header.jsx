@@ -64,7 +64,7 @@ const MenuItem = styled.div`
     }
 
     ${mediaWidth.MEDIA_MOBILE} {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
   }
 `;

@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import wrapper from '@Store/configure';
 import '@Public/style/yolog.css';
 import '@Public/font/font.css';
+import ogImage from '@Assets/og-image.png';
 
 const MainLayout = dynamic(() => import('@Components/Layout'));
 
@@ -39,7 +40,7 @@ const MainApp = ({ Component, pageProps }) => {
         <meta name="og:url" content="https://" />
         <meta
           name="og:image"
-          content=""
+          content={ogImage}
         />
         <meta
           name="viewport"
