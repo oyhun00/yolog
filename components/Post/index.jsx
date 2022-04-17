@@ -38,10 +38,10 @@ const PostComponent = () => {
 
   const itemRender = (current, type, originalElement) => {
     if (type === 'prev') {
-      return <a href={() => false}>Prev</a>;
+      return <a href="#">Prev</a>;
     }
     if (type === 'next') {
-      return <a href={() => false}>Next</a>;
+      return <a href="#">Next</a>;
     }
     return originalElement;
   };
