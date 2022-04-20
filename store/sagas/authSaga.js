@@ -45,7 +45,6 @@ function* signUp(action) {
 function* silentRefresh() {
   try {
     const { data } = yield call(silentRefreshApi);
-
     if (data.success) {
       yield axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
       yield put({ type: REFRESH_TOKEN_SUCCESS, result: data.isLogin });

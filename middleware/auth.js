@@ -18,6 +18,7 @@ const authMiddleware = async (req, res, handler) => {
 
     return await handler(req, res);
   } catch (e) {
+    console.log('123!@#!#!@#!@#!@#!@#!#2', e);
     if (e.name === 'JsonWebTokenError') {
       return res.status(401).json({
         success: false,

@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 import { ConnectedRouter } from 'connected-next-router';
 import { ToastContainer } from 'react-toastify';
-import 'react-quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import wrapper from '@Store/configure';
