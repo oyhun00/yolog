@@ -29,7 +29,6 @@ const SELECT_POST_LIST = `
     , p.title
     , p.thumbnail
     , p.thumbnail_text as "thumbnailText"
-    , p.content
     , TO_CHAR(p.crt_dttm, 'Mon DD, YYYY') as "crtDttm"
     , TO_CHAR(p.udt_dttm, 'Mon DD, YYYY') as "udtDttm"
     , p.tag as "tags"
