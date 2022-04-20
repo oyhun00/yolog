@@ -32,7 +32,7 @@ const PostComponent = () => {
 
   const tagList = tags.map((v) => (
     <div key={v.mostTags} onClick={(e) => onSearchByTag(v.mostTags, e)} aria-hidden="true">
-      #{v.mostTags} <span>({v.tagCount})</span>
+      {v.mostTags} <span>({v.tagCount})</span>
     </div>
   ));
 
@@ -121,12 +121,7 @@ const PostRow = styled(Row)`
 const Category = styled.div`
   margin: 0 0 0.5rem 0;
   font-size: 2rem;
-  font-weight: 400;
-  text-shadow: 0 0 14px #ffffffe0;
-  
-  &:first-of-type {
-    margin: 0 0 0.5rem 0;
-  }
+  font-weight: 500;
 `;
 
 const TagAreaWrap = styled.div`

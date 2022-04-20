@@ -201,6 +201,12 @@ const CustomParagraph = styled(Paragraph)`
   img {
     width: 100%;
   }
+
+  .ant-typography h1 {
+    ${mediaWidth.MEDIA_MOBILE} {
+      font-size: 1.8rem;
+    }
+  }
 `;
 
 export default Post;
