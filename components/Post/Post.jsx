@@ -6,6 +6,7 @@ import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import parse from 'html-react-parser';
 import 'highlight.js/styles/atom-one-dark-reasonable.css';
+import 'react-quill/dist/quill.snow.css';
 
 import { mediaWidth } from '@Constants/responsive';
 import { deletePost } from '@Store/reducers/post';
@@ -186,18 +187,12 @@ const Tag = styled.div`
 
 const CustomParagraph = styled(Paragraph)`
   p {
-    font-size: 1rem;
-    font-weight: 300;
-  
     ${mediaWidth.MEDIA_MOBILE} {
       font-size: 0.9rem;
     }  
   }
   
   p > span {
-    font-size: 1rem;
-    font-weight: 300;
-    
     ${mediaWidth.MEDIA_MOBILE} {
       font-size: 0.9rem;
     }

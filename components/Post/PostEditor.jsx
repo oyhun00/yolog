@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark-reasonable.css';
+import 'react-quill/dist/quill.snow.css';
 
 hljs.configure({
   languages: ['javascript'],

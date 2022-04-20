@@ -20,7 +20,7 @@ const PostBox = ({ data, onSearchByTag }) => {
         hoverable
         bordered={false}
         tags={tags.length !== 0 ? 1 : 0}
-        cover={<Image alt="example" src={thumbnail || thumbnailImage} width="100%" height="100%" layout="responsive" objectFit="cover" />}
+        cover={<Image alt="example" src={thumbnail || thumbnailImage} priority width="100%" height="100%" layout="responsive" objectFit="cover" />}
       >
         <Date>{crtDttm || udtDttm}</Date>
         <Meta title={title} description={thumbnailText} />
