@@ -3,6 +3,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 import { ConnectedRouter } from 'connected-next-router';
+import NextNProgress from 'nextjs-progressbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,6 +53,14 @@ const MainApp = ({ Component, pageProps }) => {
       </Head>
       <ConnectedRouter>
         <MainLayout>
+          <NextNProgress
+            color="#fff"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={3}
+            showSpinner={false}
+            options={{ showSpinner: false }}
+          />
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
         </MainLayout>
