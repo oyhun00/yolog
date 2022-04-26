@@ -1,4 +1,4 @@
-import { Layout, Breadcrumb } from 'antd';
+import { Layout } from 'antd';
 import styled from '@emotion/styled';
 import { GithubOutlined, InstagramOutlined } from '@ant-design/icons';
 import { mediaWidth } from '@Constants/responsive';
@@ -6,10 +6,11 @@ import { mediaWidth } from '@Constants/responsive';
 const { Footer } = Layout;
 const MainFooter = () => (
   <CustomFooter>
-    <Breadcrumb separator="•">
-      <Breadcrumb.Item>© 2022</Breadcrumb.Item>
-      <Breadcrumb.Item>Yolog</Breadcrumb.Item>
-    </Breadcrumb>
+    <div>
+      <span>© 2022</span>
+      <span style={{ margin: '0 0.4rem' }}>•</span>
+      <span>Yolog</span>
+    </div>
     <IconArea>
       <a href="https://github.com/oyhun00" target="_blank" rel="noreferrer">
         <GithubOutlined style={{ fontSize: '1.4rem' }} />

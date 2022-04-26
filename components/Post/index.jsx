@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import { Row } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
-import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
 
 import PostBox from '@Components/Post/PostBox';
 import PostPagination from '@Components/Post/Pagination';
